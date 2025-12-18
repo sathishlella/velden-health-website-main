@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+  <title>Velden Health | Behavioral Health Medical Billing & AR Recovery</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Velden Health specializes in behavioral & mental health medical billing, AR recovery, and denial management for U.S. clinics. We fix denials, shorten AR days, and help TherapyNotes & Kareo practices get paid faster."
+  />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Velden Health | Behavioral Health Medical Billing & AR Recovery">
+  <meta property="og:description" content="Behavioral & mental health medical billing, AR recovery, and denial management for U.S. clinics using TherapyNotes & Kareo.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts: Added Montserrat as requested in SVG -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Structured Data (Organization) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Velden Health",
+    "url": "https://www.veldenhealth.com/",
+    "description": "Behavioral & mental health medical billing, AR recovery, and denial management for U.S. clinics.",
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "email": "info@veldenhealth.com"
+    }]
+  }
+  </script>
+
+  <style>
+    :root {
+      /* Modern Palette - Derived from Velden SVG */
+      --color-bg: #ffffff;
+      --color-bg-alt: #f4f8fb; /* Very light slate tint */
+      --color-surface: #ffffff;
+      
+      /* Primary: Vibrant Teal from SVG (#00C4B4) */
+      --color-primary: #00C4B4; 
+      --color-primary-dark: #009e91;
+      --color-primary-light: #e0fbf9;
+      
+      /* Accent: Dark Navy from SVG (#001F3F - Updated from Logo) */
+      --color-accent: #001F3F;
+      --color-accent-glow: rgba(0, 31, 63, 0.15);
+      
+      /* Text: Dark Navy for headings, Slate for body */
+      --color-text: #001F3F;
+      --color-text-muted: #5A6B7C;
+      --color-text-light: #94a3b8;
+      
+      --color-border: #e2e8f0;
+      
+      /* Spacing & Radius */
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --radius-pill: 999px;
+      --radius-md: 0.75rem;
+      
+      /* Shadows - Soft & Layered */
+      --shadow-sm: 0 2px 4px rgba(90, 107, 124, 0.1);
+      --shadow-md: 0 6px 12px -2px rgba(90, 107, 124, 0.15);
+      --shadow-lg: 0 15px 25px -5px rgba(90, 107, 124, 0.15), 0 8px 10px -6px rgba(90, 107, 124, 0.1);
+      --shadow-xl: 0 25px 50px -12px rgba(0, 31, 63, 0.25);
+      
+      /* Transitions - Butter Smooth */
+      --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+      /* Responsive Spacing Variables */
+      --section-padding-y: 7rem;
+      --container-padding-x: 1.5rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Headings now use Montserrat to match brand */
+    h1, h2, h3, h4 {
+      font-family: "Montserrat", sans-serif;
+      color: var(--color-text);
+      margin-top: 0;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      /* Gradient from Navy to Teal */
+      background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      letter-spacing: -1px;
+    }
+
+    .section-intro {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: var(--color-text-muted);
+      max-width: 700px;
+      margin: 0 auto 3rem auto;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--container-padding-x);
+    }
+
+    .section {
+      padding: var(--section-padding-y) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-alt {
+      background: radial-gradient(circle at top right, #f4f8fb 0%, #edf2f7 100%);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 2.5rem;
+    }
+    
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+      transition: all 0.4s var(--ease-smooth);
+    }
+
+    .site-header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px; /* Increased from 80px */
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      background: none;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .logo-mark svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-name { 
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700; 
+      font-size: 1.3rem; 
+      color: var(--color-text); 
+      letter-spacing: -0.05em; 
+      line-height: 1;
+    }
+    .logo-tagline { font-size: 0.75rem; color: var(--color-text-muted); font-weight: 500; letter-spacing: 0.05em; margin-top: 2px; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0.5rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-weight: 500;
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary-dark);
+      background: var(--color-primary-light);
+    }
+
+    .nav-cta-wrapper { display: flex; align-items: center; gap: 1rem; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-text);
+      padding: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s var(--ease-smooth);
+      cursor: pointer;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .btn:active { transform: scale(0.96); }
+
+    .btn-primary {
+      background: var(--color-text); /* Navy Button */
+      color: white;
+      border: 1px solid transparent;
+      box-shadow: 0 4px 6px rgba(0, 31, 63, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary); /* Teal Hover */
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(0, 196, 180, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-text);
+      background: var(--color-bg-alt);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--color-border);
+      color: var(--color-primary-dark);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+
+    .btn-full { width: 100%; }
+    .small-btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+
+    /* Hero */
+    .hero-section {
+      padding: 1rem 0 6rem; /* Reduced top padding from 4rem to 1rem */
+      background: 
+        radial-gradient(circle at 85% 10%, rgba(0, 196, 180, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 15% 90%, rgba(0, 31, 63, 0.05) 0%, transparent 40%);
+      overflow: visible;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      color: var(--color-primary-dark);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: inline-block;
+      background: var(--color-primary-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-purpose {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--color-text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 95%;
+      line-height: 1.7;
+    }
+
+    .hero-trust {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .hero-trust li {
+      background: white;
+      border: 1px solid var(--color-border);
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .hero-trust li svg {
+      color: var(--color-primary);
+      margin-right: 0.5rem;
+      width: 18px;
+      height: 18px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-right {
+      position: relative;
+      perspective: 1000px;
+    }
+    
+    .hero-right::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(0, 196, 180, 0.15) 0%, transparent 70%);
+      z-index: -1;
+      filter: blur(40px);
+    }
+
+    .floating-stack {
+      position: relative;
+      height: 580px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(255,255,255,0.5);
+      position: absolute;
+      transition: transform 0.5s var(--ease-smooth);
+    }
+
+    .card-metrics {
+      top: 20px;
+      left: 0;
+      width: 280px;
+      z-index: 2;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .card-chart {
+      bottom: 40px;
+      right: 0;
+      width: 320px;
+      z-index: 3;
+      animation: float 7s ease-in-out infinite 1s;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .metric-row:last-child { border-bottom: none; }
+    .metric-value { font-weight: 700; color: var(--color-text); }
+    .metric-change { font-size: 0.8rem; font-weight: 600; }
+    .metric-change.pos { color: var(--color-primary-dark); }
+    .metric-change.neg { color: #ef4444; }
+
+    .live-indicator {
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-primary);
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: blink-live 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    @keyframes blink-live {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.4s var(--ease-smooth);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-lg);
+      padding: 2px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-text));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .card:hover::before { opacity: 1; }
+
+    .card h3 { font-size: 1.35rem; margin-bottom: 1rem; font-weight: 700; }
+    .card p { color: var(--color-text-muted); margin-bottom: 1.5rem; font-size: 1rem; flex-grow: 1; }
+
+    .service-overview-grid { margin-bottom: 3rem; }
+    
+    .service-card { cursor: pointer; text-align: center; }
+    .service-card.active {
+      background: var(--color-text); /* Navy background for active */
+      color: white;
+      border-color: var(--color-text);
+      transform: scale(1.05);
+    }
+    .service-card.active h3, .service-card.active p { color: white; }
+    .service-card.active .text-link { color: var(--color-primary); } /* Teal link on Navy */
+
+    .service-detail {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: 3.5rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-detail::after {
+      content: "";
+      position: absolute;
+      right: -10%;
+      top: -10%;
+      width: 40%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(0, 196, 180, 0.05), transparent 70%);
+      z-index: 0;
+    }
+
+    .detail-content { position: relative; z-index: 1; }
+
+    .bullet-list { list-style: none; padding: 0; }
+    .bullet-list li {
+      padding-left: 2rem;
+      position: relative;
+      margin-bottom: 0.85rem;
+      color: var(--color-text-muted);
+    }
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--color-primary-light);
+    }
+
+    /* Timeline */
+    .timeline-wrapper {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline-line-bg {
+      position: absolute;
+      left: 0;
+      top: 1rem;
+      bottom: 1rem;
+      width: 4px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    .timeline-line-fill {
+      position: absolute;
+      left: 0;
+      top: 1rem;
+      width: 4px;
+      background: var(--color-primary);
+      border-radius: 4px;
+      height: 0%;
+      z-index: 1;
+      transition: height 0.1s linear;
+    }
+
+    .timeline-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .timeline-step {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 1.5rem;
+      opacity: 0.5;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: -2.45rem;
+      top: 0.25rem;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 50%;
+      z-index: 3;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-step.active {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    .timeline-step.active::before {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 4px var(--color-primary-light);
+    }
+
+    .flowchart-container {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden; 
+    }
+    
+    .flow-step {
+      width: 100%;
+      background: var(--color-bg-alt);
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+    
+    .flow-step.active {
+      border-color: var(--color-primary);
+      background: #f0fdfa;
+      box-shadow: var(--shadow-md);
+      transform: translateX(5px);
+    }
+
+    .flow-step.active .flow-icon {
+      background: var(--color-primary);
+      color: white;
+    }
+    
+    .flow-icon {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.4s ease;
+      flex-shrink: 0;
+    }
+    
+    .flow-arrow {
+      height: 20px;
+      width: 2px;
+      background: #e2e8f0;
+      position: relative;
+      transition: background 0.4s ease;
+    }
+    
+    .flow-arrow.active {
+      background: var(--color-primary);
+    }
+
+    .flow-arrow::after {
+      content: "▼";
+      position: absolute;
+      bottom: -10px;
+      left: -5px;
+      color: inherit;
+      font-size: 10px;
+    }
+
+    .pricing-card-featured {
+      border: 2px solid var(--color-primary);
+      transform: scale(1.05);
+      box-shadow: var(--shadow-xl);
+      z-index: 2;
+      background: linear-gradient(to bottom, var(--color-primary-light), white);
+    }
+    .chip-gold {
+      background: #fef3c7;
+      color: #b45309;
+      padding: 0.3rem 0.8rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .audit-form { padding: 2.5rem; }
+    .form-row { margin-bottom: 1.5rem; }
+    .form-row label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .form-row input {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-alt);
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .form-row input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 4px var(--color-primary-light);
+      background: white;
+    }
+
+    .site-footer {
+      background: #f4f8fb;
+      padding: 5rem 0 2rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .footer-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.75rem;
+      transition: color 0.2s;
+      font-size: 0.9rem;
+    }
+    .footer-links a:hover { color: var(--color-primary-dark); }
+
+    .text-link {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--color-primary-dark);
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: gap 0.2s ease;
+    }
+    .text-link:hover { gap: 0.5rem; }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 31, 63, 0.5); /* Navy transparent backdrop */
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+    
+    .modal {
+      background: white;
+      width: 90%;
+      max-width: 600px;
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      transform: translateY(30px) scale(0.95);
+      transition: all 0.3s var(--ease-back);
+      box-shadow: var(--shadow-xl);
+      display: none; 
+    }
+    .modal.open { transform: translateY(0) scale(1); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .reveal-group > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s var(--ease-out-back);
+    }
+
+    .reveal-group.active > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-group.active > *:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-group.active > *:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-group.active > *:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-group.active > *:nth-child(4) { transition-delay: 0.4s; }
+
+    .chart-bars { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+    .bar-row { display: flex; align-items: center; gap: 1rem; font-size: 0.8rem; }
+    .bar-track { flex: 1; height: 8px; background: #f1f5f9; border-radius: 10px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark)); width: 0; border-radius: 10px; transition: width 1.5s var(--ease-out-back); }
+    .bar-fill.critical { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .chip {
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      background: white;
+    }
+
+    @media (max-width: 1024px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .hero-title { font-size: 3.5rem; }
+      .pricing-card-featured { transform: scale(1); border-width: 1px; }
+      .service-detail { padding: 2.5rem; }
+    }
+    
+    @media (max-width: 768px) {
+      :root {
+        --section-padding-y: 4rem;
+      }
+      
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 1.5rem; }
+      .section-title { text-align: left; }
+      .section-intro { text-align: left; margin-left: 0; }
+      
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: absolute;
+        top: 100px; /* Adjusted for taller header */
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+      .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+      .nav-links a { padding: 1rem; border-radius: 0; border-bottom: 1px solid #f1f5f9; width: 100%; display: block; }
+      .nav-cta-wrapper .btn { display: none; }
+
+      .hero-section { padding: 2rem 0 3rem; } /* Reduced from 6rem to 2rem for mobile */
+      .hero-grid { grid-template-columns: 1fr; text-align: left; gap: 3rem; }
+      .hero-cta-row { justify-content: flex-start; }
+      .hero-trust { justify-content: flex-start; }
+      
+      .hero-right { margin-top: 1rem; }
+      
+      .floating-stack {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .hero-card {
+        position: relative;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        animation: none !important;
+      }
+
+      .service-overview-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        overflow-x: visible;
+        padding-bottom: 0;
+      }
+      .service-card {
+        min-width: 0;
+        padding: 1rem;
+        text-align: center; 
+        align-items: center; 
+        justify-content: center;
+      }
+      .service-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      .service-card p {
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+      }
+      .service-card .text-link {
+        font-size: 0.8rem;
+      }
+      
+      .service-detail {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      
+      .timeline-wrapper { 
+        padding-left: 1rem; 
+        margin-bottom: 2rem;
+      }
+      .timeline-line-bg, .timeline-line-fill { 
+        display: block; 
+        left: -8px;
+      } 
+      .timeline-step { 
+        opacity: 0.5;
+        transform: none; 
+        margin-bottom: 2rem;
+        padding-left: 1.5rem;
+      }
+      .timeline-step::before { 
+        left: -2.35rem;
+      }
+      
+      .site-footer { padding: 3rem 0; text-align: left; }
+    }
+
+    /* Chat button mobile override */
+    .medexa-chat-launcher {
+      z-index: 2147483647 !important;
+    }
+
+    @media (max-width: 480px) {
+      .medexa-chat-launcher.active {
+        bottom: auto !important;
+        top: 20px !important;
+        right: 20px !important;
+        transform: scale(0.8);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-container">
+    <a href="/" class="logo-area">
+      <!-- Full New Logo SVG -->
+      <svg viewBox="0 0 900 250" style="height: 75px; width: auto;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bar Chart Symbol -->
+        <g transform="translate(20, 60)">
+          <!-- Bar 1 - Shortest -->
+          <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
+          <!-- Bar 2 -->
+          <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
+          <!-- Bar 3 -->
+          <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
+          <!-- Bar 4 - Tallest (Electric Teal) -->
+          <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
+        </g>
+        <!-- Company Name -->
+        <text x="200" y="175" font-family="Montserrat, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-size="60" fill="#001F3F" letter-spacing="3">VELDEN HEALTH</text>
+        <!-- Tagline -->
+        <text x="215" y="205" font-family="Montserrat, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="500" font-size="24" fill="#5A6B7C" letter-spacing="6.5">REVENUE CYCLE MANAGEMENT</text>
+      </svg>
+    </a>
+      
+    <nav class="main-nav">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+      <div class="nav-cta-wrapper">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="/">Home</a></li>
+          <li><a href="#behavioral-health">Behavioral Health</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how-it-works">Process</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#resources">Results</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+        <a href="#audit" class="btn btn-primary">Free Audit</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="hero" class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-left reveal-group active">
+        <span class="hero-subtitle">Behavioral & mental health medical billing for U.S. clinics</span>
+        <h1 class="hero-title">Recover Lost Revenue for Your Clinic</h1>
+        <p class="hero-purpose">
+          Velden Health specializes in behavioral & mental health medical billing for U.S. clinics with expert AR follow-up and denial analytics. Decrease denials, shorten AR days, and get paid faster whether you’re a solo therapist or a multi-specialty group..
+        </p>
+        
+        <ul class="hero-trust">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            95%+ Clean Claims
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            HIPAA Compliant
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            US Payer Experts
+          </li>
+        </ul>
+
+        <div class="hero-cta-row">
+          <a href="#audit" class="btn btn-primary">Start Free Audit</a>
+          <a href="#resources" class="btn btn-secondary">View Results</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="floating-stack">
+          <div class="hero-card card-metrics">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+              <span style="font-weight:700;">Behavioral Health Snapshot</span>
+              <span style="font-size:0.7rem; background:var(--color-primary-light); color:var(--color-primary-dark); padding:2px 6px; border-radius:4px; display:inline-flex; align-items:center;">
+                <span class="live-indicator"></span>
+                LIVE
+              </span>
+            </div>
+            <div class="metric-row">
+              <span>90+ Day AR</span>
+              <span class="metric-value">42% <span class="metric-change pos">▼</span></span>
+            </div>
+            <div class="metric-row">
+              <span>Denial Rate</span>
+              <span class="metric-value">28% <span class="metric-change pos">▼</span></span>
+            </div>
+            <div class="metric-row">
+              <span>Recovered</span>
+              <span class="metric-value">$182K+</span>
+            </div>
+          </div>
+
+          <div class="hero-card card-chart">
+            <div style="margin-bottom:1rem;">
+              <span style="font-weight:700; display:block;">Aging Trend</span>
+              <span style="font-size:0.7rem; color:var(--color-text-muted);">Behavioral health revenue stuck &gt; 90 days</span>
+            </div>
+
+            <div class="chart-bars">
+              <div class="bar-row">
+                <span style="width:40px">0-30</span>
+                <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+              </div>
+              <div class="bar-row">
+                <span style="width:40px">31-60</span>
+                <div class="bar-track"><div class="bar-fill" style="width:45%"></div></div>
+              </div>
+              <div class="bar-row">
+                <span style="width:40px">61-90</span>
+                <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
+              </div>
+              <div class="bar-row">
+                <span style="width:40px">90+</span>
+                <div class="bar-track"><div class="bar-fill critical" style="width:85%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEHAVIORAL HEALTH SECTION -->
+  <section class="section section-alt" id="behavioral-health">
+    <div class="container">
+      <div class="reveal-group">
+        <h2 class="section-title">Behavioral & Mental Health Billing</h2>
+        <p class="section-intro">
+          Built for therapists, counselors, and psychologists using TherapyNotes, Kareo and similar EMRs.
+          We understand 90834, 90837, 90791, telehealth modifiers, and the payer rules that drive clean claims.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card reveal-group">
+          <h3>Built Around How You Actually Work</h3>
+          <p>
+            Behavioral health billing is not primary care billing. Session lengths, authorization limits,
+            no-shows, and telehealth rules all impact whether you get paid. We tune your workflows to match.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Individual therapy</span>
+            <span class="chip">Initial evals</span>
+            <span class="chip">Telehealth &amp; POS 10</span>
+            <span class="chip">Modifiers &amp; auth tracking</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Front-desk checklists for eligibility &amp; benefits.</li>
+            <li>Session limits &amp; frequency rules baked into scheduling.</li>
+            <li>Telehealth documentation that passes payer scrutiny.</li>
+            <li>Clean claim templates per payer to avoid repeats.</li>
+          </ul>
+        </div>
+
+        <div class="card reveal-group">
+          <h3>Deep TherapyNotes & Kareo Expertise</h3>
+          <p>
+            We don’t force you onto a new EMR. Instead, we plug into the tools you already use and wrap them
+            with Velden's denial intelligence.
+          </p>
+          <ul class="bullet-list">
+            <li>Optimized TherapyNotes &amp; Kareo billing workflows.</li>
+            <li>Claim scrubbing tuned to behavioral health patterns.</li>
+            <li>Denial “black box” that records every payer reason code.</li>
+            <li>Weekly behavioral health AR scorecard by payer &amp; provider.</li>
+          </ul>
+          <p style="margin-top:1.5rem; color:var(--color-text-muted); font-size:0.9rem;">
+            Starting as a solo therapist? Growing to a multi-provider group? We scale the same
+            behavioral health playbook with you.
+          </p>
+          <a href="#audit" class="btn btn-primary">Start Behavioral Health Audit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE -->
+  <section class="section" id="benefits">
+    <div class="container">
+      <div class="reveal-group">
+        <h2 class="section-title">Why Clinics Choose Velden</h2>
+        <p class="section-intro">Expert human follow-up combined with AI-guided workflows.</p>
+      </div>
+      
+      <div class="grid-3 reveal-group">
+        <div class="card">
+          <div style="width:50px; height:50px; background:var(--color-bg-alt); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem; font-size:1.5rem;">💰</div>
+          <h3>Recover Lost Revenue</h3>
+          <p>We find underpayments and denials that internal teams miss - from coding variances to silent write-offs.</p>
+        </div>
+        <div class="card">
+          <div style="width:50px; height:50px; background:var(--color-bg-alt); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem; font-size:1.5rem;">⚡</div>
+          <h3>Faster Payments</h3>
+          <p>Focused AR workflows reduce days outstanding (DSO), so cash hits your bank account sooner.</p>
+        </div>
+        <div class="card">
+          <div style="width:50px; height:50px; background:var(--color-bg-alt); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem; font-size:1.5rem;">📊</div>
+          <h3>Data-Driven</h3>
+          <p>Dashboards show exactly where revenue is stuck by payer, provider, and denial code.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section-alt" id="services">
+    <div class="container">
+      <div class="reveal-group">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-intro">End-to-end revenue cycle management tailored to your specialty.</p>
+      </div>
+
+      <div class="grid-4 service-overview-grid reveal-group">
+        <article class="card service-card active" data-service="medical-billing">
+          <h3>Medical Billing</h3>
+          <p>End-to-end coding &amp; claims.</p>
+          <span class="text-link" style="margin-top:auto">View Details →</span>
+        </article>
+        <article class="card service-card" data-service="ar-followup">
+          <h3>AR Recovery</h3>
+          <p>Chasing unpaid claims.</p>
+          <span class="text-link" style="margin-top:auto">View Details →</span>
+        </article>
+        <article class="card service-card" data-service="denials">
+          <h3>Denials</h3>
+          <p>Appeals &amp; corrections.</p>
+          <span class="text-link" style="margin-top:auto">View Details →</span>
+        </article>
+        <article class="card service-card" data-service="underpayment">
+          <h3>Analytics</h3>
+          <p>Detecting revenue leaks.</p>
+          <span class="text-link" style="margin-top:auto">View Details →</span>
+        </article>
+      </div>
+
+      <div class="service-detail reveal-group" id="serviceDetailPanel">
+        <div class="grid-2 detail-content">
+          <div>
+            <h3 id="svcTitle" style="font-size:clamp(1.5rem, 3vw, 2rem); margin-bottom:0.5rem;">Medical Billing</h3>
+            <p id="svcTagline" style="color:var(--color-primary); font-weight:600; margin-bottom:1.5rem;">Clean claims paid first time.</p>
+            <p id="svcDesc" style="font-size:1.1rem; color:var(--color-text-muted);">
+              Velden Health handles end-to-end billing: eligibility checks, coding review, claim scrubbing, electronic submission, and payment posting, guided by payer-specific rules. We ensure every step is accurate.
+            </p>
+            <div style="margin-top:2rem;">
+              <a href="#audit" class="btn btn-primary">Get Started</a>
+            </div>
+          </div>
+          <div>
+            <h4 style="margin-bottom:1rem; margin-top:1rem;">Key Deliverables</h4>
+            <ul class="bullet-list" id="svcList">
+              <li>Eligibility &amp; benefits verification</li>
+              <li>Coding review &amp; claim scrubbing</li>
+              <li>Electronic claim submission</li>
+              <li>Payment posting &amp; adjustments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="reveal-group">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-intro">From free audit to consistent cash flow in 4 steps.</p>
+      </div>
+
+      <div class="grid-2" style="align-items: flex-start;">
+        <div class="reveal-group timeline-wrapper" id="timelineWrapper">
+          <div class="timeline-line-bg"></div>
+          <div class="timeline-line-fill" id="scrollLine"></div>
+
+          <ul class="timeline-steps">
+            <li class="timeline-step" data-step="1">
+              <h3>1. Free Audit</h3>
+              <p style="color:var(--color-text-muted);">We analyze your AR &amp; denial data securely to find recoverables and behavioral health patterns.</p>
+            </li>
+            <li class="timeline-step" data-step="2">
+              <h3>2. Fix &amp; Resubmit</h3>
+              <p style="color:var(--color-text-muted);">Our team corrects coding errors, missing modifiers, and submits clean claims.</p>
+            </li>
+            <li class="timeline-step" data-step="3">
+              <h3>3. Active Follow-up</h3>
+              <p style="color:var(--color-text-muted);">Dedicated specialists call payers to resolve stuck claims across all aging buckets.</p>
+            </li>
+            <li class="timeline-step" data-step="4">
+              <h3>4. Weekly Reports</h3>
+              <p style="color:var(--color-text-muted);">Track recovered dollars and aging trends via dashboards you can actually read.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="reveal-group">
+          <div class="flowchart-container" id="flowChart">
+            <div class="flow-step" data-flow="1">
+              <div class="flow-icon">📂</div>
+              <div>
+                <strong>Data Intake</strong>
+                <div style="font-size:0.8rem; color:var(--color-text-muted);">Secure Transfer</div>
+              </div>
+            </div>
+            <div class="flow-arrow" data-arrow="1"></div>
+            <div class="flow-step" data-flow="2">
+              <div class="flow-icon">🔍</div>
+              <div>
+                <strong>AI Analysis</strong>
+                <div style="font-size:0.8rem; color:var(--color-text-muted);">Identify Errors</div>
+              </div>
+            </div>
+            <div class="flow-arrow" data-arrow="2"></div>
+            <div class="flow-step" data-flow="3">
+              <div class="flow-icon">📞</div>
+              <div>
+                <strong>Payer Calls</strong>
+                <div style="font-size:0.8rem; color:var(--color-text-muted);">Resolve Issues</div>
+              </div>
+            </div>
+            <div class="flow-arrow" data-arrow="3"></div>
+            <div class="flow-step" data-flow="4">
+              <div class="flow-icon">💵</div>
+              <div>
+                <strong>Payment Posted</strong>
+                <div style="font-size:0.8rem; color:var(--color-text-muted);">Cash in Bank</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section section-alt" id="pricing">
+    <div class="container">
+      <div class="reveal-group">
+        <h2 class="section-title">Transparent Pricing</h2>
+        <p class="section-intro">Models that align with your success.</p>
+      </div>
+
+      <div class="grid-3 reveal-group">
+        <div class="card">
+          <h3>Percentage of Collections</h3>
+          <p>Best for full-service billing. We only get paid when you get paid.</p>
+          <h4 style="font-size:2rem; margin:1rem 0;">3% - 6%</h4>
+          <ul class="bullet-list" style="flex-grow:1; margin-bottom:2rem;">
+            <li>Full RCM Service</li>
+            <li>Includes Denial Management</li>
+            <li>Monthly Reporting</li>
+          </ul>
+          <a href="#audit" class="btn btn-outline btn-full">Get Quote</a>
+        </div>
+
+        <div class="card pricing-card-featured">
+          <span class="chip-gold">Most Popular</span>
+          <h3>Hybrid Model</h3>
+          <p>Keep your front desk. We handle the tough AR &amp; denials.</p>
+          <h4 style="font-size:2rem; margin:1rem 0;">Base + Percentage</h4>
+          <ul class="bullet-list" style="flex-grow:1; margin-bottom:2rem;">
+            <li>Dedicated AR Team</li>
+            <li>Denial Root Cause Fixes</li>
+            <li>Weekly Strategy Calls</li>
+          </ul>
+          <a href="#audit" class="btn btn-primary btn-full">Get Proposal</a>
+        </div>
+
+        <div class="card">
+          <h3>Analytics Only</h3>
+          <p>Keep your current biller. We audit and find leaks.</p>
+          <h4 style="font-size:2rem; margin:1rem 0;">Fixed Fee</h4>
+          <ul class="bullet-list" style="flex-grow:1; margin-bottom:2rem;">
+            <li>Underpayment Detection</li>
+            <li>Contract Variance Analysis</li>
+            <li>Quarterly Reviews</li>
+          </ul>
+          <a href="#audit" class="btn btn-outline btn-full">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS  -->
+  <section class="section" id="resources">
+    <div class="container">
+      <h2 class="section-title reveal-group">Results &amp; Case Studies</h2>
+      <div class="grid-3">
+        <article class="card reveal-group">
+          <h3>Multi-Specialty Clinic · 6 Providers</h3>
+          <ul class="bullet-list">
+            <li>42% reduction in 90+ day AR</li>
+            <li>23% increase in monthly collections</li>
+            <li>Clean-claim rate up to 95%</li>
+          </ul>
+          <button class="text-link case-modal-trigger" data-case="case1" style="background:none; border:none; padding:0; cursor:pointer; margin-top:1rem;">View case study →</button>
+        </article>
+        <article class="card reveal-group">
+          <h3>Behavioral health Group · 3 Providers</h3>
+          <ul class="bullet-list">
+            <li>Denial rate cut from 18% to 9%</li>
+            <li>$120K recovered from aged AR</li>
+            <li>Front-desk time freed by 30%</li>
+          </ul>
+          <button class="text-link case-modal-trigger" data-case="case2" style="background:none; border:none; padding:0; cursor:pointer; margin-top:1rem;">View case study →</button>
+        </article>
+      </div>
+
+      <!-- Resource Hub Preview -->
+      <div class="reveal-group" style="margin-top:3rem;">
+        <h3 style="font-size:1.5rem; margin-bottom:1rem;">Resource Hub (coming online)</h3>
+        <p style="max-width:720px; color:var(--color-text-muted); margin-bottom:1.5rem;">
+          We’re building a free resource library for clinic owners and practice managers — focused on AR, denial prevention,
+          and behavioral health billing best practices.
+        </p>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Behavioral Health Denial Cheat Sheet</h3>
+            <p>Plain-English explanations of CO-197, CO-16, CO-29 and how to prevent them.</p>
+          </div>
+          <div class="card">
+            <h3>Front-Desk Eligibility Checklist</h3>
+            <p>15 quick checks before every visit to avoid “avoidable” denials and write-offs.</p>
+          </div>
+          <div class="card">
+            <h3>AR Clean-Up Playbook</h3>
+            <p>How to prioritize 60–90+ day buckets and convert them to cash in 60 days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY & HIPAA -->
+  <section class="section section-alt" id="security">
+    <div class="container">
+      <div class="reveal-group">
+        <h2 class="section-title">Security &amp; HIPAA Compliance</h2>
+        <p class="section-intro">
+          Handling PHI is non-negotiable. We operate with strict HIPAA-aligned processes, secure access controls,
+          and clear data boundaries between your clinic and our team.
+        </p>
+      </div>
+
+      <div class="grid-2 reveal-group">
+        <div class="card">
+          <h3>HIPAA-Aligned Operations</h3>
+          <ul class="bullet-list">
+            <li>Business Associate Agreements (BAAs) available on request.</li>
+            <li>Restricted PHI access based on role and function.</li>
+            <li>No PHI stored in personal devices or email inboxes.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Secure Workflows</h3>
+          <ul class="bullet-list">
+            <li>EMR access via secure VPN or MFA-protected portals.</li>
+            <li>Internal SOPs for password rotation and access reviews.</li>
+            <li>Audit trails on all claim and AR activities.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="reveal-group">
+        <h2 class="section-title">About Velden Health</h2>
+        <p class="section-intro">
+          Velden Health LLC is a Wyoming-based company created by revenue cycle specialists who’ve seen both sides: large RCM enterprises and the day-to-day reality inside small clinics.
+        </p>
+      </div>
+
+      <div class="grid-2 reveal-group">
+        <div class="card">
+          <h3>Our Mission</h3>
+          <p>
+            Our goal is simple: make sure clinically excellent providers aren’t punished by messy billing.
+            We combine disciplined AR execution with automation and smart data, starting with behavioral health
+            and expanding into other specialties as our clients grow.
+          </p>
+          <p style="color:var(--color-text-muted); font-size:0.95rem;">
+            We believe your billing partner should feel like a quiet “collections engine”
+            in the background — not another chaos to manage.
+          </p>
+        </div>
+        <div class="card">
+          <h3>How We Work With Clinics</h3>
+          <ul class="bullet-list">
+            <li>Start with a no-risk audit of your current AR and denials.</li>
+            <li>Co-design workflows with your front desk and biller (if you have one).</li>
+            <li>Set clear weekly reporting and feedback loops.</li>
+            <li>Continuously refine based on payer performance and denial patterns.</li>
+          </ul>
+          <a href="#audit" class="btn btn-primary" style="margin-top:1rem;">Talk to a Velden specialist</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY SUMMARY -->
+  <section class="section section-alt" id="privacy">
+    <div class="container">
+      <div class="reveal-group">
+        <h2 class="section-title">Privacy &amp; Data Use (Summary)</h2>
+        <p class="section-intro">
+          We only use your data to deliver RCM services, generate analytics for your clinic, and improve
+          your revenue outcomes. We do not sell PHI or share it with third parties for marketing.
+        </p>
+      </div>
+      <div class="card reveal-group">
+        <ul class="bullet-list">
+          <li>PHI is accessed strictly for billing, AR follow-up, denials, and reporting.</li>
+          <li>Any third-party tools we use for ticketing or collaboration are configured to avoid PHI where possible.</li>
+          <li>You can request full details on our privacy policy and security posture at any time.</li>
+        </ul>
+        <p style="font-size:0.9rem; color:var(--color-text-muted); margin-top:1rem;">
+          For a full legal privacy policy and BAA terms, please contact us at <strong>info@veldenhealth.com</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIT CTA -->
+  <section class="section section-alt" id="audit">
+    <div class="container">
+      <div class="grid-2" style="align-items:center;">
+        <div class="reveal-group">
+          <h2 class="section-title" style="text-align:left;">Get Your Free Audit</h2>
+          <p class="section-intro" style="text-align:left; margin-bottom:2rem;">
+            See exactly how much revenue you can recover. No commitment required.
+          </p>
+          <ul class="bullet-list">
+            <li>1-Page AR Scorecard (including 90+ day breakdown).</li>
+            <li>Top 5 Denial Reasons with concrete fixes.</li>
+            <li>Estimated recoverable amount in the next 60–90 days.</li>
+          </ul>
+        </div>
+        <div class="reveal-group">
+          <form class="card audit-form" action="https://formspree.io/f/xkgelwbw" method="POST">
+            <div class="form-row">
+              <label>Clinic Name</label>
+              <input type="text" name="clinic_name" placeholder="e.g. City Health" required>
+            </div>
+            <div class="form-row">
+              <label>Email Address</label>
+              <input type="email" name="email" placeholder="doctor@clinic.com" required>
+            </div>
+            <div class="form-row">
+              <label>Estimated Monthly Billing</label>
+              <input type="text" name="estimated_billing" placeholder="$100k+">
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Request Audit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="grid-4">
+      <div>
+        <div class="logo-area" style="margin-bottom:1rem;">
+          <div class="logo-mark" style="width:32px; height:32px;">
+            <!-- Small Footer Logo SVG - Extracted Symbol from Main Logo -->
+            <svg viewBox="0 0 152 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
+              <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
+              <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
+              <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
+            </svg>
+          </div>
+          <span style="font-weight:700;">Velden Health</span>
+        </div>
+        <p style="font-size:0.9rem; color:var(--color-text-muted);">
+          Empowering behavioral &amp; multi-specialty clinics with data-driven revenue cycle management.
+        </p>
+      </div>
+      <div>
+        <h4 style="margin-bottom:1rem;">Services</h4>
+        <div class="footer-links">
+          <a href="#services">Medical Billing</a>
+          <a href="#services">AR Recovery</a>
+          <a href="#services">Denial Management</a>
+          <a href="#services">Payment Posting</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-bottom:1rem;">Company</h4>
+        <div class="footer-links">
+          <a href="#about">About Us</a>
+          <a href="#resources">Case Studies</a>
+          <a href="#privacy">Privacy &amp; Data Use</a>
+        </div>
+      </div>
+      <div>
+        <!-- <h4 style="margin-bottom:1rem;">Contact</h4>
+        <p style="color:var(--color-text-muted); font-size:0.9rem;">
+          info@veldenhealth.com<br>
+          <!-- TODO: Replace this with your real US phone number
+          (555) 123-4567 
+         https://www.instagram.com/veldenhealth/
+        </p> -->
+
+      <h4 style="margin-bottom:1rem;">Contact</h4>
+      <p style="color:var(--color-text-muted); font-size:0.9rem;">
+        info@veldenhealth.com<br>
+       ‪+1 (312) 925-6457<br>
+       30 N Gould St Ste N<br>
+       Sheridan, WY 82801
+        <br> <a href="https://www.instagram.com/veldenhealth/" target="_blank" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.232-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+          </svg>
+          @veldenhealth
+        </a>
+      </p>
+
+       
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:4rem; font-size:0.85rem; color:var(--color-text-light);">
+      &copy; <span id="year"></span> Velden Health LLC. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- CASE STUDY MODALS -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="case1">
+    <h3>Multi-Specialty Clinic</h3>
+    <p style="margin-top:1rem; color:var(--color-text-muted);">
+      This 6-provider clinic had $200k stuck in &gt;90 days AR. We implemented a focused calling campaign and cleared 42% of it in 60 days.
+    </p>
+    <button class="btn btn-secondary small-btn close-modal" style="margin-top:1.5rem;">Close</button>
+  </div>
+  <div class="modal" id="case2">
+    <h3>Pediatrics Group</h3>
+    <p style="margin-top:1rem; color:var(--color-text-muted);">
+      Recurring eligibility denials were costing 18% of revenue. We set up automated front-end checks and reduced denials to 9%.
+    </p>
+    <button class="btn btn-secondary small-btn close-modal" style="margin-top:1.5rem;">Close</button>
+  </div>
+  <div class="modal" id="case3">
+    <h3>Urgent Care Center</h3>
+    <p style="margin-top:1rem; color:var(--color-text-muted);">
+      We audited their contracted rates vs allowed amounts and found a specific payer was underpaying by 15% systematically.
+    </p>
+    <button class="btn btn-secondary small-btn close-modal" style="margin-top:1.5rem;">Close</button>
+  </div>
+</div>
+
+<script>
+  // Update Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile Nav Toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('open');
+  });
+  
+  document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+      navLinks.classList.remove('open');
+    }
+  });
+
+  // Sticky Header
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+
+  // Intersection Observer for Reveals
+  const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+  }, observerOptions);
+  document.querySelectorAll('.reveal-group').forEach(el => observer.observe(el));
+
+  // Service Detail Logic
+  const serviceData = {
+    'medical-billing': {
+      title: 'Medical Billing',
+      tagline: 'Clean claims paid first time.',
+      desc: 'Velden Health handles end-to-end billing: eligibility checks, coding review, claim scrubbing, electronic submission, and payment posting, guided by payer-specific rules. We ensure every step is accurate.',
+      list: ['Eligibility & benefits', 'Coding review', 'Claim submission', 'Payment posting']
+    },
+    'ar-followup': {
+      title: 'AR Recovery',
+      tagline: 'Turn old AR buckets into cash.',
+      desc: 'We build prioritized worklists and call payers directly to resolve unpaid claims that have been ignored.',
+      list: ['Aged AR analysis', 'Payer calling', 'Denial resolution', 'Status reporting']
+    },
+    'denials': {
+      title: 'Denial Management',
+      tagline: 'Stop repeat denials forever.',
+      desc: 'We analyze root causes, fix coding errors, and appeal wrongful denials while preventing future ones.',
+      list: ['Root cause analysis', 'Appeal letters', 'Coding correction', 'Prevention training']
+    },
+    'underpayment': {
+      title: 'Analytics',
+      tagline: 'Find every dollar owed.',
+      desc: 'We compare your contracted rates against actual payments to find variance and recover short-pays.',
+      list: ['Contract variance', 'Underpayment audit', 'Recovery negotiation', 'Fee schedule review']
+    }
+  };
+
+  const serviceCards = document.querySelectorAll('.service-card');
+  serviceCards.forEach(card => {
+    card.addEventListener('click', () => {
+      serviceCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+
+      const key = card.getAttribute('data-service');
+      const data = serviceData[key];
+      
+      const panel = document.getElementById('serviceDetailPanel');
+      panel.classList.remove('active');
+      
+      setTimeout(() => {
+        document.getElementById('svcTitle').textContent = data.title;
+        document.getElementById('svcTagline').textContent = data.tagline;
+        document.getElementById('svcDesc').textContent = data.desc;
+        
+        const list = document.getElementById('svcList');
+        list.innerHTML = '';
+        data.list.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+        
+        panel.classList.add('active');
+        
+        if(window.innerWidth <= 768) {
+          const headerOffset = 100;
+          const elementPosition = panel.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        }
+      }, 50);
+    });
+  });
+
+  // Modal Logic
+  const backdrop = document.getElementById('modalBackdrop');
+  const triggers = document.querySelectorAll('.case-modal-trigger'); 
+  const closeBtns = document.querySelectorAll('.close-modal');
+
+  triggers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-case'); 
+      const modal = document.getElementById(id);
+      if(modal) {
+        document.querySelectorAll('.modal').forEach(m => {
+          m.style.display = 'none';
+          m.classList.remove('open');
+        });
+        backdrop.classList.add('open');
+        modal.style.display = 'block';
+        setTimeout(() => modal.classList.add('open'), 10);
+      }
+    });
+  });
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.querySelectorAll('.modal').forEach(m => {
+      m.classList.remove('open');
+      setTimeout(() => m.style.display = 'none', 300);
+    });
+  }
+
+  closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+  backdrop.addEventListener('click', (e) => { if(e.target === backdrop) closeModal(); });
+
+  // Audit Form – AJAX via Formspree
+  const form = document.querySelector('.audit-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const action = "https://formspree.io/f/xkgelwbw"; // TODO: keep or replace with your own Formspree ID
+
+    try {
+      const btn = form.querySelector('button');
+      const originalText = btn.textContent;
+      btn.textContent = "Sending...";
+      btn.disabled = true;
+
+      const response = await fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      
+      if (response.ok) {
+        alert("Thank you! Your audit request has been received. We will contact you shortly.");
+        form.reset();
+      } else {
+        const data = await response.json();
+        if (Object.hasOwn(data, 'errors')) {
+          alert(data["errors"].map(error => error["message"]).join(", "));
+        } else {
+          alert("Oops! There was a problem submitting your form");
+        }
+      }
+      btn.textContent = originalText;
+      btn.disabled = false;
+    } catch (error) {
+      alert("Oops! There was a problem submitting your form");
+      console.error(error);
+      const btn = form.querySelector('button');
+      btn.textContent = "Request Audit";
+      btn.disabled = false;
+    }
+  });
+
+  // Scroll Animation & Haptic Sound Logic
+  const HapticEngine = {
+    audioCtx: null,
+    init: function() {
+      if (!this.audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) this.audioCtx = new AudioContext();
+      }
+      if (this.audioCtx && this.audioCtx.state === 'suspended') {
+        this.audioCtx.resume().catch(e => console.log("Audio resume failed", e));
+      }
+    },
+    trigger: function() {
+      if (navigator.vibrate) navigator.vibrate(5);
+      if (!this.audioCtx || this.audioCtx.state === 'suspended') this.init();
+      if (this.audioCtx && this.audioCtx.state === 'running') {
+        const t = this.audioCtx.currentTime;
+        const osc = this.audioCtx.createOscillator();
+        const gainNode = this.audioCtx.createGain();
+        osc.connect(gainNode);
+        gainNode.connect(this.audioCtx.destination);
+        osc.type = 'sine'; 
+        osc.frequency.setValueAtTime(600, t);
+        osc.frequency.exponentialRampToValueAtTime(300, t + 0.05);
+        gainNode.gain.setValueAtTime(0, t);
+        gainNode.gain.linearRampToValueAtTime(0.15, t + 0.01);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+        osc.start(t);
+        osc.stop(t + 0.15);
+      }
+    }
+  };
+
+  ['click', 'touchstart', 'keydown', 'wheel', 'pointerdown', 'scroll'].forEach(evt => {
+    window.addEventListener(evt, () => HapticEngine.init(), { once: true, passive: true });
+  });
+
+  let lastActiveStepIndex = -1;
+  function handleScrollAnimation() {
+    const wrapper = document.getElementById('timelineWrapper');
+    const fillLine = document.getElementById('scrollLine');
+    const timelineSteps = document.querySelectorAll('.timeline-step');
+    const flowSteps = document.querySelectorAll('.flow-step');
+    const flowArrows = document.querySelectorAll('.flow-arrow');
+
+    if (!wrapper) return;
+
+    const rect = wrapper.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const startPoint = windowHeight * 0.7; 
+    let percentage = 0;
+
+    if (rect.top < startPoint) {
+      const totalDistance = rect.height;
+      const scrolledDistance = startPoint - rect.top;
+      percentage = (scrolledDistance / totalDistance) * 100;
+    }
+    percentage = Math.max(0, Math.min(100, percentage));
+    fillLine.style.height = `${percentage}%`;
+
+    const lineBottomPositionInPixels = (percentage / 100) * rect.height;
+    let currentStepIndex = -1;
+
+    timelineSteps.forEach((step, index) => {
+      const stepTop = step.offsetTop;
+      const offset = window.innerWidth <= 768 ? 20 : 0;
+      if (lineBottomPositionInPixels >= (stepTop - offset)) {
+        step.classList.add('active');
+        currentStepIndex = index;
+      } else {
+        step.classList.remove('active');
+      }
+    });
+
+    if (currentStepIndex > lastActiveStepIndex && currentStepIndex !== -1) {
+      HapticEngine.trigger();
+      lastActiveStepIndex = currentStepIndex;
+    } else if (currentStepIndex < lastActiveStepIndex) {
+      lastActiveStepIndex = currentStepIndex;
+    }
+
+    flowSteps.forEach(s => s.classList.remove('active'));
+    flowArrows.forEach(a => a.classList.remove('active'));
+
+    if (percentage > 5) flowSteps[0].classList.add('active'); 
+    if (percentage > 20) flowArrows[0].classList.add('active'); 
+    if (percentage > 30) flowSteps[1].classList.add('active'); 
+    if (percentage > 45) flowArrows[1].classList.add('active');
+    if (percentage > 55) flowSteps[2].classList.add('active'); 
+    if (percentage > 70) flowArrows[2].classList.add('active'); 
+    if (percentage > 80) flowSteps[3].classList.add('active'); 
+  }
+
+  window.addEventListener('scroll', handleScrollAnimation);
+  window.addEventListener('resize', handleScrollAnimation);
+  handleScrollAnimation();
+</script>
+
+<style>
+  :root {
+    --chat-width: 380px;
+    --chat-height: 600px;
+    --chat-bg: rgba(255, 255, 255, 0.95);
+    --chat-blur: 20px;
+    /* Chat uses the new Velden Primary Teal */
+    --chat-primary: var(--color-primary, #00C4B4);
+    /* Chat accent uses the Velden Navy */
+    --chat-accent: var(--color-accent, #001F3F);
+    --chat-text: #0f172a;
+    --chat-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .medexa-chat-launcher {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    /* Gradient matching new brand */
+    background: linear-gradient(135deg, var(--chat-primary), var(--chat-accent));
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0, 196, 180, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 99999;
+    transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s ease;
+    animation: pulse-glow 3s infinite;
+  }
+
+  .medexa-chat-launcher:hover {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 15px 35px rgba(0, 196, 180, 0.5);
+  }
+
+  .medexa-chat-launcher svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+  }
+
+  .launcher-icon-close { display: none; }
+  .medexa-chat-launcher.active .launcher-icon-open { display: none; }
+  .medexa-chat-launcher.active .launcher-icon-close { display: block; transform: rotate(90deg); }
+
+  .medexa-chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: var(--chat-width);
+    height: var(--chat-height);
+    max-height: 80vh;
+    background: var(--chat-bg);
+    backdrop-filter: blur(var(--chat-blur));
+    -webkit-backdrop-filter: blur(var(--chat-blur));
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: var(--chat-shadow);
+    display: flex;
+    flex-direction: column;
+    z-index: 99999;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transform-origin: bottom right;
+    pointer-events: none;
+    transition: all 0.4s var(--ease-elastic);
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .medexa-chat-window.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  .chat-header {
+    padding: 1.25rem;
+    background: rgba(255,255,255,0.8);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .bot-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--chat-primary), var(--chat-accent));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .bot-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border: 2px solid white;
+    border-radius: 50%;
+  }
+
+  .chat-info h4 { margin: 0; font-size: 1rem; color: var(--chat-text); font-weight: 700; }
+  .chat-info span { font-size: 0.75rem; color: #64748b; }
+
+  .chat-messages {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    scroll-behavior: smooth;
+  }
+
+  .message {
+    max-width: 85%;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    position: relative;
+    animation: slide-in 0.4s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .message.bot {
+    align-self: flex-start;
+    background: white;
+    color: var(--chat-text);
+    border-radius: 12px 12px 12px 2px;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  .message.user {
+    align-self: flex-end;
+    /* User message background now matches Navy brand */
+    background: linear-gradient(135deg, var(--chat-accent), #0f172a);
+    color: white;
+    border-radius: 12px 12px 2px 12px;
+    box-shadow: 0 4px 10px rgba(0, 31, 63, 0.2);
+  }
+
+  .typing-indicator {
+    align-self: flex-start;
+    background: white;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    display: none;
+    gap: 4px;
+    border: 1px solid rgba(0,0,0,0.05);
+    width: fit-content;
+    margin-bottom: 10px;
+  }
+  .typing-indicator.active { display: flex; }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: #94a3b8;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+  }
+  .dot:nth-child(1) { animation-delay: -0.32s; }
+  .dot:nth-child(2) { animation-delay: -0.16s; }
+
+  .chat-footer {
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 99px;
+    padding: 4px 6px 4px 14px;
+    transition: all 0.3s ease;
+  }
+
+  .input-group:focus-within {
+    border-color: var(--chat-primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0, 196, 180, 0.15);
+  }
+
+  .chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.7rem 0.5rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--chat-text);
+    min-width: 0;
+  }
+
+  .mic-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #94a3b8;
+    border-radius: 50%;
+    margin-right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  .mic-btn:hover { color: var(--chat-primary); background: #e2e8f0; }
+  .mic-btn.listening { color: #ef4444; background: #fee2e2; animation: mic-pulse 1.5s infinite; }
+
+  .send-btn {
+    background: var(--chat-primary);
+    color: white;
+    border: none;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .send-btn:hover { transform: scale(1.05); background: var(--chat-primary); }
+  .send-btn:active { transform: scale(0.95); }
+  .send-btn svg { width: 18px; height: 18px; margin-left: 2px; pointer-events: none; }
+
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(0, 196, 180, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(0, 196, 180, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 196, 180, 0); }
+  }
+
+  @keyframes slide-in { to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+  @keyframes mic-pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 100% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } }
+
+  @media (max-width: 480px) {
+    .medexa-chat-window { width: 100%; height: 100%; bottom: 0; right: 0; border-radius: 0; max-height: 100vh; }
+    .medexa-chat-launcher { bottom: 20px; right: 20px; }
+  }
+</style>
+
+<div class="medexa-chat-launcher" id="chatLauncher">
+  <svg class="launcher-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  <svg class="launcher-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+</div>
+
+<div class="medexa-chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="bot-avatar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 16a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2z"/><path d="M6 12a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-6z"/><line x1="6" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="18" y2="12"/></svg>
+    </div>
+    <div class="chat-info">
+      <h4>Velden Assistant</h4>
+      <span>Online &amp; Ready</span>
+    </div>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="message bot">
+      Hello! 👋 I'm here to help. You can type or use the microphone 🎤 to ask about our pricing, audits, or RCM services!
+    </div>
+    <div class="typing-indicator" id="typingIndicator">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <div class="chat-footer">
+    <div class="input-group">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type or speak..." autocomplete="off">
+      <button type="button" class="mic-btn" id="micBtn" title="Speak">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+      </button>
+      <button type="button" class="send-btn" id="sendBtn" title="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const ChatWidget = {
+    isOpen: false,
+    elements: {},
+    FORMSPREE_URL: "https://formspree.io/f/xkgelwbw",
+    state: { step: 'idle', data: {} },
+
+    init: function() {
+      this.elements = {
+        window: document.getElementById('chatWindow'),
+        launcher: document.getElementById('chatLauncher'),
+        messages: document.getElementById('chatMessages'),
+        input: document.getElementById('chatInput'),
+        micBtn: document.getElementById('micBtn'),
+        sendBtn: document.getElementById('sendBtn'),
+        typing: document.getElementById('typingIndicator')
+      };
+
+      this.elements.launcher.addEventListener('click', () => this.toggle());
+      this.elements.sendBtn.addEventListener('click', () => this.send());
+      this.elements.input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); this.send(); }
+      });
+
+      const SpeechConstructor = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechConstructor) {
+        const recognition = new SpeechConstructor();
+        recognition.lang = 'en-US';
+        recognition.onresult = (e) => {
+          this.elements.input.value = e.results[0][0].transcript;
+          this.send();
+        };
+        this.elements.micBtn.addEventListener('click', () => recognition.start());
+      } else {
+        if(this.elements.micBtn) this.elements.micBtn.style.display = 'none';
+      }
+    },
+
+    toggle: function() {
+      this.isOpen = !this.isOpen;
+      this.elements.window.classList.toggle('open', this.isOpen);
+      this.elements.launcher.classList.toggle('active', this.isOpen);
+      if (this.isOpen) setTimeout(() => this.elements.input.focus(), 400);
+    },
+
+    send: function() {
+      const text = this.elements.input.value.trim();
+      if (!text) return;
+      this.addMessage(text, 'user');
+      this.elements.input.value = '';
+      this.showTyping();
+      setTimeout(() => {
+        const response = this.processLogic(text);
+        this.hideTyping();
+        this.addMessage(response, 'bot');
+      }, 700);
+    },
+
+    formatText: function(text) {
+      return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    },
+
+    addMessage: function(text, sender) {
+      const div = document.createElement('div');
+      div.className = `message ${sender}`;
+      div.innerHTML = this.formatText(text);
+      this.elements.messages.insertBefore(div, this.elements.typing);
+      this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
+    },
+
+    showTyping: function() {
+      this.elements.typing.classList.add('active');
+      this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
+    },
+    hideTyping: function() { this.elements.typing.classList.remove('active'); },
+
+    sendToEmail: function(name, email) {
+      const formData = new FormData();
+      formData.append('clinic_name', name);
+      formData.append('email', email);
+      formData.append('source', 'Chatbot Conversation');
+
+      fetch(this.FORMSPREE_URL, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          setTimeout(() => {
+            this.addMessage("✅ <b>Success!</b> I've emailed your details to our senior analyst. We will be in touch shortly.", 'bot');
+          }, 1000);
+        } else {
+          this.addMessage("❌ I tried to send the email, but something went wrong. Please try again later.", 'bot');
+        }
+      })
+      .catch(() => {
+        this.addMessage("❌ Network error. Please check your connection.", 'bot');
+      });
+    },
+
+    processLogic: function(input) {
+      const lower = input.toLowerCase();
+
+      if (this.state.step === 'awaiting_choice') {
+        if (lower.includes('audit') || lower.includes('free')) {
+          this.state.step = 'awaiting_name';
+          return "Great choice. To start your <b>Free Audit</b>, what is the <b>Name of your Clinic</b>?";
+        }
+        if (lower.includes('pric') || lower.includes('cost')) {
+          this.state.step = 'idle';
+          return "Our pricing is typically <b>3% to 6% of collections</b> for full-service RCM. We only get paid when you do.";
+        }
+        if (lower.includes('billing')) {
+          this.state.step = 'idle'; 
+          return "We offer full-service billing (Coding, Claims, Payment Posting) with a high first-pass acceptance rate, especially for behavioral health and primary care.";
+        }
+      }
+
+      if (this.state.step === 'awaiting_name') {
+        this.state.data.name = input;
+        this.state.step = 'awaiting_email';
+        return `Thanks, ${input}. What is the best <b>Email Address</b> to send the report to?`;
+      }
+
+      if (this.state.step === 'awaiting_email') {
+        const email = input;
+        const name = this.state.data.name || 'Clinic';
+        this.sendToEmail(name, email);
+        this.state.step = 'idle'; 
+        return "One moment, I am securely transmitting your details...";
+      }
+
+      if (lower.match(/^(hi|hello|hey|start)/)) {
+        return "Hi there! 👋 I can help you recover lost revenue. Are you interested in a <b>Free Audit</b> or our <b>Medical Billing</b> services?";
+      }
+
+      if (lower.match(/^(yes|ok|sure|help|assist)/)) {
+        this.state.step = 'awaiting_choice';
+        return "I'd be happy to help! Would you like to start a <b>Free Audit</b> or view our <b>Pricing</b>?";
+      }
+
+      if (lower.includes('about') || lower.includes('company') || lower.includes('who are you') || lower.includes('what do you do')) {
+        return "Velden Health is a revenue cycle partner for U.S. clinics, specializing in <b>behavioral & mental health billing</b>, AR recovery, and denial management.";
+      }
+
+      if (lower.includes('billing') || lower.includes('claim') || lower.includes('code')) {
+        return "We handle end-to-end billing: eligibility, coding, claims, AR follow-up, and payment posting. We’re especially strong in behavioral health codes like 90834, 90837, and 90791. Would you like a <b>Free Audit</b> of your current billing?";
+      }
+
+      if (lower.includes('audit') || lower.includes('free')) {
+        this.state.step = 'awaiting_name';
+        return "Our Free Audit finds hidden revenue leaks. To get started, please type your <b>Clinic Name</b>.";
+      }
+
+      if (lower.includes('pric') || lower.includes('cost')) {
+        return "We usually work on a performance model: <b>3% - 6% of monthly collections</b> for full-service RCM, or hybrid and analytics-only options.";
+      }
+
+      if (lower.includes('human') || lower.includes('contact')) {
+        return "You can reach our team directly at <b>info@veldenhealth.com</b> or the phone number listed in the footer.";
+      }
+
+      return "I didn't quite catch that. I can help with <b>Audits</b>, <b>Pricing</b>, or <b>Billing</b>. Which would you like to discuss?";
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    ChatWidget.init();
+  });
+</script>
+
+</body>
+</html>
