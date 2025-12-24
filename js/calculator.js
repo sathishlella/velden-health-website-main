@@ -129,8 +129,22 @@ const RevenueCalculator = {
         const min = parseFloat(slider.min);
         const max = parseFloat(slider.max);
         const value = parseFloat(slider.value);
+
+        // Calculate percentage with thumb width compensation
+        // This ensures the filled portion ends at the thumb's center, not its edge
         const percentage = ((value - min) / (max - min)) * 100;
-        slider.style.background = `linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) ${percentage}%, #e2e8f0 ${percentage}%, #e2e8f0 100%)`;
+
+        // Adjust for thumb visual alignment
+        // The thumb is 24px wide, so we need to account for half its width (12px)
+        // relative to the slider width to center it on the progress line
+        const thumbWidth = 24;
+        const sliderWidth = slider.offsetWidth;
+        const thumbOffset = (thumbWidth / 2 / sliderWidth) * 100;
+
+        // Adjust percentage to center thumb on the filled portion
+        const adjustedPercentage = percentage - (thumbOffset * (1 - percentage / 100));
+
+        slider.style.background = `linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) ${adjustedPercentage}%, #e2e8f0 ${adjustedPercentage}%, #e2e8f0 100%)`;
     },
 
     calculate: function () {
