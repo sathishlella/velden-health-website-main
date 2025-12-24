@@ -276,13 +276,19 @@ const RevenueCalculator = {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('email', email);
+        // Important: Add _replyto for Formspree to correctly set the Reply-To header
+        formData.append('_replyto', email);
+
         formData.append('sessions', this.sessions);
         formData.append('reimbursement', this.reimbursement);
         formData.append('denial_rate', this.denialRate);
         formData.append('monthly_risk', this.formatCurrency(monthlyRisk));
         formData.append('monthly_recoverable', this.formatCurrency(monthlyRecoverable));
         formData.append('annual_recovery', this.formatCurrency(annualRecovery));
-        formData.append('subject', 'Hidden Revenue Calculator Results');
+
+        // Use _subject for Formspree ensuring the email subject is set correctly
+        formData.append('_subject', 'Hidden Revenue Calculator Results');
+        formData.append('subject', 'Hidden Revenue Calculator Results'); // Keep original as backup custom field
         formData.append('message', `
 Calculator Results for ${name}
 
