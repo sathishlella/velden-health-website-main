@@ -2540,3 +2540,66 @@ h4 {
 .btn-large:hover svg {
   transform: translateX(4px);
 }
+
+/* INFINITE LOGO SLIDER */
+.logo-slider {
+  background: var(--color-bg-alt);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo-slider::before,
+.logo-slider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logo-slider::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-bg-alt), transparent);
+}
+
+.logo-slider::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-bg-alt), transparent);
+}
+
+.logo-slide-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+  gap: 4rem;
+}
+
+.logo-slide-track:hover {
+  animation-play-state: paused;
+}
+
+.logo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #333;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
