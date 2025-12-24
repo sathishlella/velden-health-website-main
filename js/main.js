@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'medical-billing': {
       title: 'Medical Billing',
       tagline: 'Clean claims paid first time.',
-      desc: 'Velden Health handles end-to-end billing: eligibility checks, coding review, claim scrubbing, electronic submission, and payment posting, guided by payer-specific rules. We ensure every step is accurate.',
+      desc: 'Velden Health handles end-to-end billing: eligibility checks, coding review, claim scrubbing, electronic submission, and payment posting. We are experts in behavioral health coding nuances, including 90837 corrections and 90791 intake coding.',
       list: ['Eligibility & benefits', 'Coding review', 'Claim submission', 'Payment posting']
     },
     'ar-followup': {
