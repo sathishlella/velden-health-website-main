@@ -2602,4 +2602,39 @@ h4 {
   100% {
     transform: translateX(-50%);
   }
+}/* ==============================================================
+   MOBILE VISUAL IMPROVEMENTS
+   - Hide logo tagline on small screens for better readability
+   - Add spacing between chat bubble and sticky CTA
+   ============================================================== */
+
+/* Hide logo tagline on mobile for better readability */
+@media (max-width: 640px) {
+
+    /* Target the tagline text in the SVG logo */
+    .logo-area svg text:last-of-type {
+        display: none;
+    }
+
+    /* Adjust logo SVG height when tagline is hidden */
+    .logo-area svg {
+        height: 60px !important;
+    }
+}
+
+/* Chat bubble and sticky CTA spacing fixes */
+@media (max-width: 768px) {
+
+    /* Add more bottom spacing for chat launcher */
+    .medexa-chat-launcher {
+        bottom: 90px !important;
+        /* Move up to avoid sticky CTA */
+    }
+
+    /* Ensure sticky CTA has proper spacing */
+    .sticky-cta {
+        bottom: 1rem !important;
+        left: 1rem !important;
+        right: 1rem !important;
+    }
 }
