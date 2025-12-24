@@ -1802,6 +1802,8 @@ h4 {
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 196, 180, 0.3);
   transition: all 0.2s ease;
+  position: relative;
+  z-index: 10;
 }
 
 .calc-slider::-webkit-slider-thumb:hover {
@@ -1822,6 +1824,8 @@ h4 {
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 196, 180, 0.3);
   transition: all 0.2s ease;
+  position: relative;
+  z-index: 10;
 }
 
 .calc-slider::-moz-range-thumb:hover {

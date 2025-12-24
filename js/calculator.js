@@ -247,10 +247,18 @@ const RevenueCalculator = {
         const nameInput = document.getElementById('userName');
         const submitBtn = e.target.querySelector('button[type="submit"]');
 
-        if (!emailInput || !nameInput) return;
+        if (!emailInput || !nameInput) {
+            console.error('Email form inputs not found');
+            return;
+        }
 
-        const email = emailInput.value;
-        const name = nameInput.value;
+        const email = emailInput.value.trim();
+        const name = nameInput.value.trim();
+
+        if (!email || !name) {
+            alert('Please fill in all fields');
+            return;
+        }
 
         // Disable button
         submitBtn.disabled = true;
@@ -261,11 +269,17 @@ const RevenueCalculator = {
         const monthlyRecoverable = monthlyRisk * this.recoveryRate;
         const annualRecovery = monthlyRecoverable * 12;
 
-        // Prepare form data
+        // Prepare form data with all calculator results
         const formData = new FormData();
         formData.append('name', name);
         formData.append('email', email);
-        formData.append('subject', 'Your Hidden Revenue Calculator Results');
+        formData.append('sessions', this.sessions);
+        formData.append('reimbursement', this.reimbursement);
+        formData.append('denial_rate', this.denialRate);
+        formData.append('monthly_risk', this.formatCurrency(monthlyRisk));
+        formData.append('monthly_recoverable', this.formatCurrency(monthlyRecoverable));
+        formData.append('annual_recovery', this.formatCurrency(annualRecovery));
+        formData.append('subject', 'Hidden Revenue Calculator Results');
         formData.append('message', `
 Calculator Results for ${name}
 
@@ -284,6 +298,15 @@ These estimates are based on a conservative 60% recovery rate from aged A/R (60-
 Ready to start recovering this revenue? Schedule your free 20-claim pilot: https://www.veldenhealth.com/contact.html
     `);
 
+        console.log('Sending calculator results:', {
+            name,
+            email,
+            sessions: this.sessions,
+            reimbursement: this.reimbursement,
+            denialRate: this.denialRate,
+            annualRecovery: this.formatCurrency(annualRecovery)
+        });
+
         // Send via Formspree
         fetch(this.FORMSPREE_URL, {
             method: 'POST',
@@ -291,6 +314,7 @@ Ready to start recovering this revenue? Schedule your free 20-claim pilot: https
             headers: { 'Accept': 'application/json' }
         })
             .then(response => {
+                console.log('Formspree response status:', response.status);
                 if (response.ok) {
                     alert('✅ Results sent! Check your email for your personalized recovery estimate.');
                     this.closeEmailModal();
@@ -304,10 +328,14 @@ Ready to start recovering this revenue? Schedule your free 20-claim pilot: https
                         value: Math.round(annualRecovery)
                     });
                 } else {
-                    alert('❌ Failed to send email. Please try again or contact us directly.');
+                    return response.json().then(data => {
+                        console.error('Formspree error:', data);
+                        alert('❌ Failed to send email. Please try again or contact us directly at info@veldenhealth.com');
+                    });
                 }
             })
-            .catch(() => {
+            .catch((error) => {
+                console.error('Network error:', error);
                 alert('❌ Network error. Please check your connection and try again.');
             })
             .finally(() => {
