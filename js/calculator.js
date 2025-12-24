@@ -18,7 +18,7 @@ const RevenueCalculator = {
     elements: {},
 
     // Formspree endpoint
-    FORMSPREE_URL: "https://formspree.io/f/xkgelwbw",
+    FORMSPREE_URL: "https://formspree.io/f/xqezjrag",
 
     init: function () {
         // Get all DOM elements
