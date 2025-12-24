@@ -1391,7 +1391,8 @@ h4 {
     display: block;
   }
 
-  .nav-links.mobile-open {
+  .nav-links.mobile-open,
+  .nav-links.open {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -1402,6 +1403,7 @@ h4 {
     padding: 1rem;
     box-shadow: var(--shadow-xl);
     border-bottom: 1px solid var(--color-border);
+    z-index: 1000;
   }
 
   .grid-2,
