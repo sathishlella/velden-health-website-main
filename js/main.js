@@ -295,10 +295,12 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       navLinks.classList.toggle('open');
+      navToggle.classList.toggle('active'); // Add active class for hamburger animation
     });
     document.addEventListener('click', (e) => {
       if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
         navLinks.classList.remove('open');
+        navToggle.classList.remove('active'); // Remove active class when closing
       }
     });
   }
