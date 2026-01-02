@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Free RCM Health Check | Velden Health</title>
+    <link rel="icon" type="image/png" href="https://www.veldenhealth.com/brand-icon-96.png?v=2026" sizes="96x96" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Free RCM assessment tool for behavioral health clinics. Answer 10 questions to discover your practice's revenue cycle health score." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .assessment-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+        }
+
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+
+        .option-btn:hover {
+            border-color: var(--color-primary);
+            background: rgba(0, 196, 180, 0.05);
+        }
+
+        .option-btn.selected {
+            border-color: var(--color-primary);
+            background: rgba(0, 196, 180, 0.1);
+        }
+
+        .option-btn .radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-btn.selected .radio {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+        }
+
+        .option-btn.selected .radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--color-border);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        /* Results Section */
+        .results-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 4rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-primary);
+            margin: 1rem 0;
+        }
+
+        .score-label {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .breakdown-item {
+            background: var(--color-bg-secondary);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .breakdown-label {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .breakdown-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        /* Email Gate */
+        .email-gate {
+            background: linear-gradient(135deg, rgba(0, 196, 180, 0.1) 0%, rgba(0, 31, 63, 0.05) 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .email-gate h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .email-form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .email-form input {
+            padding: 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .email-form input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        /* Hidden by default */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo-area">
+                <svg viewBox="0 0 900 250" style="height: 75px; width: auto;" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(20, 60)">
+                        <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
+                        <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
+                        <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
+                        <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
+                    </g>
+                    <text x="200" y="175" font-family="Montserrat, sans-serif" font-weight="800" font-size="60"
+                        fill="#001F3F" letter-spacing="3">VELDEN HEALTH</text>
+                    <text x="215" y="205" font-family="Montserrat, sans-serif" font-weight="500" font-size="24"
+                        fill="#5A6B7C" letter-spacing="6.5">REVENUE CYCLE MANAGEMENT</text>
+                </svg>
+            </a>
+            <nav class="main-nav">
+                <div class="nav-cta-wrapper">
+                    <ul class="nav-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                    <a href="../contact.html" class="btn btn-primary">Start Pilot</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" style="padding-top: 3rem;">
+            <div class="assessment-container">
+
+                <!-- Intro -->
+                <div id="intro-section" class="results-card" style="margin-bottom: 2rem;">
+                    <span class="hero-subtitle">Free Assessment Tool</span>
+                    <h1
+                        style="font-size: 2rem; margin: 1rem 0; font-family: 'Montserrat', sans-serif; font-weight: 800;">
+                        RCM Health Check
+                    </h1>
+                    <p
+                        style="color: var(--color-text-muted); font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Answer 10 quick questions about your practice's revenue cycle. Get a personalized score and
+                        recommendations in under 3 minutes.
+                    </p>
+                    <button onclick="startAssessment()" class="btn btn-primary btn-large">Start Free Assessment</button>
+                </div>
+
+                <!-- Progress -->
+                <div id="progress-section" class="hidden">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Questions -->
+                <div id="questions-section" class="hidden">
+                    <!-- Question 1 -->
+                    <div class="question-card" id="q1" data-question="1">
+                        <div class="question-number">Question 1 of 10</div>
+                        <div class="question-text">What percentage of your claims are denied on first submission?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Less than 5% - Excellent</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>5-10% - Good</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>10-20% - Needs improvement</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Over 20% or I don't know</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="question-card hidden" id="q2" data-question="2">
+                        <div class="question-number">Question 2 of 10</div>
+                        <div class="question-text">How quickly do you follow up on denied claims?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Within 7 days</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Within 14 days</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Within 30 days</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>30+ days or we don't track this</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="question-card hidden" id="q3" data-question="3">
+                        <div class="question-number">Question 3 of 10</div>
+                        <div class="question-text">What's your average days in A/R (accounts receivable)?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Under 30 days</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>30-45 days</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>45-60 days</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Over 60 days or I don't know</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="question-card hidden" id="q4" data-question="4">
+                        <div class="question-number">Question 4 of 10</div>
+                        <div class="question-text">Do you have a dedicated person or team for denial management?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Yes, dedicated denial specialist(s)</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Part of someone's responsibilities</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>We handle it ad-hoc when possible</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>No dedicated resource for denials</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="question-card hidden" id="q5" data-question="5">
+                        <div class="question-number">Question 5 of 10</div>
+                        <div class="question-text">How do you track and categorize your denials?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Automated reports with root cause analysis</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Manual spreadsheet tracking</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Occasional review of denial reports</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>No systematic tracking</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="question-card hidden" id="q6" data-question="6">
+                        <div class="question-number">Question 6 of 10</div>
+                        <div class="question-text">What percentage of your aged A/R (60+ days) do you successfully
+                            recover?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Over 50%</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>30-50%</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>10-30%</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Less than 10% or we don't track this</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="question-card hidden" id="q7" data-question="7">
+                        <div class="question-number">Question 7 of 10</div>
+                        <div class="question-text">How often do you verify patient insurance eligibility before
+                            sessions?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Every visit (automated)</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Every visit (manual)</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Only for new patients</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Rarely or never</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="question-card hidden" id="q8" data-question="8">
+                        <div class="question-number">Question 8 of 10</div>
+                        <div class="question-text">Which payer causes the most denial headaches for your practice?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>BCBS Illinois</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>UnitedHealthcare</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Aetna/Cigna</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Medicaid/Medicare</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 9 -->
+                    <div class="question-card hidden" id="q9" data-question="9">
+                        <div class="question-number">Question 9 of 10</div>
+                        <div class="question-text">Do you have documented appeal letter templates for common denials?
+                        </div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Yes, comprehensive library by denial code</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>A few templates for common issues</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>We write each appeal from scratch</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>We rarely submit appeals</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <div class="question-card hidden" id="q10" data-question="10">
+                        <div class="question-number">Question 10 of 10</div>
+                        <div class="question-text">How would you describe your current billing situation?</div>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="3" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Running smoothly, few issues</span>
+                            </button>
+                            <button class="option-btn" data-value="2" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Manageable but room for improvement</span>
+                            </button>
+                            <button class="option-btn" data-value="1" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>Struggling with significant A/R</span>
+                            </button>
+                            <button class="option-btn" data-value="0" onclick="selectOption(this)">
+                                <span class="radio"></span>
+                                <span>In crisis - major cash flow issues</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="nav-buttons">
+                        <button id="prevBtn" class="btn btn-secondary hidden" onclick="prevQuestion()">←
+                            Previous</button>
+                        <button id="nextBtn" class="btn btn-primary" onclick="nextQuestion()" disabled>Next →</button>
+                    </div>
+                </div>
+
+                <!-- Email Gate -->
+                <div id="email-section" class="hidden">
+                    <div class="email-gate">
+                        <h3>Your Assessment is Complete!</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 2rem;">
+                            Enter your email to see your personalized RCM Health Score and recommendations.
+                        </p>
+                        <form class="email-form" onsubmit="showResults(event)">
+                            <input type="text" id="userName" placeholder="Your Name" required>
+                            <input type="email" id="userEmail" placeholder="Email Address" required>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">See My Results</button>
+                        </form>
+                        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1rem;">
+                            We'll send your results to this email and never spam you.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="results-section" class="hidden">
+                    <div class="results-card">
+                        <span class="hero-subtitle">Your RCM Health Score</span>
+                        <div class="score-display" id="totalScore">--</div>
+                        <div class="score-label" id="scoreLabel">Calculating...</div>
+
+                        <div class="score-breakdown">
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Denial Management</div>
+                                <div class="breakdown-value" id="denialScore">--</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Follow-up Speed</div>
+                                <div class="breakdown-value" id="followupScore">--</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">A/R Health</div>
+                                <div class="breakdown-value" id="arScore">--</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Process Maturity</div>
+                                <div class="breakdown-value" id="processScore">--</div>
+                            </div>
+                        </div>
+
+                        <div id="recommendations"
+                            style="text-align: left; margin: 2rem 0; padding: 1.5rem; background: rgba(0, 196, 180, 0.05); border-radius: 12px;">
+                            <h4 style="margin: 0 0 1rem 0; color: var(--color-text);">Recommended Next Steps:</h4>
+                            <ul id="recList"
+                                style="margin: 0; padding-left: 1.5rem; color: var(--color-text-muted); line-height: 1.8;">
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <p style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 600;">
+                                Ready to recover your aged A/R?
+                            </p>
+                            <a href="../contact.html" class="btn btn-primary btn-large">Start Your Free 20-Claim
+                                Pilot</a>
+                            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-muted);">
+                                Or <a href="https://calendly.com/sathish-veldenhealth/30min" target="_blank"
+                                    style="color: var(--color-primary);">schedule a call</a> to discuss your results
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 10;
+        const answers = {};
+
+        function startAssessment() {
+            document.getElementById('intro-section').classList.add('hidden');
+            document.getElementById('progress-section').classList.remove('hidden');
+            document.getElementById('questions-section').classList.remove('hidden');
+            document.getElementById('q1').classList.remove('hidden');
+            updateProgress();
+        }
+
+        function selectOption(btn) {
+            const card = btn.closest('.question-card');
+            const qNum = card.dataset.question;
+
+            // Deselect all options in this question
+            card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+
+            // Select this option
+            btn.classList.add('selected');
+            answers[qNum] = parseInt(btn.dataset.value);
+
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                document.getElementById('q' + currentQuestion).classList.add('hidden');
+                currentQuestion++;
+                document.getElementById('q' + currentQuestion).classList.remove('hidden');
+                document.getElementById('nextBtn').disabled = !answers[currentQuestion];
+                document.getElementById('prevBtn').classList.remove('hidden');
+                updateProgress();
+
+                if (currentQuestion === totalQuestions) {
+                    document.getElementById('nextBtn').textContent = 'See Results';
+                }
+            } else {
+                // Show email gate
+                document.getElementById('questions-section').classList.add('hidden');
+                document.getElementById('progress-section').classList.add('hidden');
+                document.getElementById('email-section').classList.remove('hidden');
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                document.getElementById('q' + currentQuestion).classList.add('hidden');
+                currentQuestion--;
+                document.getElementById('q' + currentQuestion).classList.remove('hidden');
+                document.getElementById('nextBtn').textContent = 'Next →';
+                document.getElementById('nextBtn').disabled = false;
+                updateProgress();
+
+                if (currentQuestion === 1) {
+                    document.getElementById('prevBtn').classList.add('hidden');
+                }
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showResults(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+
+            // Calculate scores
+            const total = Object.values(answers).reduce((a, b) => a + b, 0);
+            const maxScore = totalQuestions * 3;
+            const percentage = Math.round((total / maxScore) * 100);
+
+            // Calculate category scores
+            const denialScore = Math.round(((answers[1] || 0) + (answers[4] || 0) + (answers[5] || 0)) / 9 * 100);
+            const followupScore = Math.round(((answers[2] || 0) + (answers[9] || 0)) / 6 * 100);
+            const arScore = Math.round(((answers[3] || 0) + (answers[6] || 0)) / 6 * 100);
+            const processScore = Math.round(((answers[7] || 0) + (answers[10] || 0)) / 6 * 100);
+
+            // Display scores
+            document.getElementById('totalScore').textContent = percentage + '/100';
+            document.getElementById('denialScore').textContent = denialScore + '%';
+            document.getElementById('followupScore').textContent = followupScore + '%';
+            document.getElementById('arScore').textContent = arScore + '%';
+            document.getElementById('processScore').textContent = processScore + '%';
+
+            // Score label
+            let label = '';
+            if (percentage >= 80) label = 'Excellent - Your RCM is running well!';
+            else if (percentage >= 60) label = 'Good - Some areas for improvement';
+            else if (percentage >= 40) label = 'Needs Attention - Significant opportunities';
+            else label = 'Critical - Immediate action recommended';
+            document.getElementById('scoreLabel').textContent = label;
+
+            // Recommendations
+            const recs = [];
+            if (denialScore < 60) recs.push('Implement systematic denial tracking by code and root cause');
+            if (followupScore < 60) recs.push('Reduce denial follow-up time to under 14 days');
+            if (arScore < 60) recs.push('Focus on recovering your 60-180 day aged A/R');
+            if (processScore < 60) recs.push('Establish eligibility verification for every visit');
+            if (percentage < 80) recs.push('Consider a specialized A/R recovery partner like Velden Health');
+
+            const recList = document.getElementById('recList');
+            recList.innerHTML = recs.map(r => `<li>${r}</li>`).join('');
+
+            // Show results
+            document.getElementById('email-section').classList.add('hidden');
+            document.getElementById('results-section').classList.remove('hidden');
+
+            // Send to Formspree (optional)
+            try {
+                fetch('https://formspree.io/f/xqezjrag', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: 'RCM Assessment Completed',
+                        name: name,
+                        email: email,
+                        score: percentage,
+                        denial_score: denialScore,
+                        followup_score: followupScore,
+                        ar_score: arScore,
+                        process_score: processScore,
+                        recommendations: recs.join('; ')
+                    })
+                });
+            } catch (e) {
+                console.log('Form submission error:', e);
+            }
+        }
+    </script>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

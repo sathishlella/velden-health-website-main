@@ -140,8 +140,9 @@
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="results.html">Results</a></li>
             <li><a href="about.html">About</a></li>
+            <li><a href="resources/denial-glossary.html">Resources</a></li>
           </ul>
-          <a href="contact.html" class="btn btn-primary">Initialize Pilot</a>
+          <a href="contact.html" class="btn btn-primary">Start Pilot</a>
         </div>
       </nav>
     </div>
@@ -149,7 +150,7 @@
 
   <main>
     <!-- HERO -->
-    <section id="hero" class="hero-section">
+    <section id="hero" class="hero-section section-bg-hero">
       <div class="container hero-grid">
         <div class="hero-left reveal-group active">
           <span class="hero-subtitle">Illinois Behavioral Health Recovery</span>
@@ -173,21 +174,26 @@
                 stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              HIPAA Compliant
+              HIPAA Aligned + BAA
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
                 stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              US Payer Experts
+              No Long-Term Contract
             </li>
           </ul>
 
           <div class="hero-cta-row">
-            <a href="contact.html" class="btn btn-primary">Initialize 20-Claim Pilot</a>
-            <a href="process.html" class="btn btn-secondary">How Our System Works</a>
+            <a href="contact.html" class="btn btn-primary">Try 20 Claims Free</a>
+            <a href="https://calendly.com/sathish-veldenhealth/30min" target="_blank" class="btn btn-secondary">Schedule
+              a Call</a>
           </div>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.75rem;">
+            <strong style="color: var(--color-primary);">✓ 100% Risk-Free:</strong> No recovery = no fee. No upfront
+            costs. No long-term contract.
+          </p>
         </div>
 
         <div class="hero-right">
@@ -398,7 +404,7 @@
     </section>
 
     <!-- HIDDEN REVENUE CALCULATOR -->
-    <section class="section section-alt" id="calculator">
+    <section class="section section-alt section-bg-calculator" id="calculator">
       <div class="container">
         <div class="reveal-group">
           <h2 class="section-title">Calculate Your Hidden Revenue</h2>
@@ -418,6 +424,8 @@
               <input type="range" id="sessionsSlider" min="50" max="1000" value="200" step="10" class="calc-slider">
               <div class="calc-range-labels">
                 <span>50</span>
+                <span style="color: var(--color-text-muted); font-size: 0.75rem;">Typical 3-clinician practice:
+                  150-300</span>
                 <span>1000</span>
               </div>
             </div>
@@ -426,11 +434,13 @@
             <div class="calc-input-group">
               <label for="reimbursementSlider">
                 <span class="calc-label">Average Reimbursement per Session</span>
-                <span class="calc-value" id="reimbursementValue">$120</span>
+                <span class="calc-value" id="reimbursementValue">$115</span>
               </label>
-              <input type="range" id="reimbursementSlider" min="50" max="300" value="120" step="5" class="calc-slider">
+              <input type="range" id="reimbursementSlider" min="50" max="300" value="115" step="5" class="calc-slider">
               <div class="calc-range-labels">
                 <span>$50</span>
+                <span style="color: var(--color-text-muted); font-size: 0.75rem;">IL behavioral health avg:
+                  $110-130</span>
                 <span>$300</span>
               </div>
             </div>
@@ -439,11 +449,12 @@
             <div class="calc-input-group">
               <label for="denialSlider">
                 <span class="calc-label">Current Denial/Aging Rate</span>
-                <span class="calc-value" id="denialValue">15%</span>
+                <span class="calc-value" id="denialValue">17%</span>
               </label>
-              <input type="range" id="denialSlider" min="5" max="40" value="15" step="1" class="calc-slider">
+              <input type="range" id="denialSlider" min="5" max="40" value="17" step="1" class="calc-slider">
               <div class="calc-range-labels">
                 <span>5%</span>
+                <span style="color: var(--color-text-muted); font-size: 0.75rem;">IL avg: 15-18% (HFMA 2024)</span>
                 <span>40%</span>
               </div>
             </div>
@@ -557,100 +568,99 @@
     <!-- SOCIAL PROOF -->
     <section class="section" id="social-proof">
       <div class="container">
-        <div class="reveal-group">
-          <h2 class="section-title">Proven Results. Real Clinics. Real Revenue.</h2>
-          <p class="section-intro">
-            Join 40+ Illinois behavioral health practices recovering cash they thought was lost forever
-          </p>
+        <h2 class="section-title">Industry-Backed Recovery Performance</h2>
+        <p class="section-intro">
+          We focus on the aged A/R that internal teams don't have time to chase
+        </p>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="metrics-grid reveal-group">
+        <div class="metric-card">
+          <div class="metric-value">60%</div>
+          <div class="metric-label">Avg Recovery Rate</div>
+          <div class="metric-context">Industry benchmark for 60-180 day claims</div>
         </div>
-
-        <!-- Key Metrics -->
-        <div class="metrics-grid reveal-group">
-          <div class="metric-card">
-            <div class="metric-value">$2.3M+</div>
-            <div class="metric-label">Recovered for Clinics</div>
-            <div class="metric-context">That's cash back in your bank account</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">95%+</div>
-            <div class="metric-label">Clean Claims Rate</div>
-            <div class="metric-context">First-pass approval, faster payment</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">60-180</div>
-            <div class="metric-label">Day A/R Specialist</div>
-            <div class="metric-context">We focus where others give up</div>
-          </div>
+        <div class="metric-card">
+          <div class="metric-value">95%+</div>
+          <div class="metric-label">Clean Claims Rate</div>
+          <div class="metric-context">First-pass approval, faster payment</div>
         </div>
-
-        <!-- Industry Statistics (Replacing Testimonials) -->
-        <div class="testimonials-grid reveal-group">
-          <div class="testimonial-card">
-            <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 3h18v18H3zM3 9h18M9 21V9"></path>
-              </svg>
-              <span
-                style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px;">Industry
-                Benchmark</span>
-            </div>
-            <p class="testimonial-quote">
-              <strong>67% of behavioral health claims over 90 days</strong> are never collected, according to MGMA data.
-              Most practices simply write them off.
-            </p>
-            <div class="testimonial-author">Medical Group Management Association</div>
-            <div class="testimonial-role">2023 Revenue Cycle Benchmarking Report</div>
-          </div>
-
-          <div class="testimonial-card">
-            <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span
-                style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px;">Illinois
-                Challenge</span>
-            </div>
-            <p class="testimonial-quote">
-              <strong>Average denial rate in Illinois: 15-18%</strong> for behavioral health claims, with BCBS IL and
-              UnitedHealthcare showing the highest denial rates among major payers.
-            </p>
-            <div class="testimonial-author">Healthcare Financial Management Association</div>
-            <div class="testimonial-role">State-Level Claims Analysis, 2024</div>
-          </div>
-
-          <div class="testimonial-card">
-            <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 20V10M18 20V4M6 20v-4"></path>
-              </svg>
-              <span
-                style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px;">Recovery
-                Potential</span>
-            </div>
-            <p class="testimonial-quote">
-              <strong>Specialized AR recovery teams achieve 55-65% recovery rates</strong> on claims between 60-180 days
-              old, compared to 12% recovery by internal staff who lack dedicated bandwidth.
-            </p>
-            <div class="testimonial-author">American Medical Association</div>
-            <div class="testimonial-role">Practice Management Survey, 2023</div>
-          </div>
+        <div class="metric-card">
+          <div class="metric-value">60-180</div>
+          <div class="metric-label">Day A/R Specialist</div>
+          <div class="metric-context">We focus where others give up</div>
         </div>
+      </div>
 
-        <!-- CTA -->
-        <div class="reveal-group" style="text-align: center; margin-top: 3rem;">
-          <a href="#calculator" class="btn btn-primary btn-large">
-            See Your Recovery Potential
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
+      <!-- Industry Statistics (Replacing Testimonials) -->
+      <div class="testimonials-grid reveal-group">
+        <div class="testimonial-card">
+          <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3h18v18H3zM3 9h18M9 21V9"></path>
             </svg>
-          </a>
-          <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--color-text-muted);">
-            Free calculator • No credit card • Results in 30 seconds
+            <span
+              style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px;">Industry
+              Benchmark</span>
+          </div>
+          <p class="testimonial-quote">
+            <strong>67% of behavioral health claims over 90 days</strong> are never collected, according to MGMA data.
+            Most practices simply write them off.
           </p>
+          <div class="testimonial-author">Medical Group Management Association</div>
+          <div class="testimonial-role">2023 Revenue Cycle Benchmarking Report</div>
         </div>
+
+        <div class="testimonial-card">
+          <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span
+              style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px;">Illinois
+              Challenge</span>
+          </div>
+          <p class="testimonial-quote">
+            <strong>Average denial rate in Illinois: 15-18%</strong> for behavioral health claims, with BCBS IL and
+            UnitedHealthcare showing the highest denial rates among major payers.
+          </p>
+          <div class="testimonial-author">Healthcare Financial Management Association</div>
+          <div class="testimonial-role">State-Level Claims Analysis, 2024</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20V10M18 20V4M6 20v-4"></path>
+            </svg>
+            <span
+              style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px;">Recovery
+              Potential</span>
+          </div>
+          <p class="testimonial-quote">
+            <strong>Specialized AR recovery teams achieve 55-65% recovery rates</strong> on claims between 60-180 days
+            old, compared to 12% recovery by internal staff who lack dedicated bandwidth.
+          </p>
+          <div class="testimonial-author">American Medical Association</div>
+          <div class="testimonial-role">Practice Management Survey, 2023</div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="reveal-group" style="text-align: center; margin-top: 3rem;">
+        <a href="#calculator" class="btn btn-primary btn-large">
+          See Your Recovery Potential
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+        <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--color-text-muted);">
+          Free calculator • No credit card • Results in 30 seconds
+        </p>
+      </div>
       </div>
     </section>
 

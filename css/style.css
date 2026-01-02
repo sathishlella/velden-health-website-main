@@ -178,6 +178,79 @@ h4 {
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Background Image Sections - Professional Competitor Style */
+.section-bg-hero,
+.hero-section.section-bg-hero {
+  background: linear-gradient(135deg, rgba(0, 31, 63, 0.85) 0%, rgba(0, 31, 63, 0.7) 50%, rgba(0, 196, 180, 0.4) 100%),
+    url('../Images/hero-bg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed;
+  color: white;
+}
+
+.section-bg-hero .hero-title,
+.section-bg-hero .section-title,
+.section-bg-hero h1,
+.section-bg-hero h2,
+.section-bg-hero h3 {
+  color: white;
+  background: none;
+  -webkit-text-fill-color: white;
+}
+
+.section-bg-hero .hero-purpose,
+.section-bg-hero p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.section-bg-team {
+  background: linear-gradient(135deg, rgba(0, 31, 63, 0.9) 0%, rgba(0, 31, 63, 0.85) 100%),
+    url('../Images/section-bg-team.png');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.section-bg-team .section-title,
+.section-bg-team h2,
+.section-bg-team h3 {
+  color: white;
+  background: none;
+  -webkit-text-fill-color: white;
+}
+
+.section-bg-team .section-intro,
+.section-bg-team p {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.section-bg-cta {
+  background: linear-gradient(135deg, rgba(0, 196, 180, 0.9) 0%, rgba(0, 31, 63, 0.95) 100%),
+    url('../Images/cta-bg-handshake.png');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.section-bg-cta .section-title,
+.section-bg-cta h2 {
+  color: white;
+  background: none;
+  -webkit-text-fill-color: white;
+}
+
+.section-bg-cta p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.section-bg-calculator {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(244, 248, 251, 0.9) 100%),
+    url('../Images/calculator-bg.png');
+  background-size: cover;
+  background-position: center right;
+}
+
 .grid-2,
 .grid-3,
 .grid-4 {
@@ -279,10 +352,11 @@ h4 {
   text-decoration: none;
   color: var(--color-text-muted);
   font-weight: 500;
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 0.8rem;
   border-radius: var(--radius-md);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -2602,7 +2676,9 @@ h4 {
   100% {
     transform: translateX(-50%);
   }
-}/* ==============================================================
+}
+
+/* ==============================================================
    MOBILE VISUAL IMPROVEMENTS
    - Hide logo tagline on small screens for better readability
    - Add spacing between chat bubble and sticky CTA
@@ -2611,33 +2687,34 @@ h4 {
 /* Hide logo tagline on mobile for better readability */
 @media (max-width: 640px) {
 
-    /* Target the tagline text in the SVG logo */
-    .logo-area svg text:last-of-type {
-        display: none;
-    }
+  /* Target the tagline text in the SVG logo */
+  .logo-area svg text:last-of-type {
+    display: none;
+  }
 
-    /* Adjust logo SVG height when tagline is hidden */
-    .logo-area svg {
-        height: 60px !important;
-    }
+  /* Adjust logo SVG height when tagline is hidden */
+  .logo-area svg {
+    height: 60px !important;
+  }
 }
 
 /* Chat bubble and sticky CTA spacing fixes */
 @media (max-width: 768px) {
 
-    /* Add more bottom spacing for chat launcher */
-    .medexa-chat-launcher {
-        bottom: 90px !important;
-        /* Move up to avoid sticky CTA */
-    }
+  /* Add more bottom spacing for chat launcher */
+  .medexa-chat-launcher {
+    bottom: 90px !important;
+    /* Move up to avoid sticky CTA */
+  }
 
-    /* Ensure sticky CTA has proper spacing */
-    .sticky-cta {
-        bottom: 1rem !important;
-        left: 1rem !important;
-        right: 1rem !important;
-    }
+  /* Ensure sticky CTA has proper spacing */
+  .sticky-cta {
+    bottom: 1rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
+  }
 }
+
 /* ==============================================================
    PREMIUM MOBILE MENU ANIMATIONS
    Smooth, rich dropdown experience with glassmorphism effect
@@ -2658,7 +2735,7 @@ h4 {
     gap: 0;
     box-shadow: 0 10px 40px rgba(0, 31, 63, 0.15);
     border-bottom: 1px solid rgba(0, 196, 180, 0.1);
-    
+
     /* Initial hidden state */
     max-height: 0;
     opacity: 0;
@@ -2667,14 +2744,14 @@ h4 {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
   }
-  
+
   .nav-links.open {
     max-height: 500px;
     opacity: 1;
     transform: translateY(0);
     pointer-events: all;
   }
-  
+
   .nav-links a,
   .nav-links li a {
     display: block;
@@ -2690,7 +2767,7 @@ h4 {
     position: relative;
     overflow: hidden;
   }
-  
+
   /* Shimmer effect on hover */
   .nav-links a::before,
   .nav-links li a::before {
@@ -2703,12 +2780,12 @@ h4 {
     background: linear-gradient(90deg, transparent, rgba(0, 196, 180, 0.1), transparent);
     transition: left 0.5s ease;
   }
-  
+
   .nav-links a:hover::before,
   .nav-links li a:hover::before {
     left: 100%;
   }
-  
+
   .nav-links a:hover,
   .nav-links li a:hover {
     background: linear-gradient(135deg, rgba(0, 196, 180, 0.08) 0%, rgba(0, 31, 63, 0.04) 100%);
@@ -2717,58 +2794,78 @@ h4 {
     padding-left: 1.5rem;
     box-shadow: 0 2px 8px rgba(0, 196, 180, 0.1);
   }
-  
+
   .nav-links a.active,
   .nav-links li a.active {
     background: linear-gradient(135deg, var(--color-primary) 0%, #00e5cc 100%);
     color: white;
     box-shadow: 0 4px 12px rgba(0, 196, 180, 0.3);
   }
-  
+
   /* Staggered animation for menu items */
   .nav-links.open a,
   .nav-links.open li {
     animation: slideInFromTop 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
   }
-  
+
   .nav-links.open li:nth-child(1),
-  .nav-links.open a:nth-child(1) { animation-delay: 0.05s; }
+  .nav-links.open a:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+
   .nav-links.open li:nth-child(2),
-  .nav-links.open a:nth-child(2) { animation-delay: 0.1s; }
+  .nav-links.open a:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
   .nav-links.open li:nth-child(3),
-  .nav-links.open a:nth-child(3) { animation-delay: 0.15s; }
+  .nav-links.open a:nth-child(3) {
+    animation-delay: 0.15s;
+  }
+
   .nav-links.open li:nth-child(4),
-  .nav-links.open a:nth-child(4) { animation-delay: 0.2s; }
+  .nav-links.open a:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+
   .nav-links.open li:nth-child(5),
-  .nav-links.open a:nth-child(5) { animation-delay: 0.25s; }
+  .nav-links.open a:nth-child(5) {
+    animation-delay: 0.25s;
+  }
+
   .nav-links.open li:nth-child(6),
-  .nav-links.open a:nth-child(6) { animation-delay: 0.3s; }
+  .nav-links.open a:nth-child(6) {
+    animation-delay: 0.3s;
+  }
+
   .nav-links.open li:nth-child(7),
-  .nav-links.open a:nth-child(7) { animation-delay: 0.35s; }
-  
+  .nav-links.open a:nth-child(7) {
+    animation-delay: 0.35s;
+  }
+
   /* Hamburger icon animation */
   .nav-toggle svg {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .nav-toggle.active svg {
     transform: rotate(90deg);
   }
-  
+
   .nav-toggle svg line {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center;
   }
-  
+
   /* Transform hamburger to X when open */
   .nav-toggle.active svg line:nth-child(1) {
     transform: translateY(6px) rotate(45deg);
   }
-  
+
   .nav-toggle.active svg line:nth-child(2) {
     opacity: 0;
   }
-  
+
   .nav-toggle.active svg line:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
   }
@@ -2779,6 +2876,7 @@ h4 {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

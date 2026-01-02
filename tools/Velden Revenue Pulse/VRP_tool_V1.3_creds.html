@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Velden Revenue Pulse – RCM Audit for Behavioral Clinics</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 152 160'%3E%3Crect x='0' y='96' width='32' height='64' fill='%23001F3F' rx='16'/%3E%3Crect x='40' y='64' width='32' height='96' fill='%23001F3F' rx='16'/%3E%3Crect x='80' y='32' width='32' height='128' fill='%23001F3F' rx='16'/%3E%3Crect x='120' y='0' width='32' height='160' fill='%2300C4B4' rx='16'/%3E%3C/svg%3E" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card-bg: #ffffff;
+      --primary: #009e91;
+      --primary-soft: #e0f5f3;
+      --primary-dark: #00786f;
+      --navy: #001F3F;
+      --border: #d1d5db;
+      --border-soft: #e2e8f0;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --danger: #dc2626;
+      --warning: #d97706;
+      --success: #16a34a;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    /* LOGIN SCREEN STYLES */
+    #login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 31, 63, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      border: 1px solid var(--border-soft);
+    }
+
+    .login-logo {
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+    
+    .login-logo svg {
+      height: 60px;
+      width: auto;
+    }
+
+    .login-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .login-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .login-input-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .login-input-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      background: #f9fafb;
+      transition: all 0.2s;
+    }
+
+    .login-input-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 158, 145, 0.1);
+      background: white;
+    }
+
+    .login-btn {
+      margin-top: 8px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .login-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .login-error {
+      color: var(--danger);
+      font-size: 12px;
+      margin-top: 12px;
+      min-height: 16px;
+      display: none;
+    }
+
+    /* MAIN APP STYLES */
+    .page {
+      display: none; /* Hidden by default */
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      flex-shrink: 0;
+    }
+
+    .brand-logo svg {
+      height: 46px;
+      width: auto;
+      display: block;
+    }
+
+    .brand-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .brand-text-main {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #374151;
+      white-space: nowrap;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .topbar-tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* Header block */
+    .header-block {
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      padding: 16px 18px 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .header-main {
+      flex: 1 1 260px;
+      min-width: 0;
+    }
+
+    .header-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 4px;
+      color: #111827;
+    }
+
+    .header-subtitle {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 540px;
+    }
+
+    .header-badges {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #f9fafb;
+      color: #4b5563;
+    }
+
+    .pill strong {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .header-side {
+      flex: 0 0 230px;
+      max-width: 260px;
+    }
+
+    .metric-card {
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: #f9fafb;
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+
+    .metric-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .metric-sub {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Section navigation */
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 6px 0 18px;
+    }
+
+    .section-nav-button {
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      padding: 6px 11px;
+      font-size: 11px;
+      color: #4b5563;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.1s ease, border-color 0.1s ease, color 0.1s ease,
+        transform 0.08s ease;
+    }
+
+    .section-nav-button:hover {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      color: #065f59;
+      transform: translateY(-0.5px);
+    }
+
+    .section-nav-button span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      padding: 16px 18px 10px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.03);
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #111827;
+    }
+
+    .section-title span.index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .section-help {
+      margin: 0 0 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .input-row label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .input-row input {
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      background: #f9fafb;
+    }
+
+    .input-row input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(0, 158, 145, 0.3);
+      background: #ffffff;
+    }
+
+    .question {
+      margin: 10px 0 14px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: background 0.12s ease, border-color 0.12s ease,
+        box-shadow 0.12s ease;
+    }
+
+    .question:hover {
+      background: #f9fafb;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    .question.unanswered {
+      border-color: var(--danger);
+      background: #fef2f2;
+      box-shadow: none;
+    }
+
+    .question-label-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .question-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .info-btn {
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #4b5563;
+      flex-shrink: 0;
+      transition: background 0.1s ease, border-color 0.1s ease, color 0.1s ease;
+    }
+
+    .info-btn:hover {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      color: #065f59;
+    }
+
+    .info-panel {
+      display: none;
+      margin-top: 4px;
+      padding-left: 8px;
+      border-left: 2px solid var(--border-soft);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .info-panel.open {
+      display: block;
+    }
+
+    .info-panel p {
+      margin: 2px 0 4px;
+    }
+
+    .info-panel ul {
+      margin: 0 0 4px;
+      padding-left: 14px;
+    }
+
+    .info-panel li {
+      margin-bottom: 2px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .option {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .option input[type="radio"] {
+      cursor: pointer;
+    }
+
+    .score-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 16px 0 8px;
+    }
+
+    .button-group-left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 24px rgba(0, 158, 145, 0.25);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(0.97);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0, 158, 145, 0.3);
+    }
+
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: background 0.08s ease, transform 0.08s ease;
+    }
+
+    .btn-secondary:hover {
+      background: #f9fafb;
+      transform: translateY(-0.5px);
+    }
+
+    .btn-disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .results {
+      display: none;
+      margin-top: 6px;
+      padding: 12px 12px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: #f9fafb;
+      font-size: 13px;
+    }
+
+    .results.visible {
+      display: block;
+    }
+
+    .results-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .score-main {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .score-band {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .band-red {
+      background: #fef2f2;
+      color: var(--danger);
+    }
+
+    .band-yellow {
+      background: #fffbeb;
+      color: var(--warning);
+    }
+
+    .band-green {
+      background: #ecfdf3;
+      color: var(--success);
+    }
+
+    .results-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .results-body {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .results-body p {
+      margin: 4px 0;
+    }
+
+    .results-body ul {
+      margin: 4px 0 0;
+      padding-left: 18px;
+    }
+
+    .results-body li {
+      margin-bottom: 3px;
+    }
+
+    .results-talk-title {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .unanswered-note {
+      font-size: 11px;
+      color: var(--danger);
+      margin-top: 4px;
+    }
+
+    .progress-shell {
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .progress-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .progress-bar {
+      position: relative;
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0%;
+      border-radius: 999px;
+      background: var(--primary);
+      transition: width 0.25s ease, background 0.25s ease;
+    }
+
+    .progress-bar-fill.red {
+      background: #fecaca;
+    }
+
+    .progress-bar-fill.yellow {
+      background: #fde68a;
+    }
+
+    .progress-bar-fill.green {
+      background: #bbf7d0;
+    }
+
+    /* Pillar chart container */
+    #pillarChartContainer {
+      margin-top: 10px;
+      display: none;
+    }
+
+    #pillarChartTitle {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    @media (max-width: 800px) {
+      .brand-logo svg {
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-block {
+        padding: 14px 12px;
+      }
+
+      .card {
+        padding: 14px 12px 8px;
+      }
+
+      .button-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .brand-text-main,
+      .brand-text-sub,
+      .topbar-tag {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN OVERLAY -->
+  <div id="login-overlay">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 160">
+            <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16"/>
+            <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16"/>
+            <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16"/>
+            <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16"/>
+        </svg>
+      </div>
+      <div class="login-title">Internal Audit Tool</div>
+      <div class="login-subtitle">Please sign in to access the VRP Audit.</div>
+      
+      <div class="login-form">
+        <div class="login-input-group">
+          <label>Username</label>
+          <input type="text" id="loginUser" placeholder="Enter username" />
+        </div>
+        <div class="login-input-group">
+          <label>Password</label>
+          <input type="password" id="loginPass" placeholder="Enter password" />
+        </div>
+        <div id="loginError" class="login-error">Invalid credentials.</div>
+        <button id="loginBtn" class="login-btn">Sign In</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="mainApp">
+    <!-- TOP BAR WITH SVG LOGO -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-logo">
+          <!-- Velden SVG logo -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250">
+            <g transform="translate(20, 60)">
+              <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
+              <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
+              <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
+              <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
+            </g>
+            <text 
+              x="200" 
+              y="175" 
+              font-family="Montserrat, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-weight="800" 
+              font-size="60" 
+              fill="#001F3F" 
+              letter-spacing="3"
+            >
+              VELDEN HEALTH
+            </text>
+            <text 
+              x="215" 
+              y="205" 
+              font-family="Montserrat, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+              font-weight="500" 
+              font-size="24" 
+              fill="#5A6B7C" 
+              letter-spacing="6.5"
+            >
+              REVENUE CYCLE MANAGEMENT
+            </text>
+          </svg>
+        </div>
+        <div class="brand-text-block">
+          <div class="brand-text-main">REVENUE PULSE AUDIT</div>
+          <div class="brand-text-sub">Behavioral Health · RCM Audit</div>
+        </div>
+      </div>
+      <div class="topbar-tag">Internal use with clients · Do not share publicly</div>
+    </div>
+
+    <!-- HEADER -->
+    <div class="header-block">
+      <div class="header-main">
+        <h1 class="header-title">RCM Audit for Behavioral Clinics</h1>
+        <p class="header-subtitle">
+          Run a structured 20-question review across intake, claims, A/R, denials and reporting.
+          Use this during calls to surface revenue leaks and position Velden as the fix.
+        </p>
+        <div class="header-badges">
+          <span class="pill"><strong>~30 min</strong> live audit</span>
+          <span class="pill">0–2 scoring · red / yellow / green</span>
+          <span class="pill">Provider PDF summary you can email after the call</span>
+        </div>
+      </div>
+      <div class="header-side">
+        <div class="metric-card">
+          <div class="metric-title">Today’s focus</div>
+          <div class="metric-value">3 clinics through this tool</div>
+          <div class="metric-sub">
+            If you’re not putting real practices through this, it’s just another internal form.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION NAVIGATION -->
+    <div class="section-nav">
+      <button class="section-nav-button" type="button" data-scroll-target="section-0">
+        <span class="dot"></span> Practice profile
+      </button>
+      <button class="section-nav-button" type="button" data-scroll-target="section-1">
+        <span class="dot"></span> Tech & ownership
+      </button>
+      <button class="section-nav-button" type="button" data-scroll-target="section-2">
+        <span class="dot"></span> Intake & eligibility
+      </button>
+      <button class="section-nav-button" type="button" data-scroll-target="section-3">
+        <span class="dot"></span> Claims & posting
+      </button>
+      <button class="section-nav-button" type="button" data-scroll-target="section-4">
+        <span class="dot"></span> A/R & denials
+      </button>
+      <button class="section-nav-button" type="button" data-scroll-target="section-5">
+        <span class="dot"></span> Reporting & compliance
+      </button>
+    </div>
+
+    <!-- Practice Info -->
+    <div class="card" id="section-0">
+      <div class="section-title">
+        <span class="index">0</span>
+        Practice profile (context only)
+      </div>
+      <p class="section-help">
+        These fields don’t affect the score. They just make your PDF and notes useful later.
+      </p>
+      <div class="grid-2">
+        <div class="input-row">
+          <label>Practice name</label>
+          <input id="practiceName" type="text" placeholder="e.g., Sunrise Behavioral Health" />
+        </div>
+        <div class="input-row">
+          <label>Contact person</label>
+          <input id="contactPerson" type="text" placeholder="Owner / Practice Manager" />
+        </div>
+        <div class="input-row">
+          <label>Clinic type</label>
+          <input id="clinicType" type="text" placeholder="Solo / small group / larger group" />
+        </div>
+        <div class="input-row">
+          <label>Approx. monthly sessions</label>
+          <input id="monthlySessions" type="text" placeholder="Rough estimate is fine" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1: Tech & Ownership -->
+    <div class="card" id="section-1">
+      <div class="section-title">
+        <span class="index">1</span>
+        Tech stack & RCM ownership
+      </div>
+      <p class="section-help">
+        You’re mapping structure vs improvisation: systems, ownership, and basic discipline.
+      </p>
+
+      <div class="question" data-question-id="q1">
+        <div class="question-label-row">
+          <div class="question-label">
+            1. Primary EMR/EHR and clearinghouse setup?
+          </div>
+          <button class="info-btn" type="button" data-info="q1">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q1">
+          <p><strong>EMR/EHR:</strong> Software where clinicians document sessions, diagnoses, and notes. For our purposes, EMR and EHR mean the system of record for visits.</p>
+          <p><strong>Clearinghouse:</strong> The “middle layer” that scrubs claims and routes them to payers. A good clearinghouse catches basic errors before the payer denies.</p>
+          <ul>
+            <li><strong>Behavioral EMR + integrated clearinghouse (score 2):</strong> Best case. One system (or tightly connected tools) handles scheduling, documentation, claims, and remits.</li>
+            <li><strong>Behavioral EMR, partial/manual clearinghouse (score 1):</strong> They have an EMR, but still download/upload files or key things manually. More human error and delays.</li>
+            <li><strong>No proper EMR or no clearinghouse (score 0):</strong> Paper, spreadsheets, or generic tools. Claims are often messy, delayed, or missing. Huge opportunity for Velden.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q1" value="2" data-label="Behavioral EMR + integrated clearinghouse" />
+            <span>Behavioral EMR + integrated clearinghouse</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="1" data-label="Behavioral EMR, partial / manual clearinghouse" />
+            <span>Behavioral EMR, partial / manual clearinghouse</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="0" data-label="No proper EMR or no clearinghouse" />
+            <span>No proper EMR or no clearinghouse</span>
+          </label>
+        </div>
+        <div class="score-hint">Score: 2 = strong setup, 0 = chaos.</div>
+      </div>
+
+      <div class="question" data-question-id="q2">
+        <div class="question-label-row">
+          <div class="question-label">
+            2. Who owns the billing work day-to-day?
+          </div>
+          <button class="info-btn" type="button" data-info="q2">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q2">
+          <p>This is about <strong>clear ownership</strong>. When everyone “helps a bit,” no one feels responsible for results.</p>
+          <ul>
+            <li><strong>Dedicated in-house or external RCM specialist (score 2):</strong> One person or partner is clearly accountable for claims, A/R, and denials.</li>
+            <li><strong>Shared between front desk / therapists (score 1):</strong> Billing is a side-task. It gets done, but slowly and inconsistently.</li>
+            <li><strong>No clear owner / ad hoc (score 0):</strong> Work happens only when something is on fire. Money is constantly stuck.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q2" value="2" data-label="Dedicated in-house or external RCM specialist" />
+            <span>Dedicated in-house or external RCM specialist</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="1" data-label="Shared between front desk / therapists" />
+            <span>Shared between front desk / therapists</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="0" data-label="No clear owner / ad hoc" />
+            <span>No clear owner / ad hoc</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q3">
+        <div class="question-label-row">
+          <div class="question-label">
+            3. Written SOPs/checklists for billing steps?
+          </div>
+          <button class="info-btn" type="button" data-info="q3">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q3">
+          <p>SOPs = <strong>Standard Operating Procedures</strong>. They turn “how Sarah does it in her head” into a repeatable process.</p>
+          <ul>
+            <li><strong>Documented and followed (score 2):</strong> New staff can follow a checklist and get 80–90% of tasks right without hand-holding.</li>
+            <li><strong>Some notes but inconsistent (score 1):</strong> Bits of process exist, but each person still improvises.</li>
+            <li><strong>No written process (score 0):</strong> Everything lives in memory. If one person leaves, revenue collapses.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q3" value="2" data-label="Yes, documented and followed" />
+            <span>Yes, documented and followed</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="1" data-label="Some notes but inconsistent" />
+            <span>Some notes but inconsistent</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="0" data-label="No written process" />
+            <span>No written process</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q4">
+        <div class="question-label-row">
+          <div class="question-label">
+            4. Typical lag from session to charge entry?
+          </div>
+          <button class="info-btn" type="button" data-info="q4">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q4">
+          <p>This is the delay between <strong>providing care</strong> and <strong>actually creating the claim</strong> in the system.</p>
+          <ul>
+            <li><strong>Same day / next day (score 2):</strong> Clean, fast revenue cycle. Cash flow is predictable.</li>
+            <li><strong>3–7 days (score 1):</strong> Acceptable but not ideal. Delays add up if volumes grow.</li>
+            <li><strong>More than a week / no idea (score 0):</strong> Big warning sign. A lot of work is not even being billed quickly.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q4" value="2" data-label="Same day / next day" />
+            <span>Same day / next day</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="1" data-label="3–7 days" />
+            <span>3–7 days</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q4" value="0" data-label="More than a week / no idea" />
+            <span>More than a week / no idea</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Intake & Eligibility -->
+    <div class="card" id="section-2">
+      <div class="section-title">
+        <span class="index">2</span>
+        Intake & eligibility
+      </div>
+      <p class="section-help">
+        This is where many preventable denials originate. You’re checking discipline and documentation.
+      </p>
+
+      <div class="question" data-question-id="q5">
+        <div class="question-label-row">
+          <div class="question-label">
+            5. Eligibility & benefits checked before first visit?
+          </div>
+          <button class="info-btn" type="button" data-info="q5">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q5">
+          <p>Eligibility = verifying the patient’s coverage, plan status, and key limits <strong>before</strong> they come in.</p>
+          <ul>
+            <li><strong>Always, for every new patient (score 2):</strong> Strong front-end discipline. Fewer “we don’t actually cover this” surprises.</li>
+            <li><strong>Sometimes, not consistent (score 1):</strong> Staff know they should do it, but skip it when busy.</li>
+            <li><strong>Rarely / never (score 0):</strong> You only find out after the denial. Patients and providers both get angry.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q5" value="2" data-label="Always, for every new patient" />
+            <span>Always, for every new patient</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="1" data-label="Sometimes, not consistent" />
+            <span>Sometimes, not consistent</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="0" data-label="Rarely / never" />
+            <span>Rarely / never</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q6">
+        <div class="question-label-row">
+          <div class="question-label">
+            6. Level of detail captured (deductible, copay, limits)?
+          </div>
+          <button class="info-btn" type="button" data-info="q6">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q6">
+          <p>It’s not enough to know “active or inactive.” You want to know <strong>what the plan will actually pay</strong>.</p>
+          <ul>
+            <li><strong>Standard template (score 2):</strong> They capture deductible, copay/coinsurance, visit limits, telehealth rules, auth requirements.</li>
+            <li><strong>Some details, not standardized (score 1):</strong> Depends who called or who answered the phone.</li>
+            <li><strong>Only active/inactive or nothing (score 0):</strong> They’re flying blind on patient responsibility and plan limitations.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q6" value="2" data-label="Standard template: deductible, copay, limits, telehealth" />
+            <span>Standard template: deductible, copay, limits, telehealth</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="1" data-label="Some details, not standardized" />
+            <span>Some details, not standardized</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="0" data-label="Only active/inactive or nothing" />
+            <span>Only active/inactive or nothing</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q7">
+        <div class="question-label-row">
+          <div class="question-label">
+            7. Where are eligibility notes stored?
+          </div>
+          <button class="info-btn" type="button" data-info="q7">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q7">
+          <p>Even if they check benefits, it’s useless if no one can <strong>find</strong> the information later.</p>
+          <ul>
+            <li><strong>Inside EMR in a consistent place (score 2):</strong> Anyone can open the chart and see the benefits instantly.</li>
+            <li><strong>External but somewhat organized (score 1):</strong> Google Sheets / Excel / notebook, but at least structured.</li>
+            <li><strong>Scattered (score 0):</strong> Notes live in emails, sticky notes, or staff memory.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q7" value="2" data-label="Inside EMR in a consistent place" />
+            <span>Inside EMR in a consistent place</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q7" value="1" data-label="External sheet/notes but somewhat organized" />
+            <span>External sheet/notes but somewhat organized</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q7" value="0" data-label="Scattered (emails, paper, memory)" />
+            <span>Scattered (emails, paper, memory)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q8">
+        <div class="question-label-row">
+          <div class="question-label">
+            8. Frequency of eligibility-related denials?
+          </div>
+          <button class="info-btn" type="button" data-info="q8">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q8">
+          <p>Denials that say things like “coverage terminated,” “not eligible on date of service,” etc. These are almost always preventable.</p>
+          <ul>
+            <li><strong>Rare (&lt;2%) (score 2):</strong> Good front-end processes.</li>
+            <li><strong>Occasional (2–7%) (score 1):</strong> Some gaps; worth tightening but not disastrous.</li>
+            <li><strong>Frequent or no idea (score 0):</strong> Either lots of preventable denials or zero visibility – both are bad.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q8" value="2" data-label="Rare (< 2% of claims)" />
+            <span>Rare (&lt; 2% of claims)</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q8" value="1" data-label="Occasional (2–7%)" />
+            <span>Occasional (2–7%)</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q8" value="0" data-label="Frequent (> 7%) or no idea" />
+            <span>Frequent (&gt; 7%) or no idea</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Claims & Posting -->
+    <div class="card" id="section-3">
+      <div class="section-title">
+        <span class="index">3</span>
+        Claims submission & payment posting
+      </div>
+      <p class="section-help">
+        Are services being converted into clean claims and posted payments in a timely way?
+      </p>
+
+      <div class="question" data-question-id="q9">
+        <div class="question-label-row">
+          <div class="question-label">
+            9. Claim submission frequency?
+          </div>
+          <button class="info-btn" type="button" data-info="q9">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q9">
+          <p>How often they actually <strong>send claims to payers</strong>.</p>
+          <ul>
+            <li><strong>Daily / near-daily (score 2):</strong> Keeps cash moving and A/R low.</li>
+            <li><strong>2–3 times per week (score 1):</strong> Acceptable, but can create mini cash crunches.</li>
+            <li><strong>Weekly or less (score 0):</strong> Big batches, long delays, more room for errors to pile up.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q9" value="2" data-label="Daily (or near-daily)" />
+            <span>Daily (or near-daily)</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q9" value="1" data-label="2–3 times per week" />
+            <span>2–3 times per week</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q9" value="0" data-label="Weekly or less" />
+            <span>Weekly or less</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q10">
+        <div class="question-label-row">
+          <div class="question-label">
+            10. Monitoring & fixing clearinghouse rejections?
+          </div>
+          <button class="info-btn" type="button" data-info="q10">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q10">
+          <p>Clearinghouse rejections are <strong>pre-denials</strong> – the claim never reaches the payer until you fix basic errors.</p>
+          <ul>
+            <li><strong>Reviewed same/next day (score 2):</strong> They keep this queue empty. Very healthy habit.</li>
+            <li><strong>Fixed within a week (score 1):</strong> OK, but can slow collections.</li>
+            <li><strong>Not monitored / only react (score 0):</strong> Money is stuck before it even reaches the payer.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q10" value="2" data-label="Reviewed and fixed same/next day" />
+            <span>Reviewed and fixed same/next day</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q10" value="1" data-label="Fixed within a week" />
+            <span>Fixed within a week</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q10" value="0" data-label="Not monitored / only when payer complains" />
+            <span>Not monitored / only when payer complains</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q11">
+        <div class="question-label-row">
+          <div class="question-label">
+            11. Speed of ERA/EOB posting into EMR?
+          </div>
+          <button class="info-btn" type="button" data-info="q11">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q11">
+          <p>ERAs/EOBs show what the payer actually paid or denied. Posting them keeps A/R and balances accurate.</p>
+          <ul>
+            <li><strong>Within 48 hours (score 2):</strong> Almost real-time financial picture.</li>
+            <li><strong>Within a week (score 1):</strong> Reasonable, but delays visibility.</li>
+            <li><strong>Longer / irregular / unknown (score 0):</strong> They basically don’t know where money stands day to day.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q11" value="2" data-label="Within 48 hours" />
+            <span>Within 48 hours</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q11" value="1" data-label="Within a week" />
+            <span>Within a week</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q11" value="0" data-label="Longer / irregular / unknown" />
+            <span>Longer / irregular / unknown</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q12">
+        <div class="question-label-row">
+          <div class="question-label">
+            12. Handling patient balances & statements?
+          </div>
+          <button class="info-btn" type="button" data-info="q12">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q12">
+          <p>Once payer pays their part, the rest is patient responsibility. The question is: <strong>does anyone actually collect it?</strong></p>
+          <ul>
+            <li><strong>Systematic workflow (score 2):</strong> Regular statements, reminders, clear scripts, maybe payment plans.</li>
+            <li><strong>Occasional / on request (score 1):</strong> Money is collected only when a patient asks.</li>
+            <li><strong>Almost no structured collections (score 0):</strong> A huge percentage of revenue is silently written off.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q12" value="2" data-label="Systematic statements + collection workflow" />
+            <span>Systematic statements + collection workflow</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q12" value="1" data-label="Occasional statements / on request" />
+            <span>Occasional statements / on request</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q12" value="0" data-label="Almost no structured patient collections" />
+            <span>Almost no structured patient collections</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: AR & Denials -->
+    <div class="card" id="section-4">
+      <div class="section-title">
+        <span class="index">4</span>
+        A/R & denial management
+      </div>
+      <p class="section-help">
+        This is the “money on the table” view. Weakness here is your strongest sales angle.
+      </p>
+
+      <div class="question" data-question-id="q13">
+        <div class="question-label-row">
+          <div class="question-label">
+            13. Use of A/R aging reports (30/60/90+)?
+          </div>
+          <button class="info-btn" type="button" data-info="q13">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q13">
+          <p>A/R (Accounts Receivable) aging shows how long money has been outstanding – 0–30, 31–60, 61–90, 90+ days.</p>
+          <ul>
+            <li><strong>Reviewed weekly (score 2):</strong> They actively work old balances and keep 90+ low.</li>
+            <li><strong>Reviewed monthly (score 1):</strong> Some discipline, but slower reaction.</li>
+            <li><strong>Rarely / never (score 0):</strong> No one is watching the bucket where most lost revenue hides.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q13" value="2" data-label="Reviewed weekly and actioned" />
+            <span>Reviewed weekly and actioned</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q13" value="1" data-label="Reviewed monthly" />
+            <span>Reviewed monthly</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q13" value="0" data-label="Rarely / never / no report" />
+            <span>Rarely / never / no report</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q14">
+        <div class="question-label-row">
+          <div class="question-label">
+            14. Ownership of A/R follow-up & payer calls?
+          </div>
+          <button class="info-btn" type="button" data-info="q14">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q14">
+          <p>Following up on unpaid claims requires <strong>time and persistence</strong>. If no one owns it, it doesn’t happen.</p>
+          <ul>
+            <li><strong>Dedicated person/team (score 2):</strong> Someone wakes up every day whose job is to get answers from payers.</li>
+            <li><strong>Shared between staff (score 1):</strong> Done only when people “find time.”</li>
+            <li><strong>No one clearly responsible (score 0):</strong> Money is stuck until it’s written off.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q14" value="2" data-label="Dedicated person/team with clear role" />
+            <span>Dedicated person/team with clear role</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q14" value="1" data-label="Shared between staff" />
+            <span>Shared between staff</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q14" value="0" data-label="No one clearly responsible" />
+            <span>No one clearly responsible</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q15">
+        <div class="question-label-row">
+          <div class="question-label">
+            15. Denial tracking & root-cause analysis?
+          </div>
+          <button class="info-btn" type="button" data-info="q15">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q15">
+          <p>This is about whether they <strong>learn from denials</strong> or just resubmit blindly.</p>
+          <ul>
+            <li><strong>Every denial logged (score 2):</strong> They track denial codes, reasons, and fixes – so patterns can be eliminated.</li>
+            <li><strong>Some common denials tracked (score 1):</strong> Only major recurring issues are monitored.</li>
+            <li><strong>No structured tracking (score 0):</strong> Same mistakes repeat forever.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q15" value="2" data-label="Every denial logged with reason code & action" />
+            <span>Every denial logged with reason code & action</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q15" value="1" data-label="Some common denials tracked" />
+            <span>Some common denials tracked</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q15" value="0" data-label="No structured denial tracking" />
+            <span>No structured denial tracking</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q16">
+        <div class="question-label-row">
+          <div class="question-label">
+            16. Standard process for correcting & resubmitting denials?
+          </div>
+          <button class="info-btn" type="button" data-info="q16">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q16">
+          <p>Once denied, do they have a <strong>checklist / script</strong> for what to do next – or is it random?</p>
+          <ul>
+            <li><strong>Clear steps + timelines (score 2):</strong> Staff know exactly how to appeal/fix different denial types.</li>
+            <li><strong>Handled case-by-case (score 1):</strong> People “figure it out” each time, which is slow.</li>
+            <li><strong>No defined process (score 0):</strong> Many denials are never resubmitted properly.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q16" value="2" data-label="Clear steps, timelines, and templates" />
+            <span>Clear steps, timelines, and templates</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q16" value="1" data-label="Handled case-by-case" />
+            <span>Handled case-by-case</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q16" value="0" data-label="No defined process" />
+            <span>No defined process</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Reporting & Compliance -->
+    <div class="card" id="section-5">
+      <div class="section-title">
+        <span class="index">5</span>
+        Reporting, KPIs & compliance
+      </div>
+      <p class="section-help">
+        This shows whether they run RCM by data or by gut feel.
+      </p>
+
+      <div class="question" data-question-id="q17">
+        <div class="question-label-row">
+          <div class="question-label">
+            17. Monthly RCM reports reviewed?
+          </div>
+          <button class="info-btn" type="button" data-info="q17">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q17">
+          <p>Do they sit down regularly and <strong>look at billing numbers</strong>, not just bank balance?</p>
+          <ul>
+            <li><strong>Yes, monthly (score 2):</strong> Revenue is managed intentionally.</li>
+            <li><strong>Sometimes / ad hoc (score 1):</strong> Only reviewed when there’s a problem.</li>
+            <li><strong>Almost never (score 0):</strong> They fly blind and only react to cash crunches.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q17" value="2" data-label="Yes, monthly with owner/manager" />
+            <span>Yes, monthly with owner/manager</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q17" value="1" data-label="Sometimes / ad hoc" />
+            <span>Sometimes / ad hoc</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q17" value="0" data-label="Almost never" />
+            <span>Almost never</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q18">
+        <div class="question-label-row">
+          <div class="question-label">
+            18. KPIs tracked (collections, denial rate, days in A/R, etc.)?
+          </div>
+          <button class="info-btn" type="button" data-info="q18">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q18">
+          <p>KPIs are the <strong>numbers that tell you if RCM is healthy</strong>. Typical ones: collection rate, denial rate, days in A/R, no-show rate.</p>
+          <ul>
+            <li><strong>3+ KPIs consistently (score 2):</strong> They treat RCM like a real business function.</li>
+            <li><strong>1–2 KPIs / inconsistent (score 1):</strong> Some numbers tracked, but not a full picture.</li>
+            <li><strong>No KPIs (score 0):</strong> They rely completely on “feeling” busy or not.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q18" value="2" data-label="3+ KPIs tracked consistently" />
+            <span>3+ KPIs tracked consistently</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q18" value="1" data-label="1–2 KPIs or inconsistent" />
+            <span>1–2 KPIs or inconsistent</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q18" value="0" data-label="No RCM KPIs tracked" />
+            <span>No RCM KPIs tracked</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q19">
+        <div class="question-label-row">
+          <div class="question-label">
+            19. HIPAA-ready tools & basic staff training in place?
+          </div>
+          <button class="info-btn" type="button" data-info="q19">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q19">
+          <p>Compliance isn’t just legal – it’s also about <strong>not leaking data</strong> and losing payer trust.</p>
+          <ul>
+            <li><strong>Secure tools + NDAs + training (score 2):</strong> They use HIPAA-compliant software, have basic policies, and staff training.</li>
+            <li><strong>Partially / informal (score 1):</strong> Some awareness, but gaps (e.g., using personal email, no formal training).</li>
+            <li><strong>No real discipline (score 0):</strong> Risky. Also a good reason to pitch Velden as a professional partner.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q19" value="2" data-label="Yes: secure tools + NDAs + training" />
+            <span>Yes: secure tools + NDAs + training</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q19" value="1" data-label="Partially / informal" />
+            <span>Partially / informal</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q19" value="0" data-label="No real compliance discipline" />
+            <span>No real compliance discipline</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-question-id="q20">
+        <div class="question-label-row">
+          <div class="question-label">
+            20. Data-driven improvement (fixing recurring issues)?
+          </div>
+          <button class="info-btn" type="button" data-info="q20">i</button>
+        </div>
+        <div class="info-panel" data-info-target="q20">
+          <p>Do they actually <strong>change processes</strong> when they see a pattern, or just keep patching leaks?</p>
+          <ul>
+            <li><strong>Regularly improve based on data (score 2):</strong> They identify issues, fix root causes, and update SOPs.</li>
+            <li><strong>Occasionally adjust (score 1):</strong> Changes happen, but mostly reactive.</li>
+            <li><strong>Mostly reactive / no structured improvement (score 0):</strong> Same problems show up every month.</li>
+          </ul>
+        </div>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q20" value="2" data-label="Regularly improve process based on data" />
+            <span>Regularly improve process based on data</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q20" value="1" data-label="Occasionally adjust, not systematic" />
+            <span>Occasionally adjust, not systematic</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="q20" value="0" data-label="Mostly reactive / no structured improvement" />
+            <span>Mostly reactive / no structured improvement</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions & Results -->
+    <div class="card">
+      <div class="button-row">
+        <div class="button-group-left">
+          <button id="calculateBtn" class="btn-primary" type="button">
+            Calculate score
+          </button>
+          <button id="downloadInternalPdfBtn" class="btn-primary btn-disabled" type="button" disabled>
+            Download Internal PDF
+          </button>
+          <button id="downloadProviderPdfBtn" class="btn-primary btn-disabled" type="button" disabled>
+            Download Provider Summary PDF
+          </button>
+          <button id="clearBtn" class="btn-secondary" type="button">
+            Reset answers
+          </button>
+        </div>
+      </div>
+      <div id="results" class="results">
+        <div class="results-header">
+          <div class="score-main">
+            Score: <span id="scoreValue">0</span>/<span id="maxScore">40</span>
+            (<span id="scorePercent">0</span>%)
+          </div>
+          <div id="scoreBand" class="score-band band-red">
+            RED RISK
+          </div>
+        </div>
+        <div class="progress-shell">
+          <div class="progress-label">
+            <span>Revenue health</span>
+            <span id="progressLabelRight">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div id="scoreBar" class="progress-bar-fill"></div>
+          </div>
+        </div>
+        <div class="results-sub">
+          0–50% = Red · 51–75% = Yellow · 76–100% = Green
+        </div>
+        <div id="resultsText" class="results-body"></div>
+        <div id="unansweredNote" class="unanswered-note"></div>
+
+        <!-- Pillar chart -->
+        <div id="pillarChartContainer">
+          <div id="pillarChartTitle">Pillar scores (/10)</div>
+          <canvas id="pillarChart" height="140"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jsPDF CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <!-- Chart.js for pillar bar graph -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    (function () {
+      // LOGIN LOGIC
+      const loginOverlay = document.getElementById("login-overlay");
+      const mainApp = document.getElementById("mainApp");
+      const loginBtn = document.getElementById("loginBtn");
+      const loginUser = document.getElementById("loginUser");
+      const loginPass = document.getElementById("loginPass");
+      const loginError = document.getElementById("loginError");
+
+      function attemptLogin() {
+          const u = loginUser.value;
+          const p = loginPass.value;
+          
+          if(u === "Admin" && p === "Admin123") {
+              loginOverlay.style.opacity = "0";
+              loginOverlay.style.transition = "opacity 0.3s";
+              setTimeout(() => {
+                  loginOverlay.style.display = "none";
+                  mainApp.style.display = "block";
+              }, 300);
+          } else {
+              loginError.style.display = "block";
+              loginError.textContent = "Invalid username or password";
+              // Shake animation effect
+              const card = document.querySelector(".login-card");
+              card.animate([
+                  { transform: 'translateX(0)' },
+                  { transform: 'translateX(-5px)' },
+                  { transform: 'translateX(5px)' },
+                  { transform: 'translateX(0)' }
+              ], {
+                  duration: 300,
+                  iterations: 1
+              });
+          }
+      }
+
+      loginBtn.addEventListener("click", attemptLogin);
+      loginPass.addEventListener("keypress", function(e) {
+          if(e.key === "Enter") attemptLogin();
+      });
+
+
+      // --- APP LOGIC BELOW ---
+
+      const MAX_SCORE = 20 * 2; // 20 questions * max 2 pts
+
+      // Leak mapping
+      const leakMap = {
+        q1: "Weak EMR/clearinghouse setup — increases errors & delays.",
+        q2: "No dedicated billing owner — accountability gap.",
+        q3: "No documented billing SOPs — inconsistent RCM execution.",
+        q4: "Slow charge entry — delays cash flow.",
+        q5: "Eligibility not consistently checked — preventable denials.",
+        q6: "Incomplete benefit verification — inaccurate patient balances.",
+        q7: "Eligibility notes scattered — repeated work & mistakes.",
+        q8: "High eligibility-related denials — avoidable revenue loss.",
+        q9: "Claims not sent daily — cashflow disruption.",
+        q10: "Clearinghouse rejections not monitored — stuck claims.",
+        q11: "Slow ERA/EOB posting — inaccurate A/R aging.",
+        q12: "Weak patient collections — uncollected balances.",
+        q13: "A/R aging not reviewed weekly — old claims ignored.",
+        q14: "No ownership of A/R follow-ups — lost revenue.",
+        q15: "No denial tracking — repeated preventable issues.",
+        q16: "No denial correction process — unresolved rejections.",
+        q17: "No monthly RCM review — flying blind.",
+        q18: "No KPIs tracked — no visibility into performance.",
+        q19: "HIPAA/compliance gaps — operational & legal risk.",
+        q20: "No data-driven improvement — repeatable mistakes."
+      };
+
+      const pillars = {
+        "Leadership & Accountability": ["q1","q2","q3","q4"],
+        "Intake & Eligibility": ["q5","q6","q7","q8"],
+        "Claims & Coding": ["q9","q10","q11","q12"],
+        "Payments & A/R": ["q13","q14","q15","q16"],
+        "Compliance & Data": ["q17","q18","q19","q20"]
+      };
+
+      // NEW: Context-aware analysis for each pillar
+      const pillarAnalysis = {
+        "Leadership & Accountability": {
+            low: "Lack of ownership is causing drift. Assign a clear RCM lead immediately.",
+            med: "Roles exist but accountability is loose. SOPs need strict enforcement.",
+            high: "Strong leadership structure. Focus on delegating and automating."
+        },
+        "Intake & Eligibility": {
+            low: "Front-desk gaps are creating downstream denials. Needs immediate fix.",
+            med: "Inconsistent verification. Standardize the benefits checklist.",
+            high: "Clean front-end process. Minimal eligibility denials observed."
+        },
+        "Claims & Coding": {
+            low: "Slow submission cycles are choking cash flow. Move to daily rhythm.",
+            med: "Basic process works, but clearinghouse errors cause delays.",
+            high: "Efficient submission rhythm. Verify coding compliance next."
+        },
+        "Payments & A/R": {
+            low: "A/R is aging out unworked. Cash is being lost to inaction.",
+            med: "Follow-up happens but lacks intensity. Aggressively work 60+ days.",
+            high: "Healthy A/R management. Keep pressure on stalled claims."
+        },
+        "Compliance & Data": {
+            low: "Blind spots in data and compliance. High operational risk.",
+            med: "Some metrics tracked, but not driving decisions. Review monthly.",
+            high: "Data-driven culture. Use KPIs to predict future cash flow."
+        }
+      };
+
+      function getPillarComment(pillar, score) {
+          const p = pillarAnalysis[pillar];
+          if (!p) return score <= 7 ? "Process improvements needed." : "Solid performance.";
+          
+          if (score <= 3) return p.low;
+          if (score <= 7) return p.med;
+          return p.high;
+      }
+
+      const riskSummaries = {
+        RED: "Revenue at risk. Many billing steps depend on memory and manual effort. Cashflow becomes unpredictable.",
+        YELLOW: "Leaky but fixable. Core systems exist, but inconsistent execution causes revenue leakage.",
+        GREEN: "Operationally strong. You have a solid RCM foundation — now focus on automation & optimization."
+      };
+
+      const plans = {
+        RED: [
+          "Establish strict eligibility & benefits workflow.",
+          "Move to same-/next-day claim submission.",
+          "Perform full A/R triage + payer call cadence.",
+          "Implement denial tracking with root-cause corrections."
+        ],
+        YELLOW: [
+          "Standardize intake & eligibility process.",
+          "Improve claim submission rhythm.",
+          "Fix denials within 48–72 hours.",
+          "Start monthly KPI reporting cadence."
+        ],
+        GREEN: [
+          "Automate repetitive billing workflows.",
+          "Enhance KPI dashboards for real-time visibility.",
+          "Improve coding accuracy & periodic compliance audits."
+        ]
+      };
+
+      const calculateBtn = document.getElementById("calculateBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const downloadInternalPdfBtn = document.getElementById("downloadInternalPdfBtn");
+      const downloadProviderPdfBtn = document.getElementById("downloadProviderPdfBtn");
+      const results = document.getElementById("results");
+      const scoreValueEl = document.getElementById("scoreValue");
+      const maxScoreEl = document.getElementById("maxScore");
+      const scorePercentEl = document.getElementById("scorePercent");
+      const scoreBandEl = document.getElementById("scoreBand");
+      const resultsTextEl = document.getElementById("resultsText");
+      const unansweredNoteEl = document.getElementById("unansweredNote");
+      const scoreBarEl = document.getElementById("scoreBar");
+      const progressLabelRight = document.getElementById("progressLabelRight");
+
+      const pillarChartContainer = document.getElementById("pillarChartContainer");
+      let pillarChart = null;
+
+      maxScoreEl.textContent = MAX_SCORE.toString();
+      let lastScoreData = null;
+
+      // Smooth scroll for section nav
+      const navButtons = document.querySelectorAll("[data-scroll-target]");
+      navButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-scroll-target");
+          const section = document.getElementById(targetId);
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // Info toggles
+      const infoButtons = document.querySelectorAll(".info-btn");
+      infoButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-info");
+          const panel = document.querySelector(
+            `.info-panel[data-info-target="${id}"]`
+          );
+          if (!panel) return;
+          panel.classList.toggle("open");
+        });
+      });
+
+      function computePillarScores(answers) {
+        const scores = {};
+        for (const pillarName in pillars) {
+          const qList = pillars[pillarName];
+          let sum = 0;
+          qList.forEach(qId => {
+            const a = answers.find(x => x.id === qId);
+            if (a && a.value !== null) sum += a.value;
+          });
+          const normalized = Math.round((sum / 8) * 10); // 4 questions * 2 max = 8
+          scores[pillarName] = normalized;
+        }
+        return scores;
+      }
+
+      function renderPillarChart(pillarScores) {
+        if (!pillarChartContainer) return;
+        const labels = Object.keys(pillarScores);
+        const data = labels.map(l => pillarScores[l]);
+
+        if (!labels.length) {
+          pillarChartContainer.style.display = "none";
+          return;
+        }
+
+        const canvas = document.getElementById("pillarChart");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+
+        if (pillarChart) {
+          pillarChart.destroy();
+        }
+
+        pillarChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [{
+              data,
+              borderRadius: 4,
+              backgroundColor: '#009e91'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: true }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 10,
+                ticks: { stepSize: 2 }
+              }
+            }
+          }
+        });
+
+        pillarChartContainer.style.display = "block";
+      }
+
+      function getBandAndMessage(percent, total) {
+        if (percent >= 76) {
+          return {
+            band: "GREEN",
+            cls: "band-green",
+            color: "#16a34a",
+            headline:
+              "<strong>Operationally strong.</strong> You already have a solid RCM base. The work now is about optimization, automation and freeing your team’s time.",
+            talkTrack: `
+              <div class="results-talk-title">Suggested way to say this to the provider</div>
+              <ul>
+                <li>“You&apos;re currently at <strong>${total}/${MAX_SCORE} (${percent}%)</strong>, which puts you in the healthy range. Most clinics never get here.”</li>
+                <li>“The risk for you isn&apos;t collapse, it&apos;s <strong>hidden leakage</strong> in denials, A/R follow-up and under-billing for the work you already do.”</li>
+                <li>“What Velden does with clinics at your level is run a 60–90 day optimization sprint: tighten denial patterns, standardize follow-up, and automate as much of this as possible so your team isn&apos;t chasing numbers.”</li>
+              </ul>
+            `
+          };
+        } else if (percent >= 51) {
+          return {
+            band: "YELLOW",
+            cls: "band-yellow",
+            color: "#d97706",
+            headline:
+              "<strong>Leaky but fixable.</strong> Core pieces are in place, but you&apos;re leaving meaningful money on the table.",
+            talkTrack: `
+              <div class="results-talk-title">Suggested way to say this to the provider</div>
+              <ul>
+                <li>“Right now you&apos;re at <strong>${total}/${MAX_SCORE} (${percent}%)</strong>. That tells me things work, but there&apos;s no consistent RCM system behind it.”</li>
+                <li>“The biggest leaks we&apos;re seeing for you are around <strong>intake discipline, A/R follow-up and denial tracking</strong> — you&apos;re doing the work but not capturing the full revenue.”</li>
+                <li>“What we do at Velden in this situation is a focused 60–90 day cleanup: we standardize eligibility checks, move to daily/near-daily claims, and put a clear A/R + denial workflow with ownership. Clinics at this level usually see a noticeable lift in collections without adding new patients.”</li>
+              </ul>
+            `
+          };
+        } else {
+          return {
+            band: "RED",
+            cls: "band-red",
+            color: "#dc2626",
+            headline:
+              "<strong>Revenue at risk.</strong> A lot of your RCM is running on memory and manual effort. That&apos;s why cash feels unpredictable.",
+            talkTrack: `
+              <div class="results-talk-title">Suggested way to say this to the provider</div>
+              <ul>
+                <li>“You&apos;re currently at <strong>${total}/${MAX_SCORE} (${percent}%)</strong>, which is in the red zone. That matches what you&apos;re feeling day-to-day: you&apos;re working hard, but the money isn&apos;t matching the work.”</li>
+                <li>“This usually means <strong>eligibility, claim submission and A/R</strong> are all partly manual, so a lot of money gets stuck or written off that shouldn&apos;t.”</li>
+                <li>“What Velden does in red-zone clinics is build a proper RCM system around you: strict eligibility checks, same/next-day claims, and a structured A/R + denial follow-up rhythm. The goal is simple — you focus on patients, we own the revenue system.”</li>
+              </ul>
+            `
+          };
+        }
+      }
+
+      function calculateScore() {
+        const questionBlocks = document.querySelectorAll(".question");
+        let total = 0;
+        let unanswered = [];
+        const answers = [];
+
+        questionBlocks.forEach((block, index) => {
+          block.classList.remove("unanswered");
+          const qId = block.getAttribute("data-question-id");
+          const selected = block.querySelector('input[type="radio"]:checked');
+          const labelEl = block.querySelector(".question-label");
+          const qText = labelEl ? labelEl.textContent.trim() : `Question ${index + 1}`;
+
+          if (!selected) {
+            unanswered.push(qId);
+            block.classList.add("unanswered");
+            answers.push({
+              id: qId,
+              question: qText,
+              value: null,
+              text: "(No answer)"
+            });
+            return;
+          }
+
+          const value = parseInt(selected.value, 10) || 0;
+          const optionLabel =
+            selected.getAttribute("data-label") ||
+            selected.parentElement.textContent.trim();
+
+          total += value;
+          answers.push({
+            id: qId,
+            question: qText,
+            value,
+            text: optionLabel
+          });
+        });
+
+        const percent = Math.round((total / MAX_SCORE) * 100);
+        const { band, cls, headline, talkTrack, color } = getBandAndMessage(percent, total);
+
+        scoreValueEl.textContent = total.toString();
+        scorePercentEl.textContent = percent.toString();
+        progressLabelRight.textContent = percent + "%";
+
+        scoreBandEl.textContent = band + " RISK";
+        scoreBandEl.classList.remove("band-red", "band-yellow", "band-green");
+        scoreBandEl.classList.add(cls);
+
+        scoreBarEl.style.width = percent + "%";
+        scoreBarEl.classList.remove("red", "yellow", "green");
+        if (percent >= 76) {
+          scoreBarEl.classList.add("green");
+        } else if (percent >= 51) {
+          scoreBarEl.classList.add("yellow");
+        } else {
+          scoreBarEl.classList.add("red");
+        }
+
+        const summaryLine =
+          "You&apos;re currently at <strong>" +
+          total +
+          "/" +
+          MAX_SCORE +
+          " (" +
+          percent +
+          "%)</strong>.";
+
+        resultsTextEl.innerHTML = `
+          <p>${headline}</p>
+          <p>${summaryLine}</p>
+          ${talkTrack}
+        `;
+
+        if (unanswered.length > 0) {
+          unansweredNoteEl.textContent =
+            "Some questions are unanswered (highlighted in red). For a sharper audit, complete every question.";
+        } else {
+          unansweredNoteEl.textContent = "";
+        }
+
+        results.classList.add("visible");
+
+        downloadInternalPdfBtn.disabled = false;
+        downloadInternalPdfBtn.classList.remove("btn-disabled");
+        downloadProviderPdfBtn.disabled = false;
+        downloadProviderPdfBtn.classList.remove("btn-disabled");
+
+        const practiceInfo = {
+          practiceName: document.getElementById("practiceName").value.trim(),
+          contactPerson: document.getElementById("contactPerson").value.trim(),
+          clinicType: document.getElementById("clinicType").value.trim(),
+          monthlySessions: document.getElementById("monthlySessions").value.trim()
+        };
+
+        lastScoreData = {
+          total,
+          percent,
+          band,
+          bandColor: color,
+          answers,
+          practiceInfo
+        };
+
+        // compute & render pillar chart
+        const pillarScores = computePillarScores(answers);
+        renderPillarChart(pillarScores);
+      }
+
+      function clearSelections() {
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach((r) => (r.checked = false));
+        const questionBlocks = document.querySelectorAll(".question");
+        questionBlocks.forEach((block) =>
+          block.classList.remove("unanswered")
+        );
+        results.classList.remove("visible");
+        unansweredNoteEl.textContent = "";
+        lastScoreData = null;
+        downloadInternalPdfBtn.disabled = true;
+        downloadInternalPdfBtn.classList.add("btn-disabled");
+        downloadProviderPdfBtn.disabled = true;
+        downloadProviderPdfBtn.classList.add("btn-disabled");
+        scoreBarEl.style.width = "0%";
+        scoreBarEl.classList.remove("red", "yellow", "green");
+        progressLabelRight.textContent = "0%";
+        scoreValueEl.textContent = "0";
+        scorePercentEl.textContent = "0";
+        scoreBandEl.textContent = "RED RISK";
+        scoreBandEl.classList.remove("band-yellow", "band-green");
+        scoreBandEl.classList.add("band-red");
+        resultsTextEl.innerHTML = "";
+
+        if (pillarChart) {
+          pillarChart.destroy();
+          pillarChart = null;
+        }
+        if (pillarChartContainer) {
+          pillarChartContainer.style.display = "none";
+        }
+      }
+
+      function drawLogo(doc, x, y, scale = 0.5) {
+          const navy = [0, 31, 63]; // #001F3F
+          const teal = [0, 196, 180]; // #00C4B4
+          
+          doc.setFillColor(...navy);
+          doc.roundedRect(x + 0*scale, y + 96*scale, 32*scale, 64*scale, 2, 2, 'F');
+          doc.roundedRect(x + 40*scale, y + 64*scale, 32*scale, 96*scale, 2, 2, 'F');
+          doc.roundedRect(x + 80*scale, y + 32*scale, 32*scale, 128*scale, 2, 2, 'F');
+          
+          doc.setFillColor(...teal);
+          doc.roundedRect(x + 120*scale, y + 0*scale, 32*scale, 160*scale, 2, 2, 'F');
+
+          // Text "VELDEN HEALTH"
+          doc.setTextColor(...navy);
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(22 * scale * 2); 
+          doc.text("VELDEN HEALTH", x + 170*scale, y + 80*scale);
+
+          // Subtext
+          doc.setTextColor(100, 100, 100);
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(9 * scale * 2);
+          doc.text("REVENUE CYCLE MANAGEMENT", x + 172*scale, y + 110*scale);
+      }
+
+      function generatePDF(isInternal) {
+        if (!lastScoreData) return;
+        const jspdfGlobal = window.jspdf;
+        if (!jspdfGlobal) { alert("PDF generator not ready."); return; }
+
+        const doc = new jspdfGlobal.jsPDF({ unit: "pt", format: "letter" });
+        const p = lastScoreData.practiceInfo;
+        const today = new Date();
+        const dateStr = today.toISOString().split("T")[0];
+
+        // Colors
+        const colNavy = "#001F3F";
+        const colText = "#1F2937";
+        
+        let pageHeight = doc.internal.pageSize.height;
+        let pageWidth = doc.internal.pageSize.width;
+
+        // WATERMARK FUNCTION
+        const addWatermark = () => {
+            const totalPages = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+                doc.saveGraphicsState();
+                doc.setGState(new doc.GState({ opacity: 0.05 }));
+                // Center large logo
+                const scale = 0.8;
+                const logoW = 350; // approx width
+                const logoH = 160 * scale;
+                const x = (pageWidth - logoW) / 2;
+                const y = (pageHeight - logoH) / 2;
+                drawLogo(doc, x, y, scale);
+                doc.restoreGraphicsState();
+            }
+        };
+
+        // --- HEADER ---
+        doc.setFillColor(colNavy);
+        doc.rect(0, 0, pageWidth, 50, "F");
+        doc.setTextColor(255, 255, 255);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text("VELDEN REVENUE PULSE", 30, 32);
+        
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        const docTitle = isInternal ? "Internal Audit Record" : "Executive Summary";
+        doc.text(docTitle, pageWidth - 160, 32);
+
+        // --- FOOTER FUNCTION ---
+        const addFooter = (d, pageNum) => {
+           d.setFontSize(8);
+           d.setTextColor(150);
+           d.text("Confidential – Velden Health Internal Use", 30, pageHeight - 20);
+           d.text("Page " + pageNum, pageWidth - 60, pageHeight - 20);
+        };
+
+        // --- PAGE 1 CONTENT ---
+        drawLogo(doc, 30, 80, 0.25);
+
+        let y = 140;
+
+        // Practice Info Block (Common to both)
+        doc.setDrawColor(200);
+        doc.setLineWidth(0.5);
+        doc.line(30, y, pageWidth - 30, y);
+        y += 25;
+
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text("AUDIT DATE", 30, y);
+        doc.text("PRACTICE NAME", 150, y);
+        doc.text("CONTACT PERSON", 350, y);
+        y += 15;
+        
+        doc.setFontSize(11);
+        doc.setTextColor(colText);
+        doc.setFont("helvetica", "bold");
+        doc.text(dateStr, 30, y);
+        doc.text(p.practiceName || "-", 150, y);
+        doc.text(p.contactPerson || "-", 350, y);
+        y += 30;
+
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.setFont("helvetica", "normal");
+        doc.text("CLINIC TYPE", 30, y);
+        doc.text("VOLUME", 150, y);
+        y += 15;
+
+        doc.setFontSize(11);
+        doc.setTextColor(colText);
+        doc.setFont("helvetica", "bold");
+        doc.text(p.clinicType || "-", 30, y);
+        doc.text(p.monthlySessions || "-", 150, y);
+        y += 30;
+
+        // Score Badge (Common)
+        doc.setDrawColor(200);
+        doc.line(30, y, pageWidth - 30, y);
+        y += 30;
+
+        let scoreColor = lastScoreData.bandColor; 
+        doc.setFillColor(scoreColor); 
+        doc.roundedRect(30, y, 550, 40, 4, 4, "F");
+        
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(16);
+        doc.setFont("helvetica", "bold");
+        doc.text(`OVERALL SCORE: ${lastScoreData.total}/40 (${lastScoreData.percent}%)  —  ${lastScoreData.band} RISK`, 50, y + 26);
+        y += 60;
+
+        // --- SPLIT LOGIC ---
+        if (!isInternal) {
+            // PROVIDER VERSION: Narrative, Pillars, Plan
+            doc.setTextColor(colText);
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            const summaryLines = doc.splitTextToSize(riskSummaries[lastScoreData.band], 540);
+            doc.text(summaryLines, 30, y);
+            y += (summaryLines.length * 16) + 20;
+
+            // Pillars
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(colNavy);
+            doc.text("Pillar Breakdown", 30, y);
+            y += 15;
+
+            // Table Header
+            doc.setFillColor(240, 240, 240);
+            doc.rect(30, y, 550, 25, "F");
+            doc.setFontSize(10);
+            doc.setTextColor(80);
+            doc.text("PILLAR", 40, y + 17);
+            doc.text("SCORE (/10)", 250, y + 17);
+            doc.text("ANALYSIS", 350, y + 17);
+            y += 25;
+
+            const pillarScores = computePillarScores(lastScoreData.answers);
+            doc.setFontSize(11);
+            doc.setTextColor(colText);
+            
+            let altRow = false;
+            for (const pillar in pillarScores) {
+                const score = pillarScores[pillar];
+                const comment = getPillarComment(pillar, score);
+                
+                const analysisX = 350;
+                const analysisWidth = 200; // room for wrapping
+                const analysisLines = doc.splitTextToSize(comment, analysisWidth);
+                
+                const lineHeight = 14;
+                const rowHeight = Math.max(35, (analysisLines.length * lineHeight) + 16);
+
+                if (altRow) {
+                    doc.setFillColor(252, 252, 252);
+                    doc.rect(30, y, 550, rowHeight, "F");
+                }
+                
+                const centerY = y + (rowHeight / 2) + 4; 
+
+                doc.setFont("helvetica", "bold");
+                doc.text(pillar, 40, centerY);
+                
+                // Score bar visual
+                const barY = y + (rowHeight / 2) - 4;
+                doc.setFillColor(220, 220, 220);
+                doc.roundedRect(250, barY, 60, 8, 2, 2, "F"); 
+                
+                if (score <= 4) doc.setFillColor(220, 38, 38); 
+                else if (score <= 7) doc.setFillColor(217, 119, 6); 
+                else doc.setFillColor(22, 163, 74); 
+                
+                doc.roundedRect(250, barY, (score/10)*60, 8, 2, 2, "F");
+                doc.text(String(score), 320, centerY);
+
+                doc.setFont("helvetica", "normal");
+                
+                const textBlockHeight = analysisLines.length * lineHeight;
+                const textY = y + (rowHeight / 2) - (textBlockHeight / 2) + 10;
+                
+                doc.text(analysisLines, analysisX, textY);
+                
+                doc.setDrawColor(240);
+                doc.line(30, y+rowHeight, 580, y+rowHeight);
+                y += rowHeight;
+                altRow = !altRow;
+            }
+            y += 30;
+
+            // Leaks
+            if (y + 130 > pageHeight - 50) {
+                  addFooter(doc, doc.internal.getNumberOfPages());
+                  doc.addPage();
+                  
+                  // Re-draw Header on new page
+                  doc.setFillColor(colNavy);
+                  doc.rect(0, 0, pageWidth, 50, "F");
+                  doc.setTextColor(255, 255, 255);
+                  doc.setFont("helvetica", "bold");
+                  doc.setFontSize(14);
+                  doc.text("VELDEN REVENUE PULSE", 30, 32);
+                  doc.setFontSize(10);
+                  doc.setFont("helvetica", "normal");
+                  // Updated Header
+                  doc.text("Provider Summary — Recommended 60–90 Day Plan", pageWidth - 260, 32);
+                  
+                  y = 80;
+            }
+
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(colNavy);
+            doc.text("Top Revenue Leaks", 30, y);
+            y += 20;
+
+            const sorted = lastScoreData.answers
+              .filter(a => a.value !== null)
+              .sort((a, b) => a.value - b.value)
+              .slice(0, 3);
+
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(colText);
+
+            sorted.forEach(a => {
+              doc.setFillColor(254, 242, 242);
+              doc.roundedRect(30, y, 550, 24, 4, 4, "F");
+              doc.setTextColor(185, 28, 28);
+              doc.text("• " + leakMap[a.id], 40, y + 16);
+              y += 32;
+            });
+
+            /* --- PLAN SECTION --- */
+            if (!isInternal) {
+              const band = lastScoreData.band || "YELLOW";
+              const bandPlans = (plans[band] || []).slice(0, 4);
+
+              // Calculate needed height for Box: Title + Bullets + KPIs
+              // Title ~ 20, Bullets ~ 4*18, Header KPI ~ 20, KPIs ~ 3*18, Padding ~ 20
+              // Approx 250px total height
+              if (y + 250 > pageHeight - 50) {
+                  addFooter(doc, doc.internal.getNumberOfPages());
+                  doc.addPage();
+                  
+                  // Re-draw Header on new page
+                  doc.setFillColor(colNavy);
+                  doc.rect(0, 0, pageWidth, 50, "F");
+                  doc.setTextColor(255, 255, 255);
+                  doc.setFont("helvetica", "bold");
+                  doc.setFontSize(14);
+                  doc.text("VELDEN REVENUE PULSE", 30, 32);
+                  
+                  doc.setFontSize(10);
+                  doc.setFont("helvetica", "normal");
+                  // Updated Header
+                  doc.text("Provider Summary — Recommended 60–90 Day Plan", pageWidth - 260, 32);
+                  
+                  y = 80;
+              }
+
+              y += 10;
+              
+              // Draw Tinted Box Background
+              let boxFill = [255, 251, 235]; // Default Yellow
+              let boxStroke = [252, 211, 77];
+              
+              if (band === "RED") {
+                 boxFill = [254, 242, 242];
+                 boxStroke = [252, 165, 165];
+              } else if (band === "GREEN") {
+                 boxFill = [236, 253, 245];
+                 boxStroke = [110, 231, 183];
+              }
+
+              // Determine exact height needed first? 
+              // Just estimate or calculate. 
+              // Let's draw it dynamically. Start Y is saved.
+              const boxStartY = y;
+              
+              doc.setFillColor(...boxFill);
+              doc.setDrawColor(...boxStroke);
+              // Draw rect placeholder, we will resize height later? No, jsPDF order matters.
+              // Let's assume height 220 for now, or calculate steps.
+              const planTitleH = 30;
+              const bulletsH = bandPlans.length * 16 + 10;
+              const kpiTitleH = 25;
+              const kpisH = 3 * 16 + 10;
+              const totalBoxH = planTitleH + bulletsH + kpiTitleH + kpisH + 10;
+
+              doc.roundedRect(30, y, 550, totalBoxH, 4, 4, "FD");
+
+              // Content inside box
+              y += 20;
+              doc.setFontSize(13);
+              doc.setFont("helvetica", "bold");
+              doc.setTextColor(colNavy);
+              doc.text("Recommended 60–90 Day Focus", 40, y);
+              y += 20;
+
+              doc.setFontSize(11);
+              doc.setFont("helvetica", "normal");
+              doc.setTextColor(colText);
+
+              bandPlans.forEach(line => {
+                doc.text("• " + line, 50, y);
+                y += 16;
+              });
+
+              // Measurable Targets (KPIs)
+              y += 10;
+              doc.setFontSize(12);
+              doc.setFont("helvetica", "bold");
+              doc.setTextColor(colNavy);
+              doc.text("Measurable Targets & Owners", 40, y);
+              y += 18;
+
+              doc.setFontSize(10);
+              doc.setFont("helvetica", "normal");
+              doc.setTextColor(colText);
+              
+              // KPI 1
+              doc.text("• Claim submission: same/next day", 50, y);
+              doc.setFont("helvetica", "italic");
+              doc.setTextColor(100);
+              doc.text("(Owner: Billing lead)", 300, y);
+              y += 16;
+
+              // KPI 2
+              doc.setFont("helvetica", "normal");
+              doc.setTextColor(colText);
+              doc.text("• ERA posting: <= 72 hrs", 50, y);
+              doc.setFont("helvetica", "italic");
+              doc.setTextColor(100);
+              doc.text("(Owner: A/R)", 300, y);
+              y += 16;
+
+              // KPI 3
+              doc.setFont("helvetica", "normal");
+              doc.setTextColor(colText);
+              doc.text("• Denial rework: <= 5 business days", 50, y);
+              doc.setFont("helvetica", "italic");
+              doc.setTextColor(100);
+              doc.text("(Owner: Denials)", 300, y);
+              y += 20; // Padding bottom of box
+
+              // Adjust Y to after box
+              y = boxStartY + totalBoxH + 20;
+
+              // CTA STRIP
+              if (y + 40 > pageHeight - 50) {
+                 addFooter(doc, doc.internal.getNumberOfPages());
+                 doc.addPage();
+                 // Header logic omitted for strip-only page, likely rare
+                 y = 60;
+              }
+
+              doc.setFillColor(243, 244, 246); // gray-100
+              doc.rect(30, y, 550, 40, "F");
+              
+              doc.setFontSize(11);
+              doc.setFont("helvetica", "bold");
+              doc.setTextColor(colNavy);
+              
+              const ctaText = "Next 30-min checkpoint: __________________ with __________________";
+              doc.text(ctaText, 290, y + 24, { align: "center" });
+              
+              y += 60;
+            }
+            /* --- END PLAN SECTION --- */
+
+            addFooter(doc, doc.internal.getNumberOfPages());
+
+
+            // New Page for Appendix
+            doc.addPage();
+            
+            // Header for new page
+            doc.setFillColor(colNavy);
+            doc.rect(0, 0, pageWidth, 50, "F");
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(14);
+            doc.text("VELDEN REVENUE PULSE", 30, 32);
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.text("Appendix", pageWidth - 80, 32);
+
+            y = 80;
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(colNavy);
+            doc.text("Full Audit Responses", 30, y);
+            y += 30;
+
+        } else {
+            // INTERNAL VERSION: Straight to questions
+            y += 20; 
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(colNavy);
+            doc.text("Detailed Question Log", 30, y);
+            y += 30;
+        }
+
+        // --- FULL QUESTION LOG (Both Versions) ---
+        // For Provider, this is on page 2. For Internal, it starts on page 1 after score.
+        
+        doc.setFontSize(10);
+        
+        lastScoreData.answers.forEach((a, idx) => {
+            if (y > pageHeight - 60) {
+                addFooter(doc, doc.internal.getNumberOfPages());
+                doc.addPage();
+                
+                // Header on new pages
+                doc.setFillColor(colNavy);
+                doc.rect(0, 0, pageWidth, 50, "F");
+                doc.setTextColor(255, 255, 255);
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(14);
+                doc.text("VELDEN REVENUE PULSE", 30, 32);
+                doc.setFontSize(10);
+                doc.setFont("helvetica", "normal");
+                doc.text(isInternal ? "Internal Audit" : "Appendix", pageWidth - 100, 32);
+
+                y = 80;
+            }
+
+            // CLEAN QUESTION NUMBER: Remove "1. " from start
+            const cleanQText = a.question.replace(/^\d+[\.\)]\s*/, '');
+
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(colNavy);
+            doc.text(`Q${idx + 1}. ${cleanQText}`, 30, y);
+            y += 14;
+
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(colText);
+            doc.text(`Selected: ${a.text}`, 40, y);
+            
+            doc.setFontSize(9);
+            doc.setTextColor(100);
+            const scoreTxt = `Score: ${a.value}/2`;
+            doc.text(scoreTxt, 500, y);
+            
+            y += 24;
+            doc.setDrawColor(240);
+            doc.line(30, y-10, 580, y-10);
+            doc.setFontSize(10);
+        });
+
+        addFooter(doc, doc.internal.getNumberOfPages());
+        addWatermark(); // Apply watermark to all pages
+
+        const prefix = isInternal ? "Internal_Record" : "Provider_Summary";
+        const filenameBase = (p.practiceName || "clinic").replace(/[^a-z0-9]+/gi, "_").toLowerCase();
+        doc.save(`Velden_${prefix}_${filenameBase}_${dateStr}.pdf`);
+      }
+
+      calculateBtn.addEventListener("click", calculateScore);
+      clearBtn.addEventListener("click", clearSelections);
+      downloadInternalPdfBtn.addEventListener("click", () => generatePDF(true));
+      downloadProviderPdfBtn.addEventListener("click", () => generatePDF(false));
+    })();
+  </script>
+</body>
+</html>

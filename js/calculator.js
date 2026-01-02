@@ -1,17 +1,17 @@
 /* Hidden Revenue Calculator Logic - Enhanced Version */
 
 const RevenueCalculator = {
-    // Default values
+    // Default values - Illinois Behavioral Health Benchmarks
     sessions: 200,
-    reimbursement: 120,
-    denialRate: 15,
-    recoveryRate: 0.60, // 60% recovery rate (conservative estimate)
+    reimbursement: 115, // IL behavioral health avg: $110-130
+    denialRate: 17,     // IL avg denial rate: 15-18% (HFMA 2024)
+    recoveryRate: 0.60, // 60% recovery rate for aged claims (AMA 2023)
 
     // Industry benchmarks
     benchmarks: {
         avgSessions: 250,
-        avgReimbursement: 130,
-        avgDenialRate: 18
+        avgReimbursement: 115,
+        avgDenialRate: 17
     },
 
     // DOM elements
@@ -70,11 +70,17 @@ const RevenueCalculator = {
             this.elements.emailForm.addEventListener('submit', (e) => this.sendEmail(e));
         }
 
-        // Load saved results if available
-        this.loadSavedResults();
+        // Commented out to always show fresh Illinois benchmark defaults
+        // Users previously saved old values which override the new defaults
+        // this.loadSavedResults();
 
         // Initial calculation
         this.calculate();
+
+        // Initialize slider backgrounds to show correct thumb positions
+        if (this.elements.sessionsSlider) this.updateSliderBackground(this.elements.sessionsSlider);
+        if (this.elements.reimbursementSlider) this.updateSliderBackground(this.elements.reimbursementSlider);
+        if (this.elements.denialSlider) this.updateSliderBackground(this.elements.denialSlider);
 
         // Track page view
         this.trackEvent('calculator_view', {

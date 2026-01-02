@@ -38,7 +38,16 @@ const ComponentLoader = {
         // Load footer component
         const footerPlaceholder = document.getElementById('footer-placeholder');
         if (footerPlaceholder) {
-            this.loadComponent('components/footer.html', 'footer-placeholder');
+            // Determine if we're in a subdirectory
+            const path = window.location.pathname;
+            let footerPath = 'components/footer.html';
+
+            // If path contains /resources/ or /tools/, we're in a subdirectory
+            if (path.includes('/resources/') || path.includes('/tools/')) {
+                footerPath = '../components/footer.html';
+            }
+
+            this.loadComponent(footerPath, 'footer-placeholder');
         }
     }
 };
