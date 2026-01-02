@@ -357,6 +357,8 @@ h4 {
   font-size: 0.9rem;
   transition: all 0.2s ease;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-links a:hover {
@@ -383,7 +385,7 @@ h4 {
 }
 
 .nav-dropdown .dropdown-toggle {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.3rem;
 }
