@@ -17,7 +17,7 @@ const ChatWidget = {
       email: "info@veldenhealth.com",
       founded: "2023",
       specialty: "behavioral and mental health billing recovery",
-      differentiator: "We work as a 'sidecar' to your existing billing team—we don't replace them, we clear their backlog."
+      differentiator: "We work as a 'sidecar' to your existing billing team. We don't replace them; we clear their backlog."
     },
     services: {
       ar_recovery: {
@@ -29,7 +29,7 @@ const ChatWidget = {
       },
       denial_management: {
         name: "Denial Management",
-        description: "We don't just fix denials—we prevent them. We analyze root causes and implement fixes.",
+        description: "We don't just fix denials. We prevent them by analyzing root causes and implementing fixes.",
         commonCodes: {
           "CO-197": "Precertification/authorization not obtained. We verify prior auth status before resubmitting.",
           "CO-16": "Missing or invalid information. Usually a simple data entry fix.",
@@ -90,7 +90,7 @@ const ChatWidget = {
       },
       {
         q: ["minimum", "small practice", "solo", "how big"],
-        a: "We work with practices of all sizes—from solo therapists to multi-location clinics. Our pilot program is designed to be accessible for smaller practices too."
+        a: "We work with practices of all sizes, from solo therapists to multi-location clinics. Our pilot program is designed to be accessible for smaller practices too."
       },
       {
         q: ["guarantee", "risk", "if you don't recover"],
@@ -102,7 +102,7 @@ const ChatWidget = {
       }
     ],
     behavioral: {
-      specialty: "Behavioral and mental health billing has unique challenges—prior auth requirements, medical necessity documentation, and payer-specific rules. We specialize in this niche.",
+      specialty: "Behavioral and mental health billing has unique challenges: prior auth requirements, medical necessity documentation, and payer-specific rules. We specialize in this niche.",
       providers: ["Therapists (LCSW, LMFT, LPC)", "Psychologists", "Psychiatrists", "Counselors", "Substance abuse clinics", "IOP/PHP programs"],
       commonIssues: ["Prior authorization denials", "Medical necessity documentation gaps", "Timely filing issues", "Coding errors on 90837 vs 90834"]
     }
@@ -128,7 +128,7 @@ const ChatWidget = {
   transitions: [
     "Does that help? Let me know if you have more questions!",
     "Want me to explain anything else?",
-    "Feel free to ask more—I'm here to help!",
+    "Feel free to ask more. I'm here to help!",
     "Is there anything specific you'd like to dive deeper into?",
     "Does that answer your question?"
   ],
@@ -259,7 +259,7 @@ const ChatWidget = {
     if (this.state.step === 'awaiting_name') {
       this.state.data.name = input;
       this.state.step = 'awaiting_email';
-      return `Got it—**${input}**! And what's the best email to reach you at?`;
+      return `Got it, **${input}**! And what's the best email to reach you at?`;
     }
 
     if (this.state.step === 'awaiting_email') {
@@ -330,16 +330,16 @@ const ChatWidget = {
 
     // === DENIAL CODES ===
     if (lower.includes('co-197') || lower.includes('prior auth')) {
-      return `**CO-197** is a prior authorization denial—one of the most common in behavioral health. ` +
+      return `**CO-197** is a prior authorization denial, and it's one of the most common in behavioral health. ` +
         `The fix? We verify the original auth, check if it was entered correctly, and either resubmit with the correct auth number or submit a retrospective auth request. ` +
         `We've recovered thousands on CO-197 alone. Want us to look at yours?`;
     }
     if (lower.includes('co-16')) {
-      return `**CO-16** means "missing or invalid information." Usually it's a simple fix—wrong subscriber ID, missing modifier, or date issue. ` +
+      return `**CO-16** means "missing or invalid information." Usually it's a simple fix: wrong subscriber ID, missing modifier, or date issue. ` +
         `We identify exactly what's missing and resubmit with the correction. Quick win!`;
     }
     if (lower.includes('co-29') || lower.includes('timely filing')) {
-      return `**CO-29** is the timely filing denial—payers love this one. 😤 But it's not always the end! ` +
+      return `**CO-29** is the timely filing denial, and payers love using this one. 😤 But it's not always the end! ` +
         `We can appeal if there was a valid reason for the delay (prior appeal, payer error, etc.). We've overturned plenty of these.`;
     }
     if (this.matchesIntent(input, k.services.denial_management.keywords)) {
@@ -356,7 +356,7 @@ const ChatWidget = {
     if (this.matchesIntent(input, k.services.ar_recovery.keywords)) {
       return this.randomFrom(this.thinking) +
         `A/R recovery is what we do best. Here's the reality: **67% of claims over 90 days are never collected** (HFMA data). ` +
-        `Most billers don't have time to work old claims—they're focused on current ones.\n\n` +
+        `Most billers don't have time to work old claims because they're focused on current ones.\n\n` +
         `That's where we come in. We take your 60-180+ day claims and work them until they're paid. ` +
         `No replacing your team, just clearing the backlog.\n\n` +
         `How old is your oldest unpaid claim?`;
@@ -371,7 +371,7 @@ const ChatWidget = {
         `• **Claim submission** with 95%+ clean claim rate\n` +
         `• **Payment posting & reconciliation**\n` +
         `• **Patient statement management**\n\n` +
-        `We're especially strong in behavioral health codes—the ones other billers often get wrong. What's your current billing situation?`;
+        `We're especially strong in behavioral health codes, the ones other billers often get wrong. What's your current billing situation?`;
     }
 
     // === HIPAA/SECURITY ===
@@ -393,7 +393,7 @@ const ChatWidget = {
         `• **Kareo** ✓\n` +
         `• **Valant** ✓\n` +
         `• **And many others!**\n\n` +
-        `We just need an aged A/R export (CSV or Excel)—takes about 5 minutes to pull. Which system are you using?`;
+        `We just need an aged A/R export (CSV or Excel). It takes about 5 minutes to pull. Which system are you using?`;
     }
 
     // === ILLINOIS/PAYERS ===
@@ -414,14 +414,14 @@ const ChatWidget = {
         `**2. We Find the Claims** - We identify what's recoverable\n` +
         `**3. We Get You Paid** - Appeals, resubmissions, payer calls\n` +
         `**4. Weekly Reports** - Track progress every Friday\n\n` +
-        `Your current biller keeps doing their job—we just clear the backlog. Want to try the pilot?`;
+        `Your current biller keeps doing their job while we clear the backlog. Want to try the pilot?`;
     }
 
     // === ABOUT/COMPANY ===
     if (this.matchesIntent(input, ['about', 'company', 'who are you', 'what do you do', 'tell me about', 'velden'])) {
       return `**Velden Health** is a revenue cycle partner based in Chicago, specializing in behavioral and mental health billing recovery.\n\n` +
         `We're the "**cleanup crew**" for Illinois clinics. Your internal team handles current claims; we recover the aged, denied, and stuck ones.\n\n` +
-        `Think of us as a sidecar—we work alongside your team, not instead of them. ` +
+        `Think of us as a sidecar. We work alongside your team, not instead of them. ` +
         `Want to know more about a specific service?`;
     }
 
@@ -430,7 +430,7 @@ const ChatWidget = {
       return `Of course! Here's how to reach our team:\n\n` +
         `📧 **Email**: info@veldenhealth.com\n` +
         `📞 **Phone**: (312) 925-6457\n\n` +
-        `Or I can have someone reach out to you—just share your clinic name and email!`;
+        `Or I can have someone reach out to you. Just share your clinic name and email!`;
     }
 
     // === CHECK FAQ DATABASE ===
@@ -461,7 +461,7 @@ const ChatWidget = {
         `• **67%** of claims over 90 days are never collected\n` +
         `• **15-18%** average denial rate in Illinois behavioral health\n` +
         `• **55-65%** recovery rate with specialized A/R teams vs **12%** with internal staff\n\n` +
-        `The difference? Bandwidth. Your biller is busy with current claims—they can't chase old ones. That's where we come in.`;
+        `The difference? Bandwidth. Your biller is busy with current claims, so they can't chase old ones. That's where we come in.`;
     }
 
     // === FALLBACK with suggestions ===
