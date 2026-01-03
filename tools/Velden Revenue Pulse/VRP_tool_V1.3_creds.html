@@ -145,8 +145,8 @@
 
     /* MAIN APP STYLES */
     .page {
-      display: none;
-      /* Hidden by default */
+      display: block;
+      /* Direct access - no login required */
       max-width: 980px;
       margin: 0 auto;
       padding: 24px 16px 40px;
@@ -757,34 +757,7 @@
 
 <body>
 
-  <!-- LOGIN OVERLAY -->
-  <div id="login-overlay">
-    <div class="login-card">
-      <div class="login-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 160">
-          <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
-          <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
-          <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
-          <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
-        </svg>
-      </div>
-      <div class="login-title">Revenue Pulse Tool</div>
-      <div class="login-subtitle">Please sign in to access the VRP dashboard.</div>
-
-      <div class="login-form">
-        <div class="login-input-group">
-          <label>Email</label>
-          <input type="email" id="loginUser" placeholder="Enter email" />
-        </div>
-        <div class="login-input-group">
-          <label>Password</label>
-          <input type="password" id="loginPass" placeholder="Enter password" />
-        </div>
-        <div id="loginError" class="login-error">Invalid credentials.</div>
-        <button id="loginBtn" class="login-btn">Sign In</button>
-      </div>
-    </div>
-  </div>
+  <!-- LOGIN REMOVED - Direct access to tool -->
 
   <div class="page" id="mainApp">
     <!-- TOP BAR WITH SVG LOGO -->

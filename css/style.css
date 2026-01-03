@@ -1540,6 +1540,28 @@ h4 {
     z-index: 1000;
   }
 
+  /* Mobile dropdown styling */
+  .nav-links.open .nav-dropdown {
+    position: static;
+  }
+
+  .nav-links.open .nav-dropdown .dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: var(--color-bg-alt);
+    padding: 0.5rem 0 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border-radius: var(--radius-md);
+  }
+
+  .nav-links.open .nav-dropdown .dropdown-menu li a {
+    padding: 0.5rem 1rem;
+  }
+
   .grid-2,
   .grid-3,
   .grid-4 {
