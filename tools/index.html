@@ -2,11 +2,228 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools | Velden Health</title>
+    <meta charset="UTF-8" />
+    <title>Free Tools | Velden Health</title>
     <link rel="icon" type="image/png" href="https://www.veldenhealth.com/brand-icon-96.png?v=2026" sizes="96x96" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Free revenue cycle assessment tools for behavioral health clinics. Practice Assessment and Revenue Pulse audit to identify hidden revenue opportunities." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .tools-hero {
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.03) 0%, rgba(0, 196, 180, 0.05) 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .tools-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+
+        .tools-hero p {
+            font-size: 1.2rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .tool-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f0f9f8 0%, #e8f4f3 100%);
+        }
+
+        .tool-content {
+            padding: 2rem;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            background: var(--color-primary-light);
+            color: var(--color-primary-dark);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .tool-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .tool-description {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-benefits {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .tool-benefits li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+        }
+
+        .tool-benefits li::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white' stroke-width='3'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: 12px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .tool-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-time svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--color-primary);
+        }
+
+        .tool-cta {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .tool-cta:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .why-section {
+            background: var(--color-bg-secondary);
+            padding: 4rem 0;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 2rem auto 0;
+        }
+
+        @media (max-width: 768px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .why-item {
+            text-align: center;
+        }
+
+        .why-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .why-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: white;
+        }
+
+        .why-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .why-text {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+    </style>
 </head>
 
 <body>
@@ -44,16 +261,7 @@
                         <li><a href="../results.html">Results</a></li>
                         <li><a href="../about.html">About</a></li>
                         <li><a href="../resources/denial-glossary.html">Resources</a></li>
-                        <li class="nav-dropdown">
-                            <a href="#" class="dropdown-toggle">Tools <svg width="12" height="12" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="assessment.html">Practice Assessment</a></li>
-                                <li><a href="Velden Revenue Pulse/revenue-pulse.html">Revenue Pulse</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="index.html" class="active">Tools</a></li>
                     </ul>
                     <a href="../contact.html" class="btn btn-primary">Start Pilot</a>
                 </div>
@@ -61,30 +269,151 @@
         </div>
     </header>
 
-    <main class="section" style="padding-top:4rem;">
-        <div class="container">
-            <div class="reveal-group" style="text-align: center; margin-bottom: 3rem;">
-                <h1>Interactive Tools</h1>
-                <p>Explore our suite of revenue cycle management tools designed for behavioral health practices.</p>
+    <main>
+        <!-- Hero Section -->
+        <section class="tools-hero">
+            <div class="container">
+                <span class="hero-subtitle">Free Assessment Tools</span>
+                <h1>Discover Your Revenue Opportunities</h1>
+                <p>Use our free diagnostic tools to uncover hidden revenue leaks and identify recovery potential in your
+                    behavioral health practice.</p>
             </div>
+        </section>
 
-            <div class="grid-2">
-                <div class="card" style="padding:2rem;">
-                    <h3>Practice Assessment</h3>
-                    <p>Evaluate your practice's billing health and identifying potential revenue leakage.</p>
-                    <a href="assessment.html" class="btn btn-primary" style="margin-top:1rem;">Launch Assessment</a>
-                </div>
+        <!-- Tools Grid -->
+        <section class="section">
+            <div class="container">
+                <div class="tools-grid">
 
-                <div class="card" style="padding:2rem;">
-                    <h3>Revenue Pulse</h3>
-                    <p>Advanced revenue forecasting and denial impact analysis tool.</p>
-                    <a href="Velden Revenue Pulse/revenue-pulse.html" class="btn btn-primary"
-                        style="margin-top:1rem;">Launch Revenue Pulse</a>
+                    <!-- Tool 1: Practice Assessment -->
+                    <div class="tool-card">
+                        <img src="practice-assessment-preview.png" alt="Practice Assessment Tool Preview"
+                            class="tool-image">
+                        <div class="tool-content">
+                            <span class="tool-badge">Quick Assessment</span>
+                            <h2 class="tool-title">RCM Health Check</h2>
+                            <p class="tool-description">
+                                A quick 10-question assessment to evaluate your practice's revenue cycle health. Get
+                                instant insights into potential improvement areas.
+                            </p>
+
+                            <div class="tool-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                Takes only 3-5 minutes
+                            </div>
+
+                            <ul class="tool-benefits">
+                                <li>Evaluate billing processes and workflows</li>
+                                <li>Identify gaps in denial management</li>
+                                <li>Get personalized recommendations</li>
+                                <li>See your RCM health score instantly</li>
+                            </ul>
+
+                            <a href="assessment.html" class="tool-cta">Start Free Assessment →</a>
+                        </div>
+                    </div>
+
+                    <!-- Tool 2: Revenue Pulse -->
+                    <div class="tool-card">
+                        <img src="revenue-pulse-preview.png" alt="Revenue Pulse Audit Preview" class="tool-image">
+                        <div class="tool-content">
+                            <span class="tool-badge">Deep Audit</span>
+                            <h2 class="tool-title">Revenue Pulse Audit</h2>
+                            <p class="tool-description">
+                                A comprehensive 20-question RCM audit covering 5 key pillars. Get detailed insights into
+                                tech, eligibility, claims, A/R, and compliance.
+                            </p>
+
+                            <div class="tool-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                Takes 5-8 minutes
+                            </div>
+
+                            <ul class="tool-benefits">
+                                <li>5 pillar analysis across your RCM</li>
+                                <li>Tech & ownership evaluation</li>
+                                <li>Claims, A/R, and denial tracking</li>
+                                <li>Detailed recovery recommendations</li>
+                            </ul>
+
+                            <a href="Velden Revenue Pulse/revenue-pulse.html" class="tool-cta">Start Revenue Pulse →</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Why Use Our Tools -->
+        <section class="why-section">
+            <div class="container" style="text-align: center;">
+                <span class="hero-subtitle">Why Use These Tools?</span>
+                <h2
+                    style="font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 700; margin-top: 0.5rem;">
+                    Data-Driven Revenue Recovery</h2>
+
+                <div class="why-grid">
+                    <div class="why-item">
+                        <div class="why-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                <path d="M2 17l10 5 10-5"></path>
+                                <path d="M2 12l10 5 10-5"></path>
+                            </svg>
+                        </div>
+                        <h3 class="why-title">100% Free</h3>
+                        <p class="why-text">No cost, no credit card, no commitment. Get valuable insights without any
+                            obligation.</p>
+                    </div>
+
+                    <div class="why-item">
+                        <div class="why-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="why-title">Instant Results</h3>
+                        <p class="why-text">Get your score and recommendations immediately after completing the
+                            assessment.</p>
+                    </div>
+
+                    <div class="why-item">
+                        <div class="why-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <h3 class="why-title">Actionable Insights</h3>
+                        <p class="why-text">Receive specific recommendations to recover aged A/R and reduce denials.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section" style="text-align: center; padding: 4rem 2rem;">
+            <div class="container">
+                <h2
+                    style="font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">
+                    Ready for a Deeper Analysis?</h2>
+                <p style="color: var(--color-text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">
+                    Our free 20-claim pilot provides a detailed financial analysis of your actual aged claims with no
+                    risk.
+                </p>
+                <a href="../contact.html" class="btn btn-primary btn-large">Start Your Free Pilot</a>
+            </div>
+        </section>
     </main>
 
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
             <div class="grid-4">
@@ -102,53 +431,36 @@
                         <span style="font-weight:700;">Velden Health</span>
                     </div>
                     <p style="font-size:0.9rem; color:var(--color-text-muted);">Specialized A/R recovery and denial
-                        management solutions for Illinois behavioral health clinics.</p>
+                        management for Illinois behavioral health clinics.</p>
                 </div>
                 <div>
                     <h4 style="margin-bottom:1rem;">Services</h4>
                     <div class="footer-links"><a href="../services.html">Medical Billing</a><a
-                            href="../services.html">AR Recovery</a><a href="../services.html">Denial Management</a><a
-                            href="../services.html">Payment Posting</a></div>
+                            href="../services.html">AR Recovery</a><a href="../services.html">Denial Management</a>
+                    </div>
                 </div>
                 <div>
                     <h4 style="margin-bottom:1rem;">Company</h4>
                     <div class="footer-links"><a href="../about.html">About Us</a><a href="../results.html">Case
-                            Studies</a><a href="../privacy.html">Privacy & Data Use</a></div>
+                            Studies</a><a href="../privacy.html">Privacy</a></div>
                 </div>
                 <div>
                     <h4 style="margin-bottom:1rem;">Contact</h4>
                     <div
                         style="display: flex; flex-direction: column; gap: 0.75rem; color: var(--color-text-muted); font-size: 0.9rem;">
-                        <a href="mailto:info@veldenhealth.com"
-                            style="color: inherit; text-decoration: none;">info@veldenhealth.com</a>
-                        <a href="tel:+13129256457" style="color: inherit; text-decoration: none;">+1 (312) 925-6457</a>
+                        <a href="mailto:info@veldenhealth.com" style="color: inherit;">info@veldenhealth.com</a>
+                        <a href="tel:+13129256457" style="color: inherit;">+1 (312) 925-6457</a>
                     </div>
                 </div>
             </div>
             <div
-                style="text-align:center; margin-top:2rem; padding-top:2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
-                    <img src="../Images/hipaa-badge.png" alt="HIPAA Compliant" style="height: 60px; width: auto;"
-                        loading="lazy">
-                    <div
-                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: rgba(0, 196, 180, 0.2); border-radius: 8px; border: 1px solid #00C4B4;">
-                        <span style="font-weight: 600; color: #ffffff; font-size: 0.9rem;">BAA Ready</span>
-                    </div>
-                    <div
-                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
-                        <span style="font-weight: 600; color: #ffffff; font-size: 0.9rem;">Encrypted Data</span>
-                    </div>
-                </div>
-            </div>
-            <div
-                style="text-align:center; margin-top:1.5rem; padding-top:1.5rem; border-top: 1px solid var(--color-border); font-size:0.9rem; color:var(--color-text-muted);">
-                Based in Chicago | Serving Illinois Behavioral Health Providers Statewide</div>
-            <div style="text-align:center; margin-top:1rem; font-size:0.85rem; color:var(--color-text-light);">&copy;
+                style="text-align:center; margin-top:2rem; padding-top:2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size:0.85rem; color:var(--color-text-light);">
+                &copy;
                 <script>document.write(new Date().getFullYear())</script> Velden Health LLC. All rights reserved.
             </div>
         </div>
     </footer>
-    <script src="../js/components.js"></script>
+
     <script src="../js/main.js"></script>
 </body>
 
