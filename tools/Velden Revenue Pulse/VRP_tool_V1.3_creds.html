@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Velden Revenue Pulse – RCM Audit for Behavioral Clinics</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 152 160'%3E%3Crect x='0' y='96' width='32' height='64' fill='%23001F3F' rx='16'/%3E%3Crect x='40' y='64' width='32' height='96' fill='%23001F3F' rx='16'/%3E%3Crect x='80' y='32' width='32' height='128' fill='%23001F3F' rx='16'/%3E%3Crect x='120' y='0' width='32' height='160' fill='%2300C4B4' rx='16'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 152 160'%3E%3Crect x='0' y='96' width='32' height='64' fill='%23001F3F' rx='16'/%3E%3Crect x='40' y='64' width='32' height='96' fill='%23001F3F' rx='16'/%3E%3Crect x='80' y='32' width='32' height='128' fill='%23001F3F' rx='16'/%3E%3Crect x='120' y='0' width='32' height='160' fill='%2300C4B4' rx='16'/%3E%3C/svg%3E" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
@@ -65,7 +67,7 @@
       margin-bottom: 24px;
       display: inline-block;
     }
-    
+
     .login-logo svg {
       height: 60px;
       width: auto;
@@ -143,7 +145,8 @@
 
     /* MAIN APP STYLES */
     .page {
-      display: none; /* Hidden by default */
+      display: none;
+      /* Hidden by default */
       max-width: 980px;
       margin: 0 auto;
       padding: 24px 16px 40px;
@@ -751,6 +754,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- LOGIN OVERLAY -->
@@ -758,19 +762,19 @@
     <div class="login-card">
       <div class="login-logo">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 160">
-            <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16"/>
-            <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16"/>
-            <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16"/>
-            <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16"/>
+          <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
+          <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
+          <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
+          <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
         </svg>
       </div>
-      <div class="login-title">Internal Audit Tool</div>
-      <div class="login-subtitle">Please sign in to access the VRP Audit.</div>
-      
+      <div class="login-title">Revenue Pulse Tool</div>
+      <div class="login-subtitle">Please sign in to access the VRP dashboard.</div>
+
       <div class="login-form">
         <div class="login-input-group">
-          <label>Username</label>
-          <input type="text" id="loginUser" placeholder="Enter username" />
+          <label>Email</label>
+          <input type="email" id="loginUser" placeholder="Enter email" />
         </div>
         <div class="login-input-group">
           <label>Password</label>
@@ -795,26 +799,14 @@
               <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
               <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
             </g>
-            <text 
-              x="200" 
-              y="175" 
+            <text x="200" y="175"
               font-family="Montserrat, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-              font-weight="800" 
-              font-size="60" 
-              fill="#001F3F" 
-              letter-spacing="3"
-            >
+              font-weight="800" font-size="60" fill="#001F3F" letter-spacing="3">
               VELDEN HEALTH
             </text>
-            <text 
-              x="215" 
-              y="205" 
+            <text x="215" y="205"
               font-family="Montserrat, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-              font-weight="500" 
-              font-size="24" 
-              fill="#5A6B7C" 
-              letter-spacing="6.5"
-            >
+              font-weight="500" font-size="24" fill="#5A6B7C" letter-spacing="6.5">
               REVENUE CYCLE MANAGEMENT
             </text>
           </svg>
@@ -921,12 +913,17 @@
           <button class="info-btn" type="button" data-info="q1">i</button>
         </div>
         <div class="info-panel" data-info-target="q1">
-          <p><strong>EMR/EHR:</strong> Software where clinicians document sessions, diagnoses, and notes. For our purposes, EMR and EHR mean the system of record for visits.</p>
-          <p><strong>Clearinghouse:</strong> The “middle layer” that scrubs claims and routes them to payers. A good clearinghouse catches basic errors before the payer denies.</p>
+          <p><strong>EMR/EHR:</strong> Software where clinicians document sessions, diagnoses, and notes. For our
+            purposes, EMR and EHR mean the system of record for visits.</p>
+          <p><strong>Clearinghouse:</strong> The “middle layer” that scrubs claims and routes them to payers. A good
+            clearinghouse catches basic errors before the payer denies.</p>
           <ul>
-            <li><strong>Behavioral EMR + integrated clearinghouse (score 2):</strong> Best case. One system (or tightly connected tools) handles scheduling, documentation, claims, and remits.</li>
-            <li><strong>Behavioral EMR, partial/manual clearinghouse (score 1):</strong> They have an EMR, but still download/upload files or key things manually. More human error and delays.</li>
-            <li><strong>No proper EMR or no clearinghouse (score 0):</strong> Paper, spreadsheets, or generic tools. Claims are often messy, delayed, or missing. Huge opportunity for Velden.</li>
+            <li><strong>Behavioral EMR + integrated clearinghouse (score 2):</strong> Best case. One system (or tightly
+              connected tools) handles scheduling, documentation, claims, and remits.</li>
+            <li><strong>Behavioral EMR, partial/manual clearinghouse (score 1):</strong> They have an EMR, but still
+              download/upload files or key things manually. More human error and delays.</li>
+            <li><strong>No proper EMR or no clearinghouse (score 0):</strong> Paper, spreadsheets, or generic tools.
+              Claims are often messy, delayed, or missing. Huge opportunity for Velden.</li>
           </ul>
         </div>
         <div class="options">
@@ -954,11 +951,15 @@
           <button class="info-btn" type="button" data-info="q2">i</button>
         </div>
         <div class="info-panel" data-info-target="q2">
-          <p>This is about <strong>clear ownership</strong>. When everyone “helps a bit,” no one feels responsible for results.</p>
+          <p>This is about <strong>clear ownership</strong>. When everyone “helps a bit,” no one feels responsible for
+            results.</p>
           <ul>
-            <li><strong>Dedicated in-house or external RCM specialist (score 2):</strong> One person or partner is clearly accountable for claims, A/R, and denials.</li>
-            <li><strong>Shared between front desk / therapists (score 1):</strong> Billing is a side-task. It gets done, but slowly and inconsistently.</li>
-            <li><strong>No clear owner / ad hoc (score 0):</strong> Work happens only when something is on fire. Money is constantly stuck.</li>
+            <li><strong>Dedicated in-house or external RCM specialist (score 2):</strong> One person or partner is
+              clearly accountable for claims, A/R, and denials.</li>
+            <li><strong>Shared between front desk / therapists (score 1):</strong> Billing is a side-task. It gets done,
+              but slowly and inconsistently.</li>
+            <li><strong>No clear owner / ad hoc (score 0):</strong> Work happens only when something is on fire. Money
+              is constantly stuck.</li>
           </ul>
         </div>
         <div class="options">
@@ -985,11 +986,15 @@
           <button class="info-btn" type="button" data-info="q3">i</button>
         </div>
         <div class="info-panel" data-info-target="q3">
-          <p>SOPs = <strong>Standard Operating Procedures</strong>. They turn “how Sarah does it in her head” into a repeatable process.</p>
+          <p>SOPs = <strong>Standard Operating Procedures</strong>. They turn “how Sarah does it in her head” into a
+            repeatable process.</p>
           <ul>
-            <li><strong>Documented and followed (score 2):</strong> New staff can follow a checklist and get 80–90% of tasks right without hand-holding.</li>
-            <li><strong>Some notes but inconsistent (score 1):</strong> Bits of process exist, but each person still improvises.</li>
-            <li><strong>No written process (score 0):</strong> Everything lives in memory. If one person leaves, revenue collapses.</li>
+            <li><strong>Documented and followed (score 2):</strong> New staff can follow a checklist and get 80–90% of
+              tasks right without hand-holding.</li>
+            <li><strong>Some notes but inconsistent (score 1):</strong> Bits of process exist, but each person still
+              improvises.</li>
+            <li><strong>No written process (score 0):</strong> Everything lives in memory. If one person leaves, revenue
+              collapses.</li>
           </ul>
         </div>
         <div class="options">
@@ -1016,11 +1021,14 @@
           <button class="info-btn" type="button" data-info="q4">i</button>
         </div>
         <div class="info-panel" data-info-target="q4">
-          <p>This is the delay between <strong>providing care</strong> and <strong>actually creating the claim</strong> in the system.</p>
+          <p>This is the delay between <strong>providing care</strong> and <strong>actually creating the claim</strong>
+            in the system.</p>
           <ul>
-            <li><strong>Same day / next day (score 2):</strong> Clean, fast revenue cycle. Cash flow is predictable.</li>
+            <li><strong>Same day / next day (score 2):</strong> Clean, fast revenue cycle. Cash flow is predictable.
+            </li>
             <li><strong>3–7 days (score 1):</strong> Acceptable but not ideal. Delays add up if volumes grow.</li>
-            <li><strong>More than a week / no idea (score 0):</strong> Big warning sign. A lot of work is not even being billed quickly.</li>
+            <li><strong>More than a week / no idea (score 0):</strong> Big warning sign. A lot of work is not even being
+              billed quickly.</li>
           </ul>
         </div>
         <div class="options">
@@ -1058,11 +1066,15 @@
           <button class="info-btn" type="button" data-info="q5">i</button>
         </div>
         <div class="info-panel" data-info-target="q5">
-          <p>Eligibility = verifying the patient’s coverage, plan status, and key limits <strong>before</strong> they come in.</p>
+          <p>Eligibility = verifying the patient’s coverage, plan status, and key limits <strong>before</strong> they
+            come in.</p>
           <ul>
-            <li><strong>Always, for every new patient (score 2):</strong> Strong front-end discipline. Fewer “we don’t actually cover this” surprises.</li>
-            <li><strong>Sometimes, not consistent (score 1):</strong> Staff know they should do it, but skip it when busy.</li>
-            <li><strong>Rarely / never (score 0):</strong> You only find out after the denial. Patients and providers both get angry.</li>
+            <li><strong>Always, for every new patient (score 2):</strong> Strong front-end discipline. Fewer “we don’t
+              actually cover this” surprises.</li>
+            <li><strong>Sometimes, not consistent (score 1):</strong> Staff know they should do it, but skip it when
+              busy.</li>
+            <li><strong>Rarely / never (score 0):</strong> You only find out after the denial. Patients and providers
+              both get angry.</li>
           </ul>
         </div>
         <div class="options">
@@ -1089,16 +1101,21 @@
           <button class="info-btn" type="button" data-info="q6">i</button>
         </div>
         <div class="info-panel" data-info-target="q6">
-          <p>It’s not enough to know “active or inactive.” You want to know <strong>what the plan will actually pay</strong>.</p>
+          <p>It’s not enough to know “active or inactive.” You want to know <strong>what the plan will actually
+              pay</strong>.</p>
           <ul>
-            <li><strong>Standard template (score 2):</strong> They capture deductible, copay/coinsurance, visit limits, telehealth rules, auth requirements.</li>
-            <li><strong>Some details, not standardized (score 1):</strong> Depends who called or who answered the phone.</li>
-            <li><strong>Only active/inactive or nothing (score 0):</strong> They’re flying blind on patient responsibility and plan limitations.</li>
+            <li><strong>Standard template (score 2):</strong> They capture deductible, copay/coinsurance, visit limits,
+              telehealth rules, auth requirements.</li>
+            <li><strong>Some details, not standardized (score 1):</strong> Depends who called or who answered the phone.
+            </li>
+            <li><strong>Only active/inactive or nothing (score 0):</strong> They’re flying blind on patient
+              responsibility and plan limitations.</li>
           </ul>
         </div>
         <div class="options">
           <label class="option">
-            <input type="radio" name="q6" value="2" data-label="Standard template: deductible, copay, limits, telehealth" />
+            <input type="radio" name="q6" value="2"
+              data-label="Standard template: deductible, copay, limits, telehealth" />
             <span>Standard template: deductible, copay, limits, telehealth</span>
           </label>
           <label class="option">
@@ -1122,8 +1139,10 @@
         <div class="info-panel" data-info-target="q7">
           <p>Even if they check benefits, it’s useless if no one can <strong>find</strong> the information later.</p>
           <ul>
-            <li><strong>Inside EMR in a consistent place (score 2):</strong> Anyone can open the chart and see the benefits instantly.</li>
-            <li><strong>External but somewhat organized (score 1):</strong> Google Sheets / Excel / notebook, but at least structured.</li>
+            <li><strong>Inside EMR in a consistent place (score 2):</strong> Anyone can open the chart and see the
+              benefits instantly.</li>
+            <li><strong>External but somewhat organized (score 1):</strong> Google Sheets / Excel / notebook, but at
+              least structured.</li>
             <li><strong>Scattered (score 0):</strong> Notes live in emails, sticky notes, or staff memory.</li>
           </ul>
         </div>
@@ -1151,11 +1170,13 @@
           <button class="info-btn" type="button" data-info="q8">i</button>
         </div>
         <div class="info-panel" data-info-target="q8">
-          <p>Denials that say things like “coverage terminated,” “not eligible on date of service,” etc. These are almost always preventable.</p>
+          <p>Denials that say things like “coverage terminated,” “not eligible on date of service,” etc. These are
+            almost always preventable.</p>
           <ul>
             <li><strong>Rare (&lt;2%) (score 2):</strong> Good front-end processes.</li>
             <li><strong>Occasional (2–7%) (score 1):</strong> Some gaps; worth tightening but not disastrous.</li>
-            <li><strong>Frequent or no idea (score 0):</strong> Either lots of preventable denials or zero visibility – both are bad.</li>
+            <li><strong>Frequent or no idea (score 0):</strong> Either lots of preventable denials or zero visibility –
+              both are bad.</li>
           </ul>
         </div>
         <div class="options">
@@ -1197,7 +1218,8 @@
           <ul>
             <li><strong>Daily / near-daily (score 2):</strong> Keeps cash moving and A/R low.</li>
             <li><strong>2–3 times per week (score 1):</strong> Acceptable, but can create mini cash crunches.</li>
-            <li><strong>Weekly or less (score 0):</strong> Big batches, long delays, more room for errors to pile up.</li>
+            <li><strong>Weekly or less (score 0):</strong> Big batches, long delays, more room for errors to pile up.
+            </li>
           </ul>
         </div>
         <div class="options">
@@ -1224,11 +1246,13 @@
           <button class="info-btn" type="button" data-info="q10">i</button>
         </div>
         <div class="info-panel" data-info-target="q10">
-          <p>Clearinghouse rejections are <strong>pre-denials</strong> – the claim never reaches the payer until you fix basic errors.</p>
+          <p>Clearinghouse rejections are <strong>pre-denials</strong> – the claim never reaches the payer until you fix
+            basic errors.</p>
           <ul>
             <li><strong>Reviewed same/next day (score 2):</strong> They keep this queue empty. Very healthy habit.</li>
             <li><strong>Fixed within a week (score 1):</strong> OK, but can slow collections.</li>
-            <li><strong>Not monitored / only react (score 0):</strong> Money is stuck before it even reaches the payer.</li>
+            <li><strong>Not monitored / only react (score 0):</strong> Money is stuck before it even reaches the payer.
+            </li>
           </ul>
         </div>
         <div class="options">
@@ -1259,7 +1283,8 @@
           <ul>
             <li><strong>Within 48 hours (score 2):</strong> Almost real-time financial picture.</li>
             <li><strong>Within a week (score 1):</strong> Reasonable, but delays visibility.</li>
-            <li><strong>Longer / irregular / unknown (score 0):</strong> They basically don’t know where money stands day to day.</li>
+            <li><strong>Longer / irregular / unknown (score 0):</strong> They basically don’t know where money stands
+              day to day.</li>
           </ul>
         </div>
         <div class="options">
@@ -1286,11 +1311,14 @@
           <button class="info-btn" type="button" data-info="q12">i</button>
         </div>
         <div class="info-panel" data-info-target="q12">
-          <p>Once payer pays their part, the rest is patient responsibility. The question is: <strong>does anyone actually collect it?</strong></p>
+          <p>Once payer pays their part, the rest is patient responsibility. The question is: <strong>does anyone
+              actually collect it?</strong></p>
           <ul>
-            <li><strong>Systematic workflow (score 2):</strong> Regular statements, reminders, clear scripts, maybe payment plans.</li>
+            <li><strong>Systematic workflow (score 2):</strong> Regular statements, reminders, clear scripts, maybe
+              payment plans.</li>
             <li><strong>Occasional / on request (score 1):</strong> Money is collected only when a patient asks.</li>
-            <li><strong>Almost no structured collections (score 0):</strong> A huge percentage of revenue is silently written off.</li>
+            <li><strong>Almost no structured collections (score 0):</strong> A huge percentage of revenue is silently
+              written off.</li>
           </ul>
         </div>
         <div class="options">
@@ -1328,11 +1356,13 @@
           <button class="info-btn" type="button" data-info="q13">i</button>
         </div>
         <div class="info-panel" data-info-target="q13">
-          <p>A/R (Accounts Receivable) aging shows how long money has been outstanding – 0–30, 31–60, 61–90, 90+ days.</p>
+          <p>A/R (Accounts Receivable) aging shows how long money has been outstanding – 0–30, 31–60, 61–90, 90+ days.
+          </p>
           <ul>
             <li><strong>Reviewed weekly (score 2):</strong> They actively work old balances and keep 90+ low.</li>
             <li><strong>Reviewed monthly (score 1):</strong> Some discipline, but slower reaction.</li>
-            <li><strong>Rarely / never (score 0):</strong> No one is watching the bucket where most lost revenue hides.</li>
+            <li><strong>Rarely / never (score 0):</strong> No one is watching the bucket where most lost revenue hides.
+            </li>
           </ul>
         </div>
         <div class="options">
@@ -1359,9 +1389,11 @@
           <button class="info-btn" type="button" data-info="q14">i</button>
         </div>
         <div class="info-panel" data-info-target="q14">
-          <p>Following up on unpaid claims requires <strong>time and persistence</strong>. If no one owns it, it doesn’t happen.</p>
+          <p>Following up on unpaid claims requires <strong>time and persistence</strong>. If no one owns it, it doesn’t
+            happen.</p>
           <ul>
-            <li><strong>Dedicated person/team (score 2):</strong> Someone wakes up every day whose job is to get answers from payers.</li>
+            <li><strong>Dedicated person/team (score 2):</strong> Someone wakes up every day whose job is to get answers
+              from payers.</li>
             <li><strong>Shared between staff (score 1):</strong> Done only when people “find time.”</li>
             <li><strong>No one clearly responsible (score 0):</strong> Money is stuck until it’s written off.</li>
           </ul>
@@ -1392,7 +1424,8 @@
         <div class="info-panel" data-info-target="q15">
           <p>This is about whether they <strong>learn from denials</strong> or just resubmit blindly.</p>
           <ul>
-            <li><strong>Every denial logged (score 2):</strong> They track denial codes, reasons, and fixes – so patterns can be eliminated.</li>
+            <li><strong>Every denial logged (score 2):</strong> They track denial codes, reasons, and fixes – so
+              patterns can be eliminated.</li>
             <li><strong>Some common denials tracked (score 1):</strong> Only major recurring issues are monitored.</li>
             <li><strong>No structured tracking (score 0):</strong> Same mistakes repeat forever.</li>
           </ul>
@@ -1423,7 +1456,8 @@
         <div class="info-panel" data-info-target="q16">
           <p>Once denied, do they have a <strong>checklist / script</strong> for what to do next – or is it random?</p>
           <ul>
-            <li><strong>Clear steps + timelines (score 2):</strong> Staff know exactly how to appeal/fix different denial types.</li>
+            <li><strong>Clear steps + timelines (score 2):</strong> Staff know exactly how to appeal/fix different
+              denial types.</li>
             <li><strong>Handled case-by-case (score 1):</strong> People “figure it out” each time, which is slow.</li>
             <li><strong>No defined process (score 0):</strong> Many denials are never resubmitted properly.</li>
           </ul>
@@ -1494,7 +1528,8 @@
           <button class="info-btn" type="button" data-info="q18">i</button>
         </div>
         <div class="info-panel" data-info-target="q18">
-          <p>KPIs are the <strong>numbers that tell you if RCM is healthy</strong>. Typical ones: collection rate, denial rate, days in A/R, no-show rate.</p>
+          <p>KPIs are the <strong>numbers that tell you if RCM is healthy</strong>. Typical ones: collection rate,
+            denial rate, days in A/R, no-show rate.</p>
           <ul>
             <li><strong>3+ KPIs consistently (score 2):</strong> They treat RCM like a real business function.</li>
             <li><strong>1–2 KPIs / inconsistent (score 1):</strong> Some numbers tracked, but not a full picture.</li>
@@ -1527,9 +1562,12 @@
         <div class="info-panel" data-info-target="q19">
           <p>Compliance isn’t just legal – it’s also about <strong>not leaking data</strong> and losing payer trust.</p>
           <ul>
-            <li><strong>Secure tools + NDAs + training (score 2):</strong> They use HIPAA-compliant software, have basic policies, and staff training.</li>
-            <li><strong>Partially / informal (score 1):</strong> Some awareness, but gaps (e.g., using personal email, no formal training).</li>
-            <li><strong>No real discipline (score 0):</strong> Risky. Also a good reason to pitch Velden as a professional partner.</li>
+            <li><strong>Secure tools + NDAs + training (score 2):</strong> They use HIPAA-compliant software, have basic
+              policies, and staff training.</li>
+            <li><strong>Partially / informal (score 1):</strong> Some awareness, but gaps (e.g., using personal email,
+              no formal training).</li>
+            <li><strong>No real discipline (score 0):</strong> Risky. Also a good reason to pitch Velden as a
+              professional partner.</li>
           </ul>
         </div>
         <div class="options">
@@ -1556,11 +1594,14 @@
           <button class="info-btn" type="button" data-info="q20">i</button>
         </div>
         <div class="info-panel" data-info-target="q20">
-          <p>Do they actually <strong>change processes</strong> when they see a pattern, or just keep patching leaks?</p>
+          <p>Do they actually <strong>change processes</strong> when they see a pattern, or just keep patching leaks?
+          </p>
           <ul>
-            <li><strong>Regularly improve based on data (score 2):</strong> They identify issues, fix root causes, and update SOPs.</li>
+            <li><strong>Regularly improve based on data (score 2):</strong> They identify issues, fix root causes, and
+              update SOPs.</li>
             <li><strong>Occasionally adjust (score 1):</strong> Changes happen, but mostly reactive.</li>
-            <li><strong>Mostly reactive / no structured improvement (score 0):</strong> Same problems show up every month.</li>
+            <li><strong>Mostly reactive / no structured improvement (score 0):</strong> Same problems show up every
+              month.</li>
           </ul>
         </div>
         <div class="options">
@@ -1648,36 +1689,36 @@
       const loginError = document.getElementById("loginError");
 
       function attemptLogin() {
-          const u = loginUser.value;
-          const p = loginPass.value;
-          
-          if(u === "Admin" && p === "Admin123") {
-              loginOverlay.style.opacity = "0";
-              loginOverlay.style.transition = "opacity 0.3s";
-              setTimeout(() => {
-                  loginOverlay.style.display = "none";
-                  mainApp.style.display = "block";
-              }, 300);
-          } else {
-              loginError.style.display = "block";
-              loginError.textContent = "Invalid username or password";
-              // Shake animation effect
-              const card = document.querySelector(".login-card");
-              card.animate([
-                  { transform: 'translateX(0)' },
-                  { transform: 'translateX(-5px)' },
-                  { transform: 'translateX(5px)' },
-                  { transform: 'translateX(0)' }
-              ], {
-                  duration: 300,
-                  iterations: 1
-              });
-          }
+        const u = loginUser.value;
+        const p = loginPass.value;
+
+        if (u === "Admin" && p === "Admin123") {
+          loginOverlay.style.opacity = "0";
+          loginOverlay.style.transition = "opacity 0.3s";
+          setTimeout(() => {
+            loginOverlay.style.display = "none";
+            mainApp.style.display = "block";
+          }, 300);
+        } else {
+          loginError.style.display = "block";
+          loginError.textContent = "Invalid username or password";
+          // Shake animation effect
+          const card = document.querySelector(".login-card");
+          card.animate([
+            { transform: 'translateX(0)' },
+            { transform: 'translateX(-5px)' },
+            { transform: 'translateX(5px)' },
+            { transform: 'translateX(0)' }
+          ], {
+            duration: 300,
+            iterations: 1
+          });
+        }
       }
 
       loginBtn.addEventListener("click", attemptLogin);
-      loginPass.addEventListener("keypress", function(e) {
-          if(e.key === "Enter") attemptLogin();
+      loginPass.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") attemptLogin();
       });
 
 
@@ -1710,49 +1751,49 @@
       };
 
       const pillars = {
-        "Leadership & Accountability": ["q1","q2","q3","q4"],
-        "Intake & Eligibility": ["q5","q6","q7","q8"],
-        "Claims & Coding": ["q9","q10","q11","q12"],
-        "Payments & A/R": ["q13","q14","q15","q16"],
-        "Compliance & Data": ["q17","q18","q19","q20"]
+        "Leadership & Accountability": ["q1", "q2", "q3", "q4"],
+        "Intake & Eligibility": ["q5", "q6", "q7", "q8"],
+        "Claims & Coding": ["q9", "q10", "q11", "q12"],
+        "Payments & A/R": ["q13", "q14", "q15", "q16"],
+        "Compliance & Data": ["q17", "q18", "q19", "q20"]
       };
 
       // NEW: Context-aware analysis for each pillar
       const pillarAnalysis = {
         "Leadership & Accountability": {
-            low: "Lack of ownership is causing drift. Assign a clear RCM lead immediately.",
-            med: "Roles exist but accountability is loose. SOPs need strict enforcement.",
-            high: "Strong leadership structure. Focus on delegating and automating."
+          low: "Lack of ownership is causing drift. Assign a clear RCM lead immediately.",
+          med: "Roles exist but accountability is loose. SOPs need strict enforcement.",
+          high: "Strong leadership structure. Focus on delegating and automating."
         },
         "Intake & Eligibility": {
-            low: "Front-desk gaps are creating downstream denials. Needs immediate fix.",
-            med: "Inconsistent verification. Standardize the benefits checklist.",
-            high: "Clean front-end process. Minimal eligibility denials observed."
+          low: "Front-desk gaps are creating downstream denials. Needs immediate fix.",
+          med: "Inconsistent verification. Standardize the benefits checklist.",
+          high: "Clean front-end process. Minimal eligibility denials observed."
         },
         "Claims & Coding": {
-            low: "Slow submission cycles are choking cash flow. Move to daily rhythm.",
-            med: "Basic process works, but clearinghouse errors cause delays.",
-            high: "Efficient submission rhythm. Verify coding compliance next."
+          low: "Slow submission cycles are choking cash flow. Move to daily rhythm.",
+          med: "Basic process works, but clearinghouse errors cause delays.",
+          high: "Efficient submission rhythm. Verify coding compliance next."
         },
         "Payments & A/R": {
-            low: "A/R is aging out unworked. Cash is being lost to inaction.",
-            med: "Follow-up happens but lacks intensity. Aggressively work 60+ days.",
-            high: "Healthy A/R management. Keep pressure on stalled claims."
+          low: "A/R is aging out unworked. Cash is being lost to inaction.",
+          med: "Follow-up happens but lacks intensity. Aggressively work 60+ days.",
+          high: "Healthy A/R management. Keep pressure on stalled claims."
         },
         "Compliance & Data": {
-            low: "Blind spots in data and compliance. High operational risk.",
-            med: "Some metrics tracked, but not driving decisions. Review monthly.",
-            high: "Data-driven culture. Use KPIs to predict future cash flow."
+          low: "Blind spots in data and compliance. High operational risk.",
+          med: "Some metrics tracked, but not driving decisions. Review monthly.",
+          high: "Data-driven culture. Use KPIs to predict future cash flow."
         }
       };
 
       function getPillarComment(pillar, score) {
-          const p = pillarAnalysis[pillar];
-          if (!p) return score <= 7 ? "Process improvements needed." : "Solid performance.";
-          
-          if (score <= 3) return p.low;
-          if (score <= 7) return p.med;
-          return p.high;
+        const p = pillarAnalysis[pillar];
+        if (!p) return score <= 7 ? "Process improvements needed." : "Solid performance.";
+
+        if (score <= 3) return p.low;
+        if (score <= 7) return p.med;
+        return p.high;
       }
 
       const riskSummaries = {
@@ -2084,28 +2125,28 @@
       }
 
       function drawLogo(doc, x, y, scale = 0.5) {
-          const navy = [0, 31, 63]; // #001F3F
-          const teal = [0, 196, 180]; // #00C4B4
-          
-          doc.setFillColor(...navy);
-          doc.roundedRect(x + 0*scale, y + 96*scale, 32*scale, 64*scale, 2, 2, 'F');
-          doc.roundedRect(x + 40*scale, y + 64*scale, 32*scale, 96*scale, 2, 2, 'F');
-          doc.roundedRect(x + 80*scale, y + 32*scale, 32*scale, 128*scale, 2, 2, 'F');
-          
-          doc.setFillColor(...teal);
-          doc.roundedRect(x + 120*scale, y + 0*scale, 32*scale, 160*scale, 2, 2, 'F');
+        const navy = [0, 31, 63]; // #001F3F
+        const teal = [0, 196, 180]; // #00C4B4
 
-          // Text "VELDEN HEALTH"
-          doc.setTextColor(...navy);
-          doc.setFont("helvetica", "bold");
-          doc.setFontSize(22 * scale * 2); 
-          doc.text("VELDEN HEALTH", x + 170*scale, y + 80*scale);
+        doc.setFillColor(...navy);
+        doc.roundedRect(x + 0 * scale, y + 96 * scale, 32 * scale, 64 * scale, 2, 2, 'F');
+        doc.roundedRect(x + 40 * scale, y + 64 * scale, 32 * scale, 96 * scale, 2, 2, 'F');
+        doc.roundedRect(x + 80 * scale, y + 32 * scale, 32 * scale, 128 * scale, 2, 2, 'F');
 
-          // Subtext
-          doc.setTextColor(100, 100, 100);
-          doc.setFont("helvetica", "normal");
-          doc.setFontSize(9 * scale * 2);
-          doc.text("REVENUE CYCLE MANAGEMENT", x + 172*scale, y + 110*scale);
+        doc.setFillColor(...teal);
+        doc.roundedRect(x + 120 * scale, y + 0 * scale, 32 * scale, 160 * scale, 2, 2, 'F');
+
+        // Text "VELDEN HEALTH"
+        doc.setTextColor(...navy);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(22 * scale * 2);
+        doc.text("VELDEN HEALTH", x + 170 * scale, y + 80 * scale);
+
+        // Subtext
+        doc.setTextColor(100, 100, 100);
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9 * scale * 2);
+        doc.text("REVENUE CYCLE MANAGEMENT", x + 172 * scale, y + 110 * scale);
       }
 
       function generatePDF(isInternal) {
@@ -2121,26 +2162,26 @@
         // Colors
         const colNavy = "#001F3F";
         const colText = "#1F2937";
-        
+
         let pageHeight = doc.internal.pageSize.height;
         let pageWidth = doc.internal.pageSize.width;
 
         // WATERMARK FUNCTION
         const addWatermark = () => {
-            const totalPages = doc.internal.getNumberOfPages();
-            for (let i = 1; i <= totalPages; i++) {
-                doc.setPage(i);
-                doc.saveGraphicsState();
-                doc.setGState(new doc.GState({ opacity: 0.05 }));
-                // Center large logo
-                const scale = 0.8;
-                const logoW = 350; // approx width
-                const logoH = 160 * scale;
-                const x = (pageWidth - logoW) / 2;
-                const y = (pageHeight - logoH) / 2;
-                drawLogo(doc, x, y, scale);
-                doc.restoreGraphicsState();
-            }
+          const totalPages = doc.internal.getNumberOfPages();
+          for (let i = 1; i <= totalPages; i++) {
+            doc.setPage(i);
+            doc.saveGraphicsState();
+            doc.setGState(new doc.GState({ opacity: 0.05 }));
+            // Center large logo
+            const scale = 0.8;
+            const logoW = 350; // approx width
+            const logoH = 160 * scale;
+            const x = (pageWidth - logoW) / 2;
+            const y = (pageHeight - logoH) / 2;
+            drawLogo(doc, x, y, scale);
+            doc.restoreGraphicsState();
+          }
         };
 
         // --- HEADER ---
@@ -2150,7 +2191,7 @@
         doc.setFont("helvetica", "bold");
         doc.setFontSize(14);
         doc.text("VELDEN REVENUE PULSE", 30, 32);
-        
+
         doc.setFontSize(10);
         doc.setFont("helvetica", "normal");
         const docTitle = isInternal ? "Internal Audit Record" : "Executive Summary";
@@ -2158,10 +2199,10 @@
 
         // --- FOOTER FUNCTION ---
         const addFooter = (d, pageNum) => {
-           d.setFontSize(8);
-           d.setTextColor(150);
-           d.text("Confidential – Velden Health Internal Use", 30, pageHeight - 20);
-           d.text("Page " + pageNum, pageWidth - 60, pageHeight - 20);
+          d.setFontSize(8);
+          d.setTextColor(150);
+          d.text("Confidential – Velden Health Internal Use", 30, pageHeight - 20);
+          d.text("Page " + pageNum, pageWidth - 60, pageHeight - 20);
         };
 
         // --- PAGE 1 CONTENT ---
@@ -2181,7 +2222,7 @@
         doc.text("PRACTICE NAME", 150, y);
         doc.text("CONTACT PERSON", 350, y);
         y += 15;
-        
+
         doc.setFontSize(11);
         doc.setTextColor(colText);
         doc.setFont("helvetica", "bold");
@@ -2209,10 +2250,10 @@
         doc.line(30, y, pageWidth - 30, y);
         y += 30;
 
-        let scoreColor = lastScoreData.bandColor; 
-        doc.setFillColor(scoreColor); 
+        let scoreColor = lastScoreData.bandColor;
+        doc.setFillColor(scoreColor);
         doc.roundedRect(30, y, 550, 40, 4, 4, "F");
-        
+
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(16);
         doc.setFont("helvetica", "bold");
@@ -2221,271 +2262,89 @@
 
         // --- SPLIT LOGIC ---
         if (!isInternal) {
-            // PROVIDER VERSION: Narrative, Pillars, Plan
-            doc.setTextColor(colText);
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            const summaryLines = doc.splitTextToSize(riskSummaries[lastScoreData.band], 540);
-            doc.text(summaryLines, 30, y);
-            y += (summaryLines.length * 16) + 20;
+          // PROVIDER VERSION: Narrative, Pillars, Plan
+          doc.setTextColor(colText);
+          doc.setFontSize(12);
+          doc.setFont("helvetica", "normal");
+          const summaryLines = doc.splitTextToSize(riskSummaries[lastScoreData.band], 540);
+          doc.text(summaryLines, 30, y);
+          y += (summaryLines.length * 16) + 20;
 
-            // Pillars
-            doc.setFontSize(14);
+          // Pillars
+          doc.setFontSize(14);
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(colNavy);
+          doc.text("Pillar Breakdown", 30, y);
+          y += 15;
+
+          // Table Header
+          doc.setFillColor(240, 240, 240);
+          doc.rect(30, y, 550, 25, "F");
+          doc.setFontSize(10);
+          doc.setTextColor(80);
+          doc.text("PILLAR", 40, y + 17);
+          doc.text("SCORE (/10)", 250, y + 17);
+          doc.text("ANALYSIS", 350, y + 17);
+          y += 25;
+
+          const pillarScores = computePillarScores(lastScoreData.answers);
+          doc.setFontSize(11);
+          doc.setTextColor(colText);
+
+          let altRow = false;
+          for (const pillar in pillarScores) {
+            const score = pillarScores[pillar];
+            const comment = getPillarComment(pillar, score);
+
+            const analysisX = 350;
+            const analysisWidth = 200; // room for wrapping
+            const analysisLines = doc.splitTextToSize(comment, analysisWidth);
+
+            const lineHeight = 14;
+            const rowHeight = Math.max(35, (analysisLines.length * lineHeight) + 16);
+
+            if (altRow) {
+              doc.setFillColor(252, 252, 252);
+              doc.rect(30, y, 550, rowHeight, "F");
+            }
+
+            const centerY = y + (rowHeight / 2) + 4;
+
             doc.setFont("helvetica", "bold");
-            doc.setTextColor(colNavy);
-            doc.text("Pillar Breakdown", 30, y);
-            y += 15;
+            doc.text(pillar, 40, centerY);
 
-            // Table Header
-            doc.setFillColor(240, 240, 240);
-            doc.rect(30, y, 550, 25, "F");
-            doc.setFontSize(10);
-            doc.setTextColor(80);
-            doc.text("PILLAR", 40, y + 17);
-            doc.text("SCORE (/10)", 250, y + 17);
-            doc.text("ANALYSIS", 350, y + 17);
-            y += 25;
+            // Score bar visual
+            const barY = y + (rowHeight / 2) - 4;
+            doc.setFillColor(220, 220, 220);
+            doc.roundedRect(250, barY, 60, 8, 2, 2, "F");
 
-            const pillarScores = computePillarScores(lastScoreData.answers);
-            doc.setFontSize(11);
-            doc.setTextColor(colText);
-            
-            let altRow = false;
-            for (const pillar in pillarScores) {
-                const score = pillarScores[pillar];
-                const comment = getPillarComment(pillar, score);
-                
-                const analysisX = 350;
-                const analysisWidth = 200; // room for wrapping
-                const analysisLines = doc.splitTextToSize(comment, analysisWidth);
-                
-                const lineHeight = 14;
-                const rowHeight = Math.max(35, (analysisLines.length * lineHeight) + 16);
+            if (score <= 4) doc.setFillColor(220, 38, 38);
+            else if (score <= 7) doc.setFillColor(217, 119, 6);
+            else doc.setFillColor(22, 163, 74);
 
-                if (altRow) {
-                    doc.setFillColor(252, 252, 252);
-                    doc.rect(30, y, 550, rowHeight, "F");
-                }
-                
-                const centerY = y + (rowHeight / 2) + 4; 
+            doc.roundedRect(250, barY, (score / 10) * 60, 8, 2, 2, "F");
+            doc.text(String(score), 320, centerY);
 
-                doc.setFont("helvetica", "bold");
-                doc.text(pillar, 40, centerY);
-                
-                // Score bar visual
-                const barY = y + (rowHeight / 2) - 4;
-                doc.setFillColor(220, 220, 220);
-                doc.roundedRect(250, barY, 60, 8, 2, 2, "F"); 
-                
-                if (score <= 4) doc.setFillColor(220, 38, 38); 
-                else if (score <= 7) doc.setFillColor(217, 119, 6); 
-                else doc.setFillColor(22, 163, 74); 
-                
-                doc.roundedRect(250, barY, (score/10)*60, 8, 2, 2, "F");
-                doc.text(String(score), 320, centerY);
-
-                doc.setFont("helvetica", "normal");
-                
-                const textBlockHeight = analysisLines.length * lineHeight;
-                const textY = y + (rowHeight / 2) - (textBlockHeight / 2) + 10;
-                
-                doc.text(analysisLines, analysisX, textY);
-                
-                doc.setDrawColor(240);
-                doc.line(30, y+rowHeight, 580, y+rowHeight);
-                y += rowHeight;
-                altRow = !altRow;
-            }
-            y += 30;
-
-            // Leaks
-            if (y + 130 > pageHeight - 50) {
-                  addFooter(doc, doc.internal.getNumberOfPages());
-                  doc.addPage();
-                  
-                  // Re-draw Header on new page
-                  doc.setFillColor(colNavy);
-                  doc.rect(0, 0, pageWidth, 50, "F");
-                  doc.setTextColor(255, 255, 255);
-                  doc.setFont("helvetica", "bold");
-                  doc.setFontSize(14);
-                  doc.text("VELDEN REVENUE PULSE", 30, 32);
-                  doc.setFontSize(10);
-                  doc.setFont("helvetica", "normal");
-                  // Updated Header
-                  doc.text("Provider Summary — Recommended 60–90 Day Plan", pageWidth - 260, 32);
-                  
-                  y = 80;
-            }
-
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "bold");
-            doc.setTextColor(colNavy);
-            doc.text("Top Revenue Leaks", 30, y);
-            y += 20;
-
-            const sorted = lastScoreData.answers
-              .filter(a => a.value !== null)
-              .sort((a, b) => a.value - b.value)
-              .slice(0, 3);
-
-            doc.setFontSize(11);
             doc.setFont("helvetica", "normal");
-            doc.setTextColor(colText);
 
-            sorted.forEach(a => {
-              doc.setFillColor(254, 242, 242);
-              doc.roundedRect(30, y, 550, 24, 4, 4, "F");
-              doc.setTextColor(185, 28, 28);
-              doc.text("• " + leakMap[a.id], 40, y + 16);
-              y += 32;
-            });
+            const textBlockHeight = analysisLines.length * lineHeight;
+            const textY = y + (rowHeight / 2) - (textBlockHeight / 2) + 10;
 
-            /* --- PLAN SECTION --- */
-            if (!isInternal) {
-              const band = lastScoreData.band || "YELLOW";
-              const bandPlans = (plans[band] || []).slice(0, 4);
+            doc.text(analysisLines, analysisX, textY);
 
-              // Calculate needed height for Box: Title + Bullets + KPIs
-              // Title ~ 20, Bullets ~ 4*18, Header KPI ~ 20, KPIs ~ 3*18, Padding ~ 20
-              // Approx 250px total height
-              if (y + 250 > pageHeight - 50) {
-                  addFooter(doc, doc.internal.getNumberOfPages());
-                  doc.addPage();
-                  
-                  // Re-draw Header on new page
-                  doc.setFillColor(colNavy);
-                  doc.rect(0, 0, pageWidth, 50, "F");
-                  doc.setTextColor(255, 255, 255);
-                  doc.setFont("helvetica", "bold");
-                  doc.setFontSize(14);
-                  doc.text("VELDEN REVENUE PULSE", 30, 32);
-                  
-                  doc.setFontSize(10);
-                  doc.setFont("helvetica", "normal");
-                  // Updated Header
-                  doc.text("Provider Summary — Recommended 60–90 Day Plan", pageWidth - 260, 32);
-                  
-                  y = 80;
-              }
+            doc.setDrawColor(240);
+            doc.line(30, y + rowHeight, 580, y + rowHeight);
+            y += rowHeight;
+            altRow = !altRow;
+          }
+          y += 30;
 
-              y += 10;
-              
-              // Draw Tinted Box Background
-              let boxFill = [255, 251, 235]; // Default Yellow
-              let boxStroke = [252, 211, 77];
-              
-              if (band === "RED") {
-                 boxFill = [254, 242, 242];
-                 boxStroke = [252, 165, 165];
-              } else if (band === "GREEN") {
-                 boxFill = [236, 253, 245];
-                 boxStroke = [110, 231, 183];
-              }
-
-              // Determine exact height needed first? 
-              // Just estimate or calculate. 
-              // Let's draw it dynamically. Start Y is saved.
-              const boxStartY = y;
-              
-              doc.setFillColor(...boxFill);
-              doc.setDrawColor(...boxStroke);
-              // Draw rect placeholder, we will resize height later? No, jsPDF order matters.
-              // Let's assume height 220 for now, or calculate steps.
-              const planTitleH = 30;
-              const bulletsH = bandPlans.length * 16 + 10;
-              const kpiTitleH = 25;
-              const kpisH = 3 * 16 + 10;
-              const totalBoxH = planTitleH + bulletsH + kpiTitleH + kpisH + 10;
-
-              doc.roundedRect(30, y, 550, totalBoxH, 4, 4, "FD");
-
-              // Content inside box
-              y += 20;
-              doc.setFontSize(13);
-              doc.setFont("helvetica", "bold");
-              doc.setTextColor(colNavy);
-              doc.text("Recommended 60–90 Day Focus", 40, y);
-              y += 20;
-
-              doc.setFontSize(11);
-              doc.setFont("helvetica", "normal");
-              doc.setTextColor(colText);
-
-              bandPlans.forEach(line => {
-                doc.text("• " + line, 50, y);
-                y += 16;
-              });
-
-              // Measurable Targets (KPIs)
-              y += 10;
-              doc.setFontSize(12);
-              doc.setFont("helvetica", "bold");
-              doc.setTextColor(colNavy);
-              doc.text("Measurable Targets & Owners", 40, y);
-              y += 18;
-
-              doc.setFontSize(10);
-              doc.setFont("helvetica", "normal");
-              doc.setTextColor(colText);
-              
-              // KPI 1
-              doc.text("• Claim submission: same/next day", 50, y);
-              doc.setFont("helvetica", "italic");
-              doc.setTextColor(100);
-              doc.text("(Owner: Billing lead)", 300, y);
-              y += 16;
-
-              // KPI 2
-              doc.setFont("helvetica", "normal");
-              doc.setTextColor(colText);
-              doc.text("• ERA posting: <= 72 hrs", 50, y);
-              doc.setFont("helvetica", "italic");
-              doc.setTextColor(100);
-              doc.text("(Owner: A/R)", 300, y);
-              y += 16;
-
-              // KPI 3
-              doc.setFont("helvetica", "normal");
-              doc.setTextColor(colText);
-              doc.text("• Denial rework: <= 5 business days", 50, y);
-              doc.setFont("helvetica", "italic");
-              doc.setTextColor(100);
-              doc.text("(Owner: Denials)", 300, y);
-              y += 20; // Padding bottom of box
-
-              // Adjust Y to after box
-              y = boxStartY + totalBoxH + 20;
-
-              // CTA STRIP
-              if (y + 40 > pageHeight - 50) {
-                 addFooter(doc, doc.internal.getNumberOfPages());
-                 doc.addPage();
-                 // Header logic omitted for strip-only page, likely rare
-                 y = 60;
-              }
-
-              doc.setFillColor(243, 244, 246); // gray-100
-              doc.rect(30, y, 550, 40, "F");
-              
-              doc.setFontSize(11);
-              doc.setFont("helvetica", "bold");
-              doc.setTextColor(colNavy);
-              
-              const ctaText = "Next 30-min checkpoint: __________________ with __________________";
-              doc.text(ctaText, 290, y + 24, { align: "center" });
-              
-              y += 60;
-            }
-            /* --- END PLAN SECTION --- */
-
+          // Leaks
+          if (y + 130 > pageHeight - 50) {
             addFooter(doc, doc.internal.getNumberOfPages());
-
-
-            // New Page for Appendix
             doc.addPage();
-            
-            // Header for new page
+
+            // Re-draw Header on new page
             doc.setFillColor(colNavy);
             doc.rect(0, 0, pageWidth, 50, "F");
             doc.setTextColor(255, 255, 255);
@@ -2494,70 +2353,252 @@
             doc.text("VELDEN REVENUE PULSE", 30, 32);
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text("Appendix", pageWidth - 80, 32);
+            // Updated Header
+            doc.text("Provider Summary — Recommended 60–90 Day Plan", pageWidth - 260, 32);
 
             y = 80;
-            doc.setFontSize(14);
+          }
+
+          doc.setFontSize(14);
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(colNavy);
+          doc.text("Top Revenue Leaks", 30, y);
+          y += 20;
+
+          const sorted = lastScoreData.answers
+            .filter(a => a.value !== null)
+            .sort((a, b) => a.value - b.value)
+            .slice(0, 3);
+
+          doc.setFontSize(11);
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(colText);
+
+          sorted.forEach(a => {
+            doc.setFillColor(254, 242, 242);
+            doc.roundedRect(30, y, 550, 24, 4, 4, "F");
+            doc.setTextColor(185, 28, 28);
+            doc.text("• " + leakMap[a.id], 40, y + 16);
+            y += 32;
+          });
+
+          /* --- PLAN SECTION --- */
+          if (!isInternal) {
+            const band = lastScoreData.band || "YELLOW";
+            const bandPlans = (plans[band] || []).slice(0, 4);
+
+            // Calculate needed height for Box: Title + Bullets + KPIs
+            // Title ~ 20, Bullets ~ 4*18, Header KPI ~ 20, KPIs ~ 3*18, Padding ~ 20
+            // Approx 250px total height
+            if (y + 250 > pageHeight - 50) {
+              addFooter(doc, doc.internal.getNumberOfPages());
+              doc.addPage();
+
+              // Re-draw Header on new page
+              doc.setFillColor(colNavy);
+              doc.rect(0, 0, pageWidth, 50, "F");
+              doc.setTextColor(255, 255, 255);
+              doc.setFont("helvetica", "bold");
+              doc.setFontSize(14);
+              doc.text("VELDEN REVENUE PULSE", 30, 32);
+
+              doc.setFontSize(10);
+              doc.setFont("helvetica", "normal");
+              // Updated Header
+              doc.text("Provider Summary — Recommended 60–90 Day Plan", pageWidth - 260, 32);
+
+              y = 80;
+            }
+
+            y += 10;
+
+            // Draw Tinted Box Background
+            let boxFill = [255, 251, 235]; // Default Yellow
+            let boxStroke = [252, 211, 77];
+
+            if (band === "RED") {
+              boxFill = [254, 242, 242];
+              boxStroke = [252, 165, 165];
+            } else if (band === "GREEN") {
+              boxFill = [236, 253, 245];
+              boxStroke = [110, 231, 183];
+            }
+
+            // Determine exact height needed first? 
+            // Just estimate or calculate. 
+            // Let's draw it dynamically. Start Y is saved.
+            const boxStartY = y;
+
+            doc.setFillColor(...boxFill);
+            doc.setDrawColor(...boxStroke);
+            // Draw rect placeholder, we will resize height later? No, jsPDF order matters.
+            // Let's assume height 220 for now, or calculate steps.
+            const planTitleH = 30;
+            const bulletsH = bandPlans.length * 16 + 10;
+            const kpiTitleH = 25;
+            const kpisH = 3 * 16 + 10;
+            const totalBoxH = planTitleH + bulletsH + kpiTitleH + kpisH + 10;
+
+            doc.roundedRect(30, y, 550, totalBoxH, 4, 4, "FD");
+
+            // Content inside box
+            y += 20;
+            doc.setFontSize(13);
             doc.setFont("helvetica", "bold");
             doc.setTextColor(colNavy);
-            doc.text("Full Audit Responses", 30, y);
-            y += 30;
+            doc.text("Recommended 60–90 Day Focus", 40, y);
+            y += 20;
+
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(colText);
+
+            bandPlans.forEach(line => {
+              doc.text("• " + line, 50, y);
+              y += 16;
+            });
+
+            // Measurable Targets (KPIs)
+            y += 10;
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(colNavy);
+            doc.text("Measurable Targets & Owners", 40, y);
+            y += 18;
+
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(colText);
+
+            // KPI 1
+            doc.text("• Claim submission: same/next day", 50, y);
+            doc.setFont("helvetica", "italic");
+            doc.setTextColor(100);
+            doc.text("(Owner: Billing lead)", 300, y);
+            y += 16;
+
+            // KPI 2
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(colText);
+            doc.text("• ERA posting: <= 72 hrs", 50, y);
+            doc.setFont("helvetica", "italic");
+            doc.setTextColor(100);
+            doc.text("(Owner: A/R)", 300, y);
+            y += 16;
+
+            // KPI 3
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(colText);
+            doc.text("• Denial rework: <= 5 business days", 50, y);
+            doc.setFont("helvetica", "italic");
+            doc.setTextColor(100);
+            doc.text("(Owner: Denials)", 300, y);
+            y += 20; // Padding bottom of box
+
+            // Adjust Y to after box
+            y = boxStartY + totalBoxH + 20;
+
+            // CTA STRIP
+            if (y + 40 > pageHeight - 50) {
+              addFooter(doc, doc.internal.getNumberOfPages());
+              doc.addPage();
+              // Header logic omitted for strip-only page, likely rare
+              y = 60;
+            }
+
+            doc.setFillColor(243, 244, 246); // gray-100
+            doc.rect(30, y, 550, 40, "F");
+
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(colNavy);
+
+            const ctaText = "Next 30-min checkpoint: __________________ with __________________";
+            doc.text(ctaText, 290, y + 24, { align: "center" });
+
+            y += 60;
+          }
+          /* --- END PLAN SECTION --- */
+
+          addFooter(doc, doc.internal.getNumberOfPages());
+
+
+          // New Page for Appendix
+          doc.addPage();
+
+          // Header for new page
+          doc.setFillColor(colNavy);
+          doc.rect(0, 0, pageWidth, 50, "F");
+          doc.setTextColor(255, 255, 255);
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(14);
+          doc.text("VELDEN REVENUE PULSE", 30, 32);
+          doc.setFontSize(10);
+          doc.setFont("helvetica", "normal");
+          doc.text("Appendix", pageWidth - 80, 32);
+
+          y = 80;
+          doc.setFontSize(14);
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(colNavy);
+          doc.text("Full Audit Responses", 30, y);
+          y += 30;
 
         } else {
-            // INTERNAL VERSION: Straight to questions
-            y += 20; 
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "bold");
-            doc.setTextColor(colNavy);
-            doc.text("Detailed Question Log", 30, y);
-            y += 30;
+          // INTERNAL VERSION: Straight to questions
+          y += 20;
+          doc.setFontSize(14);
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(colNavy);
+          doc.text("Detailed Question Log", 30, y);
+          y += 30;
         }
 
         // --- FULL QUESTION LOG (Both Versions) ---
         // For Provider, this is on page 2. For Internal, it starts on page 1 after score.
-        
+
         doc.setFontSize(10);
-        
+
         lastScoreData.answers.forEach((a, idx) => {
-            if (y > pageHeight - 60) {
-                addFooter(doc, doc.internal.getNumberOfPages());
-                doc.addPage();
-                
-                // Header on new pages
-                doc.setFillColor(colNavy);
-                doc.rect(0, 0, pageWidth, 50, "F");
-                doc.setTextColor(255, 255, 255);
-                doc.setFont("helvetica", "bold");
-                doc.setFontSize(14);
-                doc.text("VELDEN REVENUE PULSE", 30, 32);
-                doc.setFontSize(10);
-                doc.setFont("helvetica", "normal");
-                doc.text(isInternal ? "Internal Audit" : "Appendix", pageWidth - 100, 32);
+          if (y > pageHeight - 60) {
+            addFooter(doc, doc.internal.getNumberOfPages());
+            doc.addPage();
 
-                y = 80;
-            }
-
-            // CLEAN QUESTION NUMBER: Remove "1. " from start
-            const cleanQText = a.question.replace(/^\d+[\.\)]\s*/, '');
-
+            // Header on new pages
+            doc.setFillColor(colNavy);
+            doc.rect(0, 0, pageWidth, 50, "F");
+            doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
-            doc.setTextColor(colNavy);
-            doc.text(`Q${idx + 1}. ${cleanQText}`, 30, y);
-            y += 14;
-
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(colText);
-            doc.text(`Selected: ${a.text}`, 40, y);
-            
-            doc.setFontSize(9);
-            doc.setTextColor(100);
-            const scoreTxt = `Score: ${a.value}/2`;
-            doc.text(scoreTxt, 500, y);
-            
-            y += 24;
-            doc.setDrawColor(240);
-            doc.line(30, y-10, 580, y-10);
+            doc.setFontSize(14);
+            doc.text("VELDEN REVENUE PULSE", 30, 32);
             doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.text(isInternal ? "Internal Audit" : "Appendix", pageWidth - 100, 32);
+
+            y = 80;
+          }
+
+          // CLEAN QUESTION NUMBER: Remove "1. " from start
+          const cleanQText = a.question.replace(/^\d+[\.\)]\s*/, '');
+
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(colNavy);
+          doc.text(`Q${idx + 1}. ${cleanQText}`, 30, y);
+          y += 14;
+
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(colText);
+          doc.text(`Selected: ${a.text}`, 40, y);
+
+          doc.setFontSize(9);
+          doc.setTextColor(100);
+          const scoreTxt = `Score: ${a.value}/2`;
+          doc.text(scoreTxt, 500, y);
+
+          y += 24;
+          doc.setDrawColor(240);
+          doc.line(30, y - 10, 580, y - 10);
+          doc.setFontSize(10);
         });
 
         addFooter(doc, doc.internal.getNumberOfPages());
@@ -2575,4 +2616,5 @@
     })();
   </script>
 </body>
+
 </html>
