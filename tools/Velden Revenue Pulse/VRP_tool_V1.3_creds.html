@@ -1617,25 +1617,37 @@
         </div>
       </div>
     </div>
-
     <!-- Actions & Results -->
     <div class="card">
       <div class="button-row">
         <div class="button-group-left">
           <button id="calculateBtn" class="btn-primary" type="button">
-            Calculate score
-          </button>
-          <button id="downloadInternalPdfBtn" class="btn-primary btn-disabled" type="button" disabled>
-            Download Internal PDF
-          </button>
-          <button id="downloadProviderPdfBtn" class="btn-primary btn-disabled" type="button" disabled>
-            Download Provider Summary PDF
+            Calculate Score
           </button>
           <button id="clearBtn" class="btn-secondary" type="button">
-            Reset answers
+            Reset Answers
           </button>
         </div>
       </div>
+
+      <!-- Email Gate (hidden by default) -->
+      <div id="emailGate" class="results"
+        style="display:none; background: linear-gradient(135deg, rgba(0, 158, 145, 0.1) 0%, rgba(0, 31, 63, 0.05) 100%); text-align: center; padding: 2rem; border-radius: 12px; margin-top: 1rem;">
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--navy);">Your Audit is Complete!</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 13px;">Enter your email to see your
+          personalized Revenue Pulse score and recommendations.</p>
+        <div style="max-width: 300px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px;">
+          <input type="text" id="resultName" placeholder="Your Name"
+            style="padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); font-size: 14px;" required>
+          <input type="email" id="resultEmail" placeholder="Email Address"
+            style="padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); font-size: 14px;" required>
+          <button id="showResultsBtn" class="btn-primary" type="button" style="margin-top: 8px;">See My Results</button>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: 1rem;">We'll send your results to this email
+          and never spam you.</p>
+      </div>
+
+      <!-- Results (hidden by default) -->
       <div id="results" class="results">
         <div class="results-header">
           <div class="score-main">
@@ -1648,7 +1660,7 @@
         </div>
         <div class="progress-shell">
           <div class="progress-label">
-            <span>Revenue health</span>
+            <span>Revenue Health</span>
             <span id="progressLabelRight">0%</span>
           </div>
           <div class="progress-bar">
@@ -1663,8 +1675,31 @@
 
         <!-- Pillar chart -->
         <div id="pillarChartContainer">
-          <div id="pillarChartTitle">Pillar scores (/10)</div>
+          <div id="pillarChartTitle">Pillar Scores (/10)</div>
           <canvas id="pillarChart" height="140"></canvas>
+        </div>
+
+        <!-- Action Plan -->
+        <div id="actionPlanSection"
+          style="margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 10px; border: 1px solid var(--border-soft);">
+          <h4 style="font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 0.75rem;">Recommended Action
+            Plan:</h4>
+          <ul id="actionPlanList"
+            style="margin: 0; padding-left: 1.2rem; font-size: 12px; color: var(--text-muted); line-height: 1.8;"></ul>
+        </div>
+
+        <!-- CTA -->
+        <div
+          style="margin-top: 1.5rem; text-align: center; padding: 1.5rem; background: linear-gradient(135deg, rgba(0, 158, 145, 0.08) 0%, rgba(0, 31, 63, 0.04) 100%); border-radius: 12px;">
+          <p style="font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.75rem;">Ready to recover
+            your aged A/R?</p>
+          <a href="../../contact.html" class="btn-primary"
+            style="display: inline-block; padding: 12px 24px; text-decoration: none; border-radius: 999px; font-size: 14px;">Start
+            Your Free 20-Claim Pilot</a>
+          <p style="margin-top: 0.75rem; font-size: 12px; color: var(--text-muted);">
+            Or <a href="https://calendly.com/sathish-veldenhealth/30min" target="_blank"
+              style="color: var(--primary);">schedule a call</a> to discuss your results
+          </p>
         </div>
       </div>
     </div>
@@ -1821,8 +1856,6 @@
 
       const calculateBtn = document.getElementById("calculateBtn");
       const clearBtn = document.getElementById("clearBtn");
-      const downloadInternalPdfBtn = document.getElementById("downloadInternalPdfBtn");
-      const downloadProviderPdfBtn = document.getElementById("downloadProviderPdfBtn");
       const results = document.getElementById("results");
       const scoreValueEl = document.getElementById("scoreValue");
       const maxScoreEl = document.getElementById("maxScore");
@@ -2060,12 +2093,10 @@
           unansweredNoteEl.textContent = "";
         }
 
-        results.classList.add("visible");
-
-        downloadInternalPdfBtn.disabled = false;
-        downloadInternalPdfBtn.classList.remove("btn-disabled");
-        downloadProviderPdfBtn.disabled = false;
-        downloadProviderPdfBtn.classList.remove("btn-disabled");
+        // Show email gate instead of results directly
+        const emailGate = document.getElementById("emailGate");
+        emailGate.style.display = "block";
+        results.classList.remove("visible");
 
         const practiceInfo = {
           practiceName: document.getElementById("practiceName").value.trim(),
@@ -2608,8 +2639,55 @@
 
       calculateBtn.addEventListener("click", calculateScore);
       clearBtn.addEventListener("click", clearSelections);
-      downloadInternalPdfBtn.addEventListener("click", () => generatePDF(true));
-      downloadProviderPdfBtn.addEventListener("click", () => generatePDF(false));
+
+      // Show Results Button Handler
+      const showResultsBtn = document.getElementById("showResultsBtn");
+      const emailGate = document.getElementById("emailGate");
+      const actionPlanList = document.getElementById("actionPlanList");
+
+      showResultsBtn.addEventListener("click", function () {
+        const name = document.getElementById("resultName").value.trim();
+        const email = document.getElementById("resultEmail").value.trim();
+
+        if (!name || !email) {
+          alert("Please enter your name and email to see results.");
+          return;
+        }
+
+        // Hide email gate, show results
+        emailGate.style.display = "none";
+        results.classList.add("visible");
+
+        // Populate action plan based on score band
+        if (lastScoreData) {
+          const bandKey = lastScoreData.band.toUpperCase();
+          const planItems = plans[bandKey] || [];
+          actionPlanList.innerHTML = planItems.map(item => `<li>${item}</li>`).join("");
+
+          // Send to Formspree
+          try {
+            fetch('https://formspree.io/f/xqezjrag', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                _subject: 'Revenue Pulse Audit Completed',
+                name: name,
+                email: email,
+                practice_name: lastScoreData.practiceInfo.practiceName || 'Not provided',
+                score: lastScoreData.total + '/' + MAX_SCORE,
+                percent: lastScoreData.percent + '%',
+                band: lastScoreData.band,
+                recommendations: planItems.join('; ')
+              })
+            });
+          } catch (e) {
+            console.log('Form submission error:', e);
+          }
+        }
+
+        // Smooth scroll to results
+        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     })();
   </script>
   <script src="../../js/main.js"></script>
