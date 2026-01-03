@@ -2129,10 +2129,9 @@
         results.classList.remove("visible");
         unansweredNoteEl.textContent = "";
         lastScoreData = null;
-        downloadInternalPdfBtn.disabled = true;
-        downloadInternalPdfBtn.classList.add("btn-disabled");
-        downloadProviderPdfBtn.disabled = true;
-        downloadProviderPdfBtn.classList.add("btn-disabled");
+        // Hide email gate
+        const emailGateEl = document.getElementById("emailGate");
+        if (emailGateEl) emailGateEl.style.display = "none";
         scoreBarEl.style.width = "0%";
         scoreBarEl.classList.remove("red", "yellow", "green");
         progressLabelRight.textContent = "0%";
