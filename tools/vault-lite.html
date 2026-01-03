@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="https://www.veldenhealth.com/brand-icon-96.png?v=2026" sizes="96x96" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-        content="Free denial code lookup tool. Search CARC and RARC codes instantly to understand claim adjustments and denials." />
+        content="Free denial code lookup tool. Search 1500+ CARC and RARC codes instantly to understand claim adjustments and denials." />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,201 +18,305 @@
 
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .vault-hero {
-            background: linear-gradient(135deg, rgba(0, 31, 63, 0.05) 0%, rgba(0, 196, 180, 0.08) 100%);
-            padding: 3rem 0;
-            text-align: center;
+        /* Compact search header */
+        .search-header {
+            background: linear-gradient(135deg, #001F3F 0%, #003366 100%);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .vault-hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--color-text);
-            margin-bottom: 0.5rem;
-        }
-
-        .search-container {
-            max-width: 700px;
+        .search-header-inner {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 1rem;
+        }
+
+        .search-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-title h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+        }
+
+        .search-title .badge {
+            background: #00C4B4;
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
 
         .search-box {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .search-input {
             flex: 1;
-            padding: 1rem 1.25rem;
-            font-size: 1.1rem;
-            border: 2px solid var(--color-border);
-            border-radius: 12px;
+            padding: 0.85rem 1.25rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
             outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .search-input:focus {
-            border-color: var(--color-primary);
+            background: white;
         }
 
         .search-input::placeholder {
-            color: var(--color-text-muted);
+            color: #999;
+        }
+
+        .search-btn {
+            padding: 0 1.5rem;
+            background: #00C4B4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background: #00a89a;
+        }
+
+        .filter-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .code-type-toggle {
             display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-bottom: 1.5rem;
+            gap: 0.25rem;
         }
 
         .toggle-btn {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--color-border);
-            background: white;
-            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 500;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
 
         .toggle-btn:hover {
-            border-color: var(--color-primary);
-        }
-
-        .toggle-btn.active {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
+            border-color: #00C4B4;
             color: white;
         }
 
-        .results-container {
+        .toggle-btn.active {
+            background: #00C4B4;
+            border-color: #00C4B4;
+            color: white;
+        }
+
+        .code-legend {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Results section */
+        .results-section {
             max-width: 900px;
             margin: 0 auto;
-            padding: 0 2rem 4rem;
+            padding: 1rem;
+        }
+
+        .results-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 0.75rem;
         }
 
         .results-count {
             font-size: 0.9rem;
-            color: var(--color-text-muted);
-            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .results-count strong {
+            color: #00C4B4;
+        }
+
+        .quick-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+
+        .quick-btn {
+            padding: 0.35rem 0.75rem;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-btn:hover {
+            background: #00C4B4;
+            color: white;
+        }
+
+        /* Code cards - compact */
+        .code-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         .code-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
             background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            border: 1px solid var(--color-border);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #001F3F;
+            transition: box-shadow 0.2s;
         }
 
         .code-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
-        .code-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
+        .code-card.rarc {
+            border-left-color: #00C4B4;
         }
 
         .code-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            background: var(--color-primary);
+            min-width: 60px;
+            padding: 0.35rem 0.5rem;
+            background: #001F3F;
             color: white;
             font-weight: 700;
-            font-size: 1rem;
-            border-radius: 6px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            text-align: center;
             font-family: 'Montserrat', sans-serif;
         }
 
-        .code-badge.carc {
-            background: #001F3F;
-        }
-
-        .code-badge.rarc {
+        .code-card.rarc .code-badge {
             background: #00C4B4;
         }
 
-        .code-type-label {
-            font-size: 0.75rem;
+        .code-info {
+            flex: 1;
+        }
+
+        .code-type {
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--color-text-muted);
+            color: #999;
+            margin-bottom: 0.25rem;
         }
 
-        .code-description {
-            font-size: 1rem;
-            color: var(--color-text);
-            line-height: 1.6;
+        .code-desc {
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.5;
         }
 
-        .code-meta {
-            margin-top: 0.75rem;
-            font-size: 0.85rem;
-            color: var(--color-text-muted);
+        /* Loading state */
+        .loading-indicator {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
         }
 
+        .loading-indicator .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #eee;
+            border-top-color: #00C4B4;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 0.5rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* No results */
         .no-results {
             text-align: center;
             padding: 3rem;
-            color: var(--color-text-muted);
+            color: #999;
         }
 
-        .no-results svg {
-            width: 64px;
-            height: 64px;
-            stroke: var(--color-border);
-            margin-bottom: 1rem;
+        .no-results h3 {
+            color: #666;
+            margin-bottom: 0.5rem;
         }
 
-        .quick-codes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-top: 1rem;
+        /* Pagination */
+        .load-more {
+            text-align: center;
+            padding: 1rem;
         }
 
-        .quick-code {
-            padding: 0.5rem 1rem;
-            background: var(--color-bg-alt);
-            border-radius: 999px;
-            font-size: 0.85rem;
-            color: var(--color-text-muted);
+        .load-more-btn {
+            padding: 0.75rem 2rem;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            border: none;
         }
 
-        .quick-code:hover {
-            background: var(--color-primary-light);
-            color: var(--color-primary-dark);
+        .load-more-btn:hover {
+            background: #00C4B4;
+            color: white;
+            border-color: #00C4B4;
         }
 
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: var(--color-text-muted);
-        }
-
-        @media (max-width: 768px) {
-            .search-box {
-                flex-direction: column;
+        @media (max-width: 600px) {
+            .search-title h1 {
+                font-size: 1.25rem;
             }
 
-            .vault-hero h1 {
-                font-size: 1.75rem;
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .code-type-toggle {
+                justify-content: center;
+            }
+
+            .code-legend {
+                text-align: center;
             }
         }
     </style>
@@ -261,412 +365,73 @@
         </div>
     </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="vault-hero">
-            <div class="container">
-                <span class="hero-subtitle">Vault Lite</span>
-                <h1>Denial Code Lookup</h1>
-                <p style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">
-                    Instantly search CARC and RARC codes to understand claim adjustments and denial reasons.
-                </p>
+    <!-- Sticky Search Header -->
+    <div class="search-header">
+        <div class="search-header-inner">
+            <div class="search-title">
+                <h1>🔍 Vault Lite - Denial Code Lookup</h1>
+                <span class="badge">1,500+ Codes</span>
             </div>
-        </section>
 
-        <!-- Search Section -->
-        <section class="section" style="padding-top: 2rem;">
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" id="searchInput" class="search-input"
-                        placeholder="Search by code (e.g., 16, CO45, N30) or keyword..." autofocus>
-                </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input"
+                    placeholder="Search by code (16, CO45, MA01) or keyword (authorization, eligibility)..." autofocus>
+                <button class="search-btn" onclick="handleSearch()">Search</button>
+            </div>
 
+            <div class="filter-row">
                 <div class="code-type-toggle">
                     <button class="toggle-btn active" data-type="all">All Codes</button>
-                    <button class="toggle-btn" data-type="carc">CARC Only</button>
-                    <button class="toggle-btn" data-type="rarc">RARC Only</button>
+                    <button class="toggle-btn" data-type="carc">CARC (407)</button>
+                    <button class="toggle-btn" data-type="rarc">RARC (1113)</button>
                 </div>
-
-                <p style="text-align: center; font-size: 0.85rem; color: var(--color-text-muted);">
-                    <strong>CARC</strong> = Claim Adjustment Reason Code &nbsp;|&nbsp;
-                    <strong>RARC</strong> = Remittance Advice Remark Code
-                </p>
-
-                <div class="quick-codes">
-                    <button class="quick-code" onclick="quickSearch('16')">Code 16</button>
-                    <button class="quick-code" onclick="quickSearch('45')">Code 45</button>
-                    <button class="quick-code" onclick="quickSearch('CO')">CO Codes</button>
-                    <button class="quick-code" onclick="quickSearch('PR')">PR Codes</button>
-                    <button class="quick-code" onclick="quickSearch('denial')">Denial</button>
-                    <button class="quick-code" onclick="quickSearch('authorization')">Authorization</button>
-                    <button class="quick-code" onclick="quickSearch('eligibility')">Eligibility</button>
+                <div class="code-legend">
+                    <strong>CARC</strong> = Claim Adjustment &nbsp;|&nbsp;
+                    <strong>RARC</strong> = Remittance Remark
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
 
+    <main>
         <!-- Results Section -->
-        <section class="results-container">
-            <div id="resultsCount" class="results-count"></div>
-            <div id="results">
-                <div class="loading">Loading code database...</div>
+        <section class="results-section">
+            <div class="results-status">
+                <div class="results-count" id="resultsCount">Loading codes...</div>
+                <div class="quick-filters">
+                    <button class="quick-btn" onclick="quickSearch('16')">Code 16</button>
+                    <button class="quick-btn" onclick="quickSearch('45')">Code 45</button>
+                    <button class="quick-btn" onclick="quickSearch('CO')">CO</button>
+                    <button class="quick-btn" onclick="quickSearch('PR')">PR</button>
+                    <button class="quick-btn" onclick="quickSearch('denial')">Denial</button>
+                    <button class="quick-btn" onclick="quickSearch('authorization')">Auth</button>
+                    <button class="quick-btn" onclick="quickSearch('eligibility')">Eligibility</button>
+                    <button class="quick-btn" onclick="quickSearch('medical necessity')">Med Nec</button>
+                </div>
+            </div>
+
+            <div id="results" class="code-list">
+                <div class="loading-indicator">
+                    <div class="spinner"></div>
+                    Loading 1,500+ codes...
+                </div>
+            </div>
+
+            <div id="loadMore" class="load-more" style="display:none;">
+                <button class="load-more-btn" onclick="loadMoreResults()">Load More Results</button>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="grid-4">
-                <div>
-                    <div class="logo-area" style="margin-bottom:1rem;">
-                        <div class="logo-mark" style="width:32px; height:32px;">
-                            <svg role="img" aria-label="Velden Health Logo" viewBox="0 0 152 160" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
-                                <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
-                                <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
-                                <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
-                            </svg>
-                        </div>
-                        <span style="font-weight:700;">Velden Health</span>
-                    </div>
-                    <p style="font-size:0.9rem; color:var(--color-text-muted);">Specialized A/R recovery and denial
-                        management for Illinois behavioral health clinics.</p>
-                </div>
-                <div>
-                    <h4 style="margin-bottom:1rem;">Services</h4>
-                    <div class="footer-links"><a href="../services.html">Medical Billing</a><a
-                            href="../services.html">AR Recovery</a><a href="../services.html">Denial Management</a>
-                    </div>
-                </div>
-                <div>
-                    <h4 style="margin-bottom:1rem;">Company</h4>
-                    <div class="footer-links"><a href="../about.html">About Us</a><a href="../results.html">Case
-                            Studies</a><a href="../privacy.html">Privacy</a></div>
-                </div>
-                <div>
-                    <h4 style="margin-bottom:1rem;">Contact</h4>
-                    <div
-                        style="display: flex; flex-direction: column; gap: 0.75rem; color: var(--color-text-muted); font-size: 0.9rem;">
-                        <a href="mailto:info@veldenhealth.com" style="color: inherit;">info@veldenhealth.com</a>
-                        <a href="tel:+13129256457" style="color: inherit;">+1 (312) 925-6457</a>
-                    </div>
-                </div>
-            </div>
-            <div
-                style="text-align:center; margin-top:2rem; padding-top:2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size:0.85rem; color:var(--color-text-light);">
-                &copy;
-                <script>document.write(new Date().getFullYear())</script> Velden Health LLC. All rights reserved.
-            </div>
-        </div>
-    </footer>
+    <!-- External codes data file -->
+    <script src="codes_data.js"></script>
 
     <script>
-        // Code database - embedded for client-side operation
-        const carcCodes = [
-            { code: "1", desc: "Deductible Amount" },
-            { code: "2", desc: "Coinsurance Amount" },
-            { code: "3", desc: "Co-payment Amount" },
-            { code: "4", desc: "The procedure code is inconsistent with the modifier used." },
-            { code: "5", desc: "The procedure code/type of bill is inconsistent with the place of service." },
-            { code: "6", desc: "The procedure/revenue code is inconsistent with the patient's age." },
-            { code: "7", desc: "The procedure/revenue code is inconsistent with the patient's gender." },
-            { code: "8", desc: "The procedure code is inconsistent with the provider type/specialty (taxonomy)." },
-            { code: "9", desc: "The diagnosis is inconsistent with the patient's age." },
-            { code: "10", desc: "The diagnosis is inconsistent with the patient's gender." },
-            { code: "11", desc: "The diagnosis is inconsistent with the procedure." },
-            { code: "12", desc: "The diagnosis is inconsistent with the provider type." },
-            { code: "13", desc: "The date of death precedes the date of service." },
-            { code: "14", desc: "The date of birth follows the date of service." },
-            { code: "15", desc: "The procedure code is inconsistent with the modifier used or a required modifier is missing." },
-            { code: "16", desc: "Claim/service lacks information or has submission/billing error(s). At least one Remark Code must be provided." },
-            { code: "18", desc: "Exact duplicate claim/service." },
-            { code: "19", desc: "This is a work-related injury/illness and thus the liability of the Worker's Compensation Carrier." },
-            { code: "20", desc: "This injury/illness is covered by the liability carrier." },
-            { code: "21", desc: "This injury/illness is the liability of the no-fault carrier." },
-            { code: "22", desc: "This care may be covered by another payer per coordination of benefits." },
-            { code: "23", desc: "The impact of prior payer(s) adjudication including payments and/or adjustments." },
-            { code: "24", desc: "Charges are covered under a capitation agreement/managed care plan." },
-            { code: "26", desc: "Expenses incurred prior to coverage." },
-            { code: "27", desc: "Expenses incurred after coverage terminated." },
-            { code: "29", desc: "The time limit for filing has expired." },
-            { code: "31", desc: "Patient cannot be identified as our insured." },
-            { code: "32", desc: "Our records indicate the patient is not an eligible dependent." },
-            { code: "33", desc: "Insured has no dependent coverage." },
-            { code: "35", desc: "Lifetime benefit maximum has been reached." },
-            { code: "39", desc: "Services denied at the time authorization/pre-certification was requested." },
-            { code: "40", desc: "Charges do not meet qualifications for emergent/urgent care." },
-            { code: "44", desc: "Prompt-pay discount." },
-            { code: "45", desc: "Charge exceeds fee schedule/maximum allowable or contracted/legislated fee arrangement." },
-            { code: "49", desc: "This is a non-covered service because it is a routine/preventive exam or a diagnostic/screening procedure done in conjunction with a routine/preventive exam." },
-            { code: "50", desc: "These are non-covered services because this is not deemed a 'medical necessity' by the payer." },
-            { code: "51", desc: "These are non-covered services because this is a pre-existing condition." },
-            { code: "53", desc: "Services by an immediate relative or a member of the same household are not covered." },
-            { code: "54", desc: "Multiple physicians/assistants are not covered in this case." },
-            { code: "55", desc: "Procedure/treatment/drug is deemed experimental/investigational by the payer." },
-            { code: "56", desc: "Procedure/treatment has not been deemed 'proven to be effective' by the payer." },
-            { code: "58", desc: "Treatment was deemed by the payer to have been rendered in an inappropriate or invalid place of service." },
-            { code: "59", desc: "Processed based on multiple or concurrent procedure rules." },
-            { code: "66", desc: "Blood Deductible." },
-            { code: "69", desc: "Day outlier amount." },
-            { code: "70", desc: "Cost outlier - Adjustment to compensate for additional costs." },
-            { code: "74", desc: "Indirect Medical Education Adjustment." },
-            { code: "75", desc: "Direct Medical Education Adjustment." },
-            { code: "76", desc: "Disproportionate Share Adjustment." },
-            { code: "78", desc: "Non-Covered days/Room charge adjustment." },
-            { code: "85", desc: "Patient Interest Adjustment." },
-            { code: "89", desc: "Professional fees removed from charges." },
-            { code: "90", desc: "Ingredient cost adjustment (pharmaceuticals only)." },
-            { code: "91", desc: "Dispensing fee adjustment." },
-            { code: "94", desc: "Processed in Excess of charges." },
-            { code: "95", desc: "Plan procedures not followed." },
-            { code: "96", desc: "Non-covered charge(s). At least one Remark Code must be provided." },
-            { code: "97", desc: "The benefit for this service is included in the payment/allowance for another service/procedure that has already been adjudicated." },
-            { code: "100", desc: "Payment made to patient/insured/responsible party." },
-            { code: "101", desc: "Predetermination: anticipated payment upon completion of services or claim adjudication." },
-            { code: "102", desc: "Major Medical Adjustment." },
-            { code: "103", desc: "Provider promotional discount (e.g., Senior citizen discount)." },
-            { code: "104", desc: "Managed care withholding." },
-            { code: "105", desc: "Tax withholding." },
-            { code: "107", desc: "The related or qualifying claim/service was not identified on this claim." },
-            { code: "108", desc: "Rent/purchase guidelines were not met." },
-            { code: "109", desc: "Claim/service not covered by this payer/contractor. You must send the claim/service to the correct payer/contractor." },
-            { code: "110", desc: "Billing date predates service date." },
-            { code: "111", desc: "Not covered unless the provider accepts assignment." },
-            { code: "112", desc: "Service not furnished directly to the patient and/or not documented." },
-            { code: "114", desc: "Procedure/product not approved by the Food and Drug Administration." },
-            { code: "115", desc: "Procedure postponed, canceled, or delayed." },
-            { code: "116", desc: "The advance indemnification notice signed by the patient did not comply with requirements." },
-            { code: "117", desc: "Transportation is only covered to the closest facility that can provide the necessary care." },
-            { code: "118", desc: "ESRD network support adjustment." },
-            { code: "119", desc: "Benefit maximum for this time period or occurrence has been reached." },
-            { code: "121", desc: "Indemnification adjustment - compensation for outstanding member responsibility." },
-            { code: "122", desc: "Psychiatric reduction." },
-            { code: "128", desc: "Newborn's services are covered in the mother's Allowance." },
-            { code: "129", desc: "Prior processing information appears incorrect." },
-            { code: "130", desc: "Claim submission fee." },
-            { code: "131", desc: "Claim specific negotiated discount." },
-            { code: "132", desc: "Prearranged demonstration project adjustment." },
-            { code: "134", desc: "Technical fees removed from charges." },
-            { code: "135", desc: "Interim bills cannot be processed." },
-            { code: "136", desc: "Failure to follow prior payer's coverage rules." },
-            { code: "137", desc: "Regulatory Surcharges, Assessments, Allowances or Health Related Taxes." },
-            { code: "139", desc: "Contracted funding agreement - Subscriber is employed by the provider of services." },
-            { code: "140", desc: "Patient/Insured health identification number and name do not match." },
-            { code: "142", desc: "Monthly Medicaid patient liability amount." },
-            { code: "143", desc: "Portion of payment deferred." },
-            { code: "144", desc: "Incentive adjustment, e.g. preferred product/service." },
-            { code: "146", desc: "Diagnosis was invalid for the date(s) of service reported." },
-            { code: "147", desc: "Provider contracted/negotiated rate expired or not on file." },
-            { code: "148", desc: "Information from another provider was not provided or was insufficient/incomplete." },
-            { code: "149", desc: "Lifetime benefit maximum has been reached for this service/benefit category." },
-            { code: "150", desc: "Payer deems the information submitted does not support this level of service." },
-            { code: "151", desc: "Payment adjusted because the payer deems the information submitted does not support this many/frequency of services." },
-            { code: "152", desc: "Payer deems the information submitted does not support this length of service." },
-            { code: "153", desc: "Payer deems the information submitted does not support this dosage." },
-            { code: "154", desc: "Payer deems the information submitted does not support this day's supply." },
-            { code: "155", desc: "Patient refused the service/procedure." },
-            { code: "157", desc: "Service/procedure was provided as a result of an act of war." },
-            { code: "158", desc: "Service/procedure was provided outside of the United States." },
-            { code: "159", desc: "Service/procedure was provided as a result of terrorism." },
-            { code: "160", desc: "Injury/illness was the result of an activity that is a benefit exclusion." },
-            { code: "161", desc: "Provider performance bonus." },
-            { code: "163", desc: "Attachment/other documentation referenced on the claim was not received." },
-            { code: "164", desc: "Attachment/other documentation referenced on the claim was not received in a timely fashion." },
-            { code: "166", desc: "These services were submitted after this payers responsibility for processing claims under this plan ended." },
-            { code: "167", desc: "This (these) diagnosis(es) is (are) not covered." },
-            { code: "169", desc: "Alternate benefit has been provided." },
-            { code: "170", desc: "Payment is denied when performed/billed by this type of provider." },
-            { code: "171", desc: "Payment is denied when performed/billed by this type of provider in this type of facility." },
-            { code: "172", desc: "Payment is adjusted when performed/billed by a provider of this specialty." },
-            { code: "173", desc: "Service/equipment was not prescribed by a physician." },
-            { code: "174", desc: "Service was not prescribed prior to delivery." },
-            { code: "175", desc: "Prescription is incomplete." },
-            { code: "176", desc: "Prescription is not current." },
-            { code: "177", desc: "Patient has not met the required eligibility requirements." },
-            { code: "178", desc: "Patient has not met the required spend down requirements." },
-            { code: "179", desc: "Patient has not met the required waiting requirements." },
-            { code: "180", desc: "Patient has not met the required residency requirements." },
-            { code: "181", desc: "Procedure code was invalid on the date of service." },
-            { code: "182", desc: "Procedure modifier was invalid on the date of service." },
-            { code: "183", desc: "The referring provider is not eligible to refer the service billed." },
-            { code: "184", desc: "The prescribing/ordering provider is not eligible to prescribe/order the service billed." },
-            { code: "185", desc: "The rendering provider is not eligible to perform the service billed." },
-            { code: "186", desc: "Level of care change adjustment." },
-            { code: "187", desc: "Consumer Spending Account payments (includes FSA, HSA, HRA, etc.)" },
-            { code: "188", desc: "This product/procedure is only covered when used according to FDA recommendations." },
-            { code: "189", desc: "'Not otherwise classified' or 'unlisted' procedure code was billed when there is a specific procedure code." },
-            { code: "190", desc: "Payment is included in the allowance for a Skilled Nursing Facility (SNF) qualified stay." },
-            { code: "192", desc: "Non standard adjustment code from paper remittance." },
-            { code: "193", desc: "Original payment decision is being maintained. Upon review, it was determined that this claim was processed properly." },
-            { code: "194", desc: "Anesthesia performed by the operating physician, the assistant surgeon or the attending physician." },
-            { code: "195", desc: "Refund issued to an erroneous priority payer for this claim/service." },
-            { code: "197", desc: "Precertification/authorization/notification/pre-treatment absent." },
-            { code: "198", desc: "Precertification/notification/authorization/pre-treatment exceeded." },
-            { code: "199", desc: "Revenue code and Procedure code do not match." },
-            { code: "200", desc: "Expenses incurred during lapse in coverage." },
-            { code: "201", desc: "Patient is responsible for amount of this claim/service through 'set aside arrangement' or other agreement." },
-            { code: "202", desc: "Non-covered personal comfort or convenience services." },
-            { code: "203", desc: "Discontinued or reduced service." },
-            { code: "204", desc: "This service/equipment/drug is not covered under the patient's current benefit plan." },
-            { code: "205", desc: "Pharmacy discount card processing fee." },
-            { code: "206", desc: "National Provider Identifier - missing." },
-            { code: "207", desc: "National Provider identifier - Invalid format." },
-            { code: "208", desc: "National Provider Identifier - Not matched." },
-            { code: "209", desc: "Per regulatory or other agreement. The provider cannot collect this amount from the patient." },
-            { code: "210", desc: "Payment adjusted because pre-certification/authorization not received in a timely fashion." },
-            { code: "211", desc: "National Drug Codes (NDC) not eligible for rebate, are not covered." },
-            { code: "212", desc: "Administrative surcharges are not covered." },
-            { code: "213", desc: "Non-compliance with the physician self referral prohibition legislation or payer policy." },
-            { code: "215", desc: "Based on subrogation of a third party settlement." },
-            { code: "216", desc: "Based on the findings of a review organization or the payer's findings." },
-            { code: "219", desc: "Based on extent of injury." },
-            { code: "222", desc: "Exceeds the contracted maximum number of hours/days/units by this provider for this period." },
-            { code: "223", desc: "Adjustment code for mandated federal, state or local law/regulation." },
-            { code: "224", desc: "Patient identification compromised by identity theft. Identity verification required." },
-            { code: "225", desc: "Penalty or Interest Payment by Payer." },
-            { code: "226", desc: "Information requested from the Billing/Rendering Provider was not provided or not provided timely." },
-            { code: "227", desc: "Information requested from the patient/insured/responsible party was not provided." },
-            { code: "228", desc: "Denied for failure of this provider, another provider or the subscriber to supply requested information." },
-            { code: "231", desc: "Mutually exclusive procedures cannot be done in the same day/setting." },
-            { code: "232", desc: "Institutional Transfer Amount." },
-            { code: "233", desc: "Services/charges related to the treatment of a hospital-acquired condition or preventable medical error." },
-            { code: "234", desc: "This procedure is not paid separately." },
-            { code: "235", desc: "Sales Tax." },
-            { code: "236", desc: "This procedure or procedure/modifier combination is not compatible with another procedure provided on the same day." },
-            { code: "237", desc: "Legislated/Regulatory Penalty." },
-            { code: "238", desc: "Claim spans eligible and ineligible periods of coverage, this is the reduction for the ineligible period." },
-            { code: "239", desc: "Claim spans eligible and ineligible periods of coverage. Rebill separate claims." },
-            { code: "240", desc: "The diagnosis is inconsistent with the patient's birth weight." },
-            { code: "241", desc: "Low Income Subsidy (LIS) Co-payment Amount." },
-            { code: "242", desc: "Services not provided by network/primary care providers." },
-            { code: "243", desc: "Services not authorized by network/primary care providers." },
-            { code: "245", desc: "Provider performance program withhold." },
-            { code: "246", desc: "This non-payable code is for required reporting only." },
-            { code: "249", desc: "This claim has been identified as a readmission." },
-            { code: "250", desc: "The attachment/other documentation that was received was the incorrect attachment/document." },
-            { code: "251", desc: "The attachment/other documentation that was received was incomplete or deficient." },
-            { code: "252", desc: "An attachment/other documentation is required to adjudicate this claim/service." },
-            { code: "253", desc: "Sequestration - reduction in federal payment." },
-            { code: "256", desc: "Service not payable per managed care contract." },
-            { code: "257", desc: "The disposition of the claim/service is undetermined during the premium payment grace period." },
-            { code: "258", desc: "Claim/service not covered when patient is in custody/incarcerated." },
-            { code: "261", desc: "The procedure or service is inconsistent with the patient's history." },
-            { code: "269", desc: "Anesthesia not covered for this service/procedure." },
-            { code: "272", desc: "Coverage/program guidelines were not met." },
-            { code: "273", desc: "Coverage/program guidelines were exceeded." },
-            { code: "275", desc: "Prior payer's patient responsibility (deductible, coinsurance, co-payment) not covered." },
-            { code: "276", desc: "Services denied by the prior payer(s) are not covered by this payer." },
-            { code: "278", desc: "Performance program proficiency requirements not met." },
-            { code: "279", desc: "Services not provided by Preferred network providers." },
-            { code: "281", desc: "Deductible waived per contractual agreement." },
-            { code: "282", desc: "The procedure/revenue code is inconsistent with the type of bill." },
-            { code: "283", desc: "Attending provider is not eligible to provide direction of care." },
-            { code: "284", desc: "Precertification/authorization number may be valid but does not apply to the billed services." },
-            { code: "285", desc: "Appeal procedures not followed." },
-            { code: "286", desc: "Appeal time limits not met." },
-            { code: "287", desc: "Referral exceeded." },
-            { code: "288", desc: "Referral absent." },
-            { code: "296", desc: "Precertification/authorization number may be valid but does not apply to the provider." },
-            { code: "299", desc: "The billing provider is not eligible to receive payment for the service billed." },
-            { code: "302", desc: "Precertification/notification/authorization/pre-treatment time limit has expired." },
-            { code: "A1", desc: "Claim/Service denied. At least one Remark Code must be provided." },
-            { code: "A5", desc: "Medicare Claim PPS Capital Cost Outlier Amount." },
-            { code: "A6", desc: "Prior hospitalization or 30 day transfer requirement not met." },
-            { code: "A8", desc: "Ungroupable DRG." },
-            { code: "B1", desc: "Non-covered visits." },
-            { code: "B4", desc: "Late filing penalty." },
-            { code: "B7", desc: "This provider was not certified/eligible to be paid for this procedure/service on this date of service." },
-            { code: "B8", desc: "Alternative services were available, and should have been utilized." },
-            { code: "B9", desc: "Patient is enrolled in a Hospice." },
-            { code: "B10", desc: "Allowed amount has been reduced because a component of the basic procedure/test was paid." },
-            { code: "B11", desc: "The claim/service has been transferred to the proper payer/processor for processing." },
-            { code: "B12", desc: "Services not documented in patient's medical records." },
-            { code: "B13", desc: "Previously paid. Payment for this claim/service may have been provided in a previous payment." },
-            { code: "B14", desc: "Only one visit or consultation per physician per day is covered." },
-            { code: "B15", desc: "This service/procedure requires that a qualifying service/procedure be received and covered." },
-            { code: "B16", desc: "'New Patient' qualifications were not met." },
-            { code: "B20", desc: "Procedure/service was partially or fully furnished by another provider." },
-            { code: "B22", desc: "This payment is adjusted based on the diagnosis." },
-            { code: "B23", desc: "Procedure billed is not authorized per your Clinical Laboratory Improvement Amendment (CLIA) proficiency test." },
-            { code: "CO", desc: "Contractual Obligations - Amount for which the provider is financially liable." },
-            { code: "CR", desc: "Corrections and Reversals - Used to reverse or correct a previous claim." },
-            { code: "OA", desc: "Other Adjustments - Reasons not defined by other group codes." },
-            { code: "PI", desc: "Payer Initiated Reductions - Payer believes the provider should be held liable." },
-            { code: "PR", desc: "Patient Responsibility - Amounts the patient must pay (deductible, coinsurance, etc.)." }
-        ];
-
-        const rarcCodes = [
-            { code: "M1", desc: "X-ray not taken within the past 12 months or near enough to the start of treatment." },
-            { code: "M2", desc: "Not paid separately when the patient is an inpatient." },
-            { code: "M3", desc: "Equipment is the same or similar to equipment already being used." },
-            { code: "M15", desc: "Separately billed services/tests have been bundled as they are considered components of the same procedure. Separate payment is not allowed." },
-            { code: "M16", desc: "Please see our web site, mailings, or bulletins for more details concerning this policy/procedure/decision." },
-            { code: "M19", desc: "Missing oxygen certification/re-certification." },
-            { code: "M20", desc: "Missing/incomplete/invalid HCPCS." },
-            { code: "M21", desc: "Missing/incomplete/invalid place of residence for this service/item provided in a home." },
-            { code: "M22", desc: "Missing/incomplete/invalid number of miles traveled." },
-            { code: "M23", desc: "Missing invoice." },
-            { code: "M25", desc: "The information furnished does not substantiate the need for this level of service." },
-            { code: "M29", desc: "Missing operative note/report." },
-            { code: "M30", desc: "Missing pathology report." },
-            { code: "M31", desc: "Missing radiology report." },
-            { code: "M60", desc: "Missing Certificate of Medical Necessity." },
-            { code: "M76", desc: "Missing/incomplete/invalid diagnosis or condition." },
-            { code: "M77", desc: "Missing/incomplete/invalid/inappropriate place of service." },
-            { code: "M79", desc: "Missing/incomplete/invalid charge." },
-            { code: "M80", desc: "Not covered when performed during the same session/date as a previously processed service for the patient." },
-            { code: "M81", desc: "You are required to code to the highest level of specificity." },
-            { code: "M86", desc: "Service denied because payment already made for same/similar procedure within set time frame." },
-            { code: "MA01", desc: "If you do not agree with what we approved for these services, you may appeal our decision." },
-            { code: "MA02", desc: "If you do not agree with this determination, you have the right to appeal within 180 days." },
-            { code: "MA04", desc: "Secondary payment cannot be considered without the identity of or payment information from the primary payer." },
-            { code: "MA07", desc: "The claim information has also been forwarded to Medicaid for review." },
-            { code: "MA10", desc: "The patient's payment was in excess of the amount owed. You must refund the overpayment to the patient." },
-            { code: "MA13", desc: "You may be subject to penalties if you bill the patient for amounts not reported with the PR group code." },
-            { code: "MA18", desc: "The claim information is also being forwarded to the patient's supplemental insurer." },
-            { code: "MA27", desc: "Missing/incomplete/invalid entitlement number or name shown on the claim." },
-            { code: "MA36", desc: "Missing/incomplete/invalid patient name." },
-            { code: "MA37", desc: "Missing/incomplete/invalid patient's address." },
-            { code: "MA39", desc: "Missing/incomplete/invalid gender." },
-            { code: "MA40", desc: "Missing/incomplete/invalid admission date." },
-            { code: "MA61", desc: "Missing/incomplete/invalid social security number." },
-            { code: "MA63", desc: "Missing/incomplete/invalid principal diagnosis." },
-            { code: "MA130", desc: "Your claim contains incomplete and/or invalid information, and no appeal rights are afforded because the claim is unprocessable." },
-            { code: "N1", desc: "You may appeal this decision in writing within the required time limits." },
-            { code: "N4", desc: "Missing/Incomplete/Invalid prior Insurance Carrier(s) EOB." },
-            { code: "N10", desc: "Adjustment based on the findings of a review organization/professional consult." },
-            { code: "N15", desc: "Services for a newborn must be billed separately." },
-            { code: "N19", desc: "Procedure code incidental to primary procedure." },
-            { code: "N20", desc: "Service not payable with other service rendered on the same date." },
-            { code: "N22", desc: "This procedure code was added/changed because it more accurately describes the services rendered." },
-            { code: "N26", desc: "Missing itemized bill/statement." },
-            { code: "N30", desc: "Patient ineligible for this service." },
-            { code: "N31", desc: "Missing/incomplete/invalid prescribing provider identifier." },
-            { code: "N32", desc: "Claim must be submitted by the provider who rendered the service." },
-            { code: "N34", desc: "Incorrect claim form/format for this service." },
-            { code: "N35", desc: "Program integrity/utilization review decision." },
-            { code: "N36", desc: "Claim must meet primary payer's processing requirements before we can consider payment." },
-            { code: "N50", desc: "Missing/incomplete/invalid discharge information." },
-            { code: "N52", desc: "Patient not enrolled in the billing provider's managed care plan on the date of service." },
-            { code: "N54", desc: "Claim information is inconsistent with pre-certified/authorized services." },
-            { code: "N56", desc: "Procedure code billed is not correct/valid for the services billed or the date of service billed." },
-            { code: "N69", desc: "PPS (Prospective Payment System) code changed by claims processing system." },
-            { code: "N70", desc: "Consolidated billing and payment applies." },
-            { code: "N95", desc: "This provider type/provider specialty may not bill this service." },
-            { code: "N115", desc: "This decision was based on a National Coverage Determination (NCD)." },
-            { code: "N130", desc: "Consult applicable regulatory/state agency." },
-            { code: "N211", desc: "Alert: You may not appeal this decision." },
-            { code: "N362", desc: "The number of days or units of service exceeds our acceptable maximum." },
-            { code: "N381", desc: "Alert: Consult our website or contact provider relations for more information." },
-            { code: "N432", desc: "Alert: Adjustment based on a Recovery Audit Contractor (RAC) claim adjustment." },
-            { code: "N479", desc: "Missing/incomplete/invalid documentation or prior authorization." },
-            { code: "N517", desc: "Payment adjusted based on administrative cost savings agreement." }
-        ];
-
         let allCodes = [];
         let filteredCodes = [];
         let currentFilter = 'all';
+        let displayedCount = 0;
+        const PAGE_SIZE = 30;
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -675,15 +440,20 @@
                 ...carcCodes.map(c => ({ ...c, type: 'CARC' })),
                 ...rarcCodes.map(c => ({ ...c, type: 'RARC' }))
             ];
+
             filteredCodes = [...allCodes];
+            displayedCount = 0;
 
-            renderResults(allCodes.slice(0, 20));
-            document.getElementById('resultsCount').textContent =
-                `Showing 20 of ${allCodes.length} codes. Search to find specific codes.`;
+            updateResultsCount();
+            loadMoreResults();
 
-            // Search input handler
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', debounce(handleSearch, 200));
+            // Search on Enter
+            document.getElementById('searchInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleSearch();
+            });
+
+            // Live search with debounce
+            document.getElementById('searchInput').addEventListener('input', debounce(handleSearch, 300));
 
             // Toggle buttons
             document.querySelectorAll('.toggle-btn').forEach(btn => {
@@ -715,48 +485,78 @@
             }
 
             filteredCodes = results;
+            displayedCount = 0;
+            document.getElementById('results').innerHTML = '';
 
             if (results.length === 0) {
                 renderNoResults(query);
             } else {
-                renderResults(results.slice(0, 50));
-                document.getElementById('resultsCount').textContent =
-                    results.length > 50
-                        ? `Showing 50 of ${results.length} matches. Refine your search for more specific results.`
-                        : `Found ${results.length} matching code${results.length !== 1 ? 's' : ''}.`;
+                loadMoreResults();
+            }
+
+            updateResultsCount();
+        }
+
+        function loadMoreResults() {
+            const container = document.getElementById('results');
+            const nextBatch = filteredCodes.slice(displayedCount, displayedCount + PAGE_SIZE);
+
+            nextBatch.forEach(code => {
+                const card = document.createElement('div');
+                card.className = `code-card ${code.type.toLowerCase()}`;
+                card.innerHTML = `
+                    <span class="code-badge">${escapeHtml(code.code)}</span>
+                    <div class="code-info">
+                        <div class="code-type">${code.type}</div>
+                        <div class="code-desc">${escapeHtml(code.desc)}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            displayedCount += nextBatch.length;
+
+            // Show/hide load more button
+            const loadMoreBtn = document.getElementById('loadMore');
+            if (displayedCount < filteredCodes.length) {
+                loadMoreBtn.style.display = 'block';
+            } else {
+                loadMoreBtn.style.display = 'none';
             }
         }
 
-        function renderResults(codes) {
-            const container = document.getElementById('results');
-            container.innerHTML = codes.map(code => `
-                <div class="code-card">
-                    <div class="code-header">
-                        <span class="code-badge ${code.type.toLowerCase()}">${code.code}</span>
-                        <span class="code-type-label">${code.type}</span>
-                    </div>
-                    <div class="code-description">${code.desc}</div>
-                </div>
-            `).join('');
+        function updateResultsCount() {
+            const countEl = document.getElementById('resultsCount');
+            const query = document.getElementById('searchInput').value.trim();
+
+            if (query) {
+                countEl.innerHTML = `Found <strong>${filteredCodes.length}</strong> matching codes`;
+            } else if (currentFilter !== 'all') {
+                countEl.innerHTML = `Showing <strong>${filteredCodes.length}</strong> ${currentFilter.toUpperCase()} codes`;
+            } else {
+                countEl.innerHTML = `<strong>${allCodes.length}</strong> total codes available`;
+            }
         }
 
         function renderNoResults(query) {
             document.getElementById('results').innerHTML = `
                 <div class="no-results">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.35-4.35"></path>
-                    </svg>
-                    <h3>No codes found for "${query}"</h3>
-                    <p>Try searching by code number or keyword like "authorization", "eligibility", or "denial".</p>
+                    <h3>No codes found for "${escapeHtml(query)}"</h3>
+                    <p>Try searching by code number (16, 45, MA01) or keyword (authorization, eligibility, denial)</p>
                 </div>
             `;
-            document.getElementById('resultsCount').textContent = '';
+            document.getElementById('loadMore').style.display = 'none';
         }
 
         function quickSearch(term) {
             document.getElementById('searchInput').value = term;
             handleSearch();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         function debounce(func, wait) {
