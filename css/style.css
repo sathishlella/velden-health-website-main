@@ -2817,6 +2817,7 @@ h4 {
     gap: 0;
     box-shadow: 0 10px 40px rgba(0, 31, 63, 0.15);
     border-bottom: 1px solid rgba(0, 196, 180, 0.1);
+    z-index: 999;
 
     /* Initial hidden state */
     max-height: 0;
@@ -2825,10 +2826,11 @@ h4 {
     transform: translateY(-20px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
+    overflow-y: auto;
   }
 
   .nav-links.open {
-    max-height: 500px;
+    max-height: calc(100vh - 70px);
     opacity: 1;
     transform: translateY(0);
     pointer-events: all;
