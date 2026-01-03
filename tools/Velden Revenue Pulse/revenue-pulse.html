@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Revenue Pulse | Velden Health</title>
+    <link rel="icon" type="image/png" href="https://www.veldenhealth.com/brand-icon-96.png?v=2026" sizes="96x96" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Free Revenue Pulse analysis for behavioral health clinics. Answer 20 questions to discover hidden revenue opportunities." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .assessment-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+        }
+
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .question-hint {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--color-bg-alt);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+
+        .option-btn:hover {
+            border-color: var(--color-primary);
+            background: rgba(0, 196, 180, 0.05);
+        }
+
+        .option-btn.selected {
+            border-color: var(--color-primary);
+            background: rgba(0, 196, 180, 0.1);
+        }
+
+        .option-btn .radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-btn.selected .radio {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+        }
+
+        .option-btn.selected .radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--color-border);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        /* Results Section */
+        .results-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 4rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            margin: 1rem 0;
+        }
+
+        .score-display.green {
+            color: #059669;
+        }
+
+        .score-display.yellow {
+            color: #d97706;
+        }
+
+        .score-display.red {
+            color: #dc2626;
+        }
+
+        .score-label {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .breakdown-item {
+            background: var(--color-bg-secondary);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .breakdown-label {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .breakdown-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        /* Email Gate */
+        .email-gate {
+            background: linear-gradient(135deg, rgba(0, 196, 180, 0.1) 0%, rgba(0, 31, 63, 0.05) 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .email-gate h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .email-form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .email-form input {
+            padding: 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .email-form input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Category indicator */
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--color-primary-light);
+            color: var(--color-primary-dark);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 999px;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="../../index.html" class="logo-area">
+                <svg viewBox="0 0 900 250" style="height: 75px; width: auto;" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(20, 60)">
+                        <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
+                        <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
+                        <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
+                        <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
+                    </g>
+                    <text x="200" y="175" font-family="Montserrat, sans-serif" font-weight="800" font-size="60"
+                        fill="#001F3F" letter-spacing="3">VELDEN HEALTH</text>
+                    <text x="215" y="205" font-family="Montserrat, sans-serif" font-weight="500" font-size="24"
+                        fill="#5A6B7C" letter-spacing="6.5">REVENUE CYCLE MANAGEMENT</text>
+                </svg>
+            </a>
+            <nav class="main-nav">
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="nav-cta-wrapper">
+                    <ul class="nav-links" id="navLinks">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../behavioral-health.html">Behavioral Health</a></li>
+                        <li><a href="../../services.html">Services</a></li>
+                        <li><a href="../../process.html">Process</a></li>
+                        <li><a href="../../pricing.html">Pricing</a></li>
+                        <li><a href="../../results.html">Results</a></li>
+                        <li><a href="../../about.html">About</a></li>
+                        <li><a href="../../resources/denial-glossary.html">Resources</a></li>
+                        <li class="nav-dropdown">
+                            <a href="#" class="dropdown-toggle">Tools <svg width="12" height="12" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../assessment.html">Practice Assessment</a></li>
+                                <li><a href="revenue-pulse.html">Revenue Pulse</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a href="../../contact.html" class="btn btn-primary">Start Pilot</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" style="padding-top: 3rem;">
+            <div class="assessment-container">
+
+                <!-- Practice Info Section -->
+                <div id="practice-info-section" class="results-card" style="margin-bottom: 2rem; text-align: left;">
+                    <span class="hero-subtitle" style="display: block; text-align: center;">Revenue Pulse Audit</span>
+                    <h1
+                        style="font-size: 2rem; margin: 1rem 0; font-family: 'Montserrat', sans-serif; font-weight: 800; text-align: center;">
+                        20-Question RCM Health Check
+                    </h1>
+                    <p
+                        style="color: var(--color-text-muted); font-size: 1.1rem; margin-bottom: 2rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Answer questions about your practice's revenue cycle across 5 key areas. Get personalized
+                        recommendations in about 5 minutes.
+                    </p>
+
+                    <div style="max-width: 500px; margin: 0 auto;">
+                        <div style="display: grid; gap: 1rem;">
+                            <div>
+                                <label
+                                    style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Practice
+                                    Name</label>
+                                <input type="text" id="practiceName" placeholder="e.g., Sunrise Behavioral Health"
+                                    style="width: 100%; padding: 0.75rem 1rem; border: 2px solid var(--color-border); border-radius: 8px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label
+                                    style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Contact
+                                    Person</label>
+                                <input type="text" id="contactPerson" placeholder="Your name"
+                                    style="width: 100%; padding: 0.75rem 1rem; border: 2px solid var(--color-border); border-radius: 8px; font-size: 1rem;">
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button onclick="startAssessment()" class="btn btn-primary btn-large">Start Revenue Pulse
+                                Audit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div id="progress-section" class="hidden">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Questions -->
+                <div id="questions-section" class="hidden"></div>
+
+                <!-- Email Gate -->
+                <div id="email-section" class="hidden">
+                    <div class="email-gate">
+                        <h3>Your Audit is Complete!</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 2rem;">
+                            Enter your email to see your personalized Revenue Pulse score and recovery recommendations.
+                        </p>
+                        <form class="email-form" onsubmit="showResults(event)">
+                            <input type="email" id="userEmail" placeholder="Email Address" required>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">See My Results</button>
+                        </form>
+                        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1rem;">
+                            We'll send your results to this email and never spam you.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="results-section" class="hidden">
+                    <div class="results-card">
+                        <span class="hero-subtitle">Your Revenue Pulse Score</span>
+                        <div class="score-display" id="totalScore">--</div>
+                        <div class="score-label" id="scoreLabel">Calculating...</div>
+
+                        <div class="score-breakdown">
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Tech & Ownership</div>
+                                <div class="breakdown-value" id="pillar1Score">--</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Intake & Eligibility</div>
+                                <div class="breakdown-value" id="pillar2Score">--</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Claims & Posting</div>
+                                <div class="breakdown-value" id="pillar3Score">--</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">A/R & Denials</div>
+                                <div class="breakdown-value" id="pillar4Score">--</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Reporting & Compliance</div>
+                                <div class="breakdown-value" id="pillar5Score">--</div>
+                            </div>
+                        </div>
+
+                        <div id="recommendations"
+                            style="text-align: left; margin: 2rem 0; padding: 1.5rem; background: rgba(0, 196, 180, 0.05); border-radius: 12px;">
+                            <h4 style="margin: 0 0 1rem 0; color: var(--color-text);">Recovery Opportunities:</h4>
+                            <ul id="recList"
+                                style="margin: 0; padding-left: 1.5rem; color: var(--color-text-muted); line-height: 1.8;">
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <p style="font-size: 1.1rem; margin-bottom: 1rem; font-weight: 600;">
+                                Ready to recover your aged A/R?
+                            </p>
+                            <a href="../../contact.html" class="btn btn-primary btn-large">Start Your Free 20-Claim
+                                Pilot</a>
+                            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-muted);">
+                                Or <a href="https://calendly.com/sathish-veldenhealth/30min" target="_blank"
+                                    style="color: var(--color-primary);">schedule a call</a> to discuss your results
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="grid-4">
+                <div>
+                    <div class="logo-area" style="margin-bottom:1rem;">
+                        <div class="logo-mark" style="width:32px; height:32px;">
+                            <svg role="img" aria-label="Velden Health Logo" viewBox="0 0 152 160" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0" y="96" width="32" height="64" fill="#001F3F" rx="16" />
+                                <rect x="40" y="64" width="32" height="96" fill="#001F3F" rx="16" />
+                                <rect x="80" y="32" width="32" height="128" fill="#001F3F" rx="16" />
+                                <rect x="120" y="0" width="32" height="160" fill="#00C4B4" rx="16" />
+                            </svg>
+                        </div>
+                        <span style="font-weight:700;">Velden Health</span>
+                    </div>
+                    <p style="font-size:0.9rem; color:var(--color-text-muted);">Specialized A/R recovery and denial
+                        management for Illinois behavioral health clinics.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:1rem;">Services</h4>
+                    <div class="footer-links"><a href="../../services.html">Medical Billing</a><a
+                            href="../../services.html">AR Recovery</a><a href="../../services.html">Denial
+                            Management</a></div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:1rem;">Company</h4>
+                    <div class="footer-links"><a href="../../about.html">About Us</a><a href="../../results.html">Case
+                            Studies</a><a href="../../privacy.html">Privacy</a></div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:1rem;">Contact</h4>
+                    <div
+                        style="display: flex; flex-direction: column; gap: 0.75rem; color: var(--color-text-muted); font-size: 0.9rem;">
+                        <a href="mailto:info@veldenhealth.com" style="color: inherit;">info@veldenhealth.com</a>
+                        <a href="tel:+13129256457" style="color: inherit;">+1 (312) 925-6457</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                style="text-align:center; margin-top:2rem; padding-top:2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size:0.85rem; color:var(--color-text-light);">
+                &copy;
+                <script>document.write(new Date().getFullYear())</script> Velden Health LLC. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Questions data - 20 questions across 5 pillars
+        const questions = [
+            // Pillar 1: Tech & Ownership (Q1-4)
+            {
+                id: 'q1', pillar: 'Tech & Ownership', category: 'Tech & Ownership',
+                q: 'What is your primary EMR/EHR and clearinghouse setup?',
+                hint: 'Look for integrated behavioral health systems vs. manual processes.',
+                options: [
+                    { text: 'Behavioral EMR + integrated clearinghouse', score: 2 },
+                    { text: 'Behavioral EMR, partial/manual clearinghouse', score: 1 },
+                    { text: 'No proper EMR or no clearinghouse', score: 0 }
+                ]
+            },
+            {
+                id: 'q2', pillar: 'Tech & Ownership', category: 'Tech & Ownership',
+                q: 'Who owns billing and RCM at your practice?',
+                hint: 'Clear ownership = better accountability.',
+                options: [
+                    { text: 'Dedicated billing manager or outsourced partner', score: 2 },
+                    { text: 'Owner/clinician handles it part-time', score: 1 },
+                    { text: 'No clear owner / handled ad-hoc', score: 0 }
+                ]
+            },
+            {
+                id: 'q3', pillar: 'Tech & Ownership', category: 'Tech & Ownership',
+                q: 'Do you have documented billing SOPs?',
+                hint: 'SOPs reduce errors and improve consistency.',
+                options: [
+                    { text: 'Yes, documented and followed', score: 2 },
+                    { text: 'Informal / in someone\'s head', score: 1 },
+                    { text: 'No SOPs exist', score: 0 }
+                ]
+            },
+            {
+                id: 'q4', pillar: 'Tech & Ownership', category: 'Tech & Ownership',
+                q: 'How quickly are charges entered after sessions?',
+                hint: 'Same-day entry maximizes clean claims.',
+                options: [
+                    { text: 'Same day or next day', score: 2 },
+                    { text: 'Within a week', score: 1 },
+                    { text: 'More than a week / batch entry', score: 0 }
+                ]
+            },
+
+            // Pillar 2: Intake & Eligibility (Q5-8)
+            {
+                id: 'q5', pillar: 'Intake & Eligibility', category: 'Intake & Eligibility',
+                q: 'Is eligibility verified before every appointment?',
+                hint: 'Prevents authorization-related denials.',
+                options: [
+                    { text: 'Yes, always verified in advance', score: 2 },
+                    { text: 'Usually, but sometimes missed', score: 1 },
+                    { text: 'Rarely or never', score: 0 }
+                ]
+            },
+            {
+                id: 'q6', pillar: 'Intake & Eligibility', category: 'Intake & Eligibility',
+                q: 'Are benefits fully verified (copay, deductible, auth)?',
+                hint: 'Incomplete verification = surprise denials.',
+                options: [
+                    { text: 'Full benefits verified every time', score: 2 },
+                    { text: 'Basic eligibility only', score: 1 },
+                    { text: 'Not consistently done', score: 0 }
+                ]
+            },
+            {
+                id: 'q7', pillar: 'Intake & Eligibility', category: 'Intake & Eligibility',
+                q: 'Where are eligibility notes stored?',
+                hint: 'Centralized notes reduce repeated work.',
+                options: [
+                    { text: 'In the EMR/PM system', score: 2 },
+                    { text: 'Spreadsheets or scattered notes', score: 1 },
+                    { text: 'Not documented anywhere', score: 0 }
+                ]
+            },
+            {
+                id: 'q8', pillar: 'Intake & Eligibility', category: 'Intake & Eligibility',
+                q: 'What % of denials are eligibility-related?',
+                hint: 'High rate = intake process issues.',
+                options: [
+                    { text: 'Less than 5%', score: 2 },
+                    { text: '5-15%', score: 1 },
+                    { text: 'Over 15% or unknown', score: 0 }
+                ]
+            },
+
+            // Pillar 3: Claims & Posting (Q9-12)
+            {
+                id: 'q9', pillar: 'Claims & Posting', category: 'Claims & Posting',
+                q: 'How often are claims submitted?',
+                hint: 'Daily submission = faster payment.',
+                options: [
+                    { text: 'Daily or same-day', score: 2 },
+                    { text: 'Weekly batches', score: 1 },
+                    { text: 'Less than weekly', score: 0 }
+                ]
+            },
+            {
+                id: 'q10', pillar: 'Claims & Posting', category: 'Claims & Posting',
+                q: 'Are clearinghouse rejections reviewed daily?',
+                hint: 'Quick fixes prevent aged claims.',
+                options: [
+                    { text: 'Yes, same day or next day', score: 2 },
+                    { text: 'Weekly review', score: 1 },
+                    { text: 'Not monitored consistently', score: 0 }
+                ]
+            },
+            {
+                id: 'q11', pillar: 'Claims & Posting', category: 'Claims & Posting',
+                q: 'How quickly are ERA/EOBs posted?',
+                hint: 'Delayed posting = inaccurate A/R.',
+                options: [
+                    { text: 'Within 1-2 days', score: 2 },
+                    { text: 'Within a week', score: 1 },
+                    { text: 'Longer than a week', score: 0 }
+                ]
+            },
+            {
+                id: 'q12', pillar: 'Claims & Posting', category: 'Claims & Posting',
+                q: 'How are patient balances collected?',
+                hint: 'Proactive collection = better cash flow.',
+                options: [
+                    { text: 'Automated statements + follow-up', score: 2 },
+                    { text: 'Manual statements only', score: 1 },
+                    { text: 'No systematic collection', score: 0 }
+                ]
+            },
+
+            // Pillar 4: A/R & Denials (Q13-16)
+            {
+                id: 'q13', pillar: 'A/R & Denials', category: 'A/R & Denials',
+                q: 'How often is the A/R aging report reviewed?',
+                hint: 'Weekly review catches issues early.',
+                options: [
+                    { text: 'Weekly', score: 2 },
+                    { text: 'Monthly', score: 1 },
+                    { text: 'Rarely or never', score: 0 }
+                ]
+            },
+            {
+                id: 'q14', pillar: 'A/R & Denials', category: 'A/R & Denials',
+                q: 'Who is responsible for A/R follow-up?',
+                hint: 'Clear ownership = better recovery.',
+                options: [
+                    { text: 'Dedicated staff or outsourced', score: 2 },
+                    { text: 'Done when time allows', score: 1 },
+                    { text: 'No one owns this', score: 0 }
+                ]
+            },
+            {
+                id: 'q15', pillar: 'A/R & Denials', category: 'A/R & Denials',
+                q: 'Do you track denial reasons?',
+                hint: 'Tracking enables root cause fixes.',
+                options: [
+                    { text: 'Yes, with categories and trends', score: 2 },
+                    { text: 'Some tracking, not systematic', score: 1 },
+                    { text: 'No denial tracking', score: 0 }
+                ]
+            },
+            {
+                id: 'q16', pillar: 'A/R & Denials', category: 'A/R & Denials',
+                q: 'How quickly are denials corrected and resubmitted?',
+                hint: 'Speed matters for timely filing.',
+                options: [
+                    { text: 'Within 48-72 hours', score: 2 },
+                    { text: 'Within a week', score: 1 },
+                    { text: 'Longer or not at all', score: 0 }
+                ]
+            },
+
+            // Pillar 5: Reporting & Compliance (Q17-20)
+            {
+                id: 'q17', pillar: 'Reporting & Compliance', category: 'Reporting & Compliance',
+                q: 'Are monthly RCM reports reviewed?',
+                hint: 'Data-driven management improves results.',
+                options: [
+                    { text: 'Yes, monthly with owner/manager', score: 2 },
+                    { text: 'Sometimes / ad hoc', score: 1 },
+                    { text: 'Almost never', score: 0 }
+                ]
+            },
+            {
+                id: 'q18', pillar: 'Reporting & Compliance', category: 'Reporting & Compliance',
+                q: 'Are KPIs tracked (collections, denial rate, days in A/R)?',
+                hint: 'KPIs provide visibility into performance.',
+                options: [
+                    { text: '3+ KPIs tracked consistently', score: 2 },
+                    { text: '1-2 KPIs or inconsistent', score: 1 },
+                    { text: 'No RCM KPIs tracked', score: 0 }
+                ]
+            },
+            {
+                id: 'q19', pillar: 'Reporting & Compliance', category: 'Reporting & Compliance',
+                q: 'Are HIPAA-ready tools and staff training in place?',
+                hint: 'Compliance protects your practice.',
+                options: [
+                    { text: 'Yes: secure tools + NDAs + training', score: 2 },
+                    { text: 'Partially / informal', score: 1 },
+                    { text: 'No real compliance discipline', score: 0 }
+                ]
+            },
+            {
+                id: 'q20', pillar: 'Reporting & Compliance', category: 'Reporting & Compliance',
+                q: 'Do you regularly improve processes based on data?',
+                hint: 'Continuous improvement drives results.',
+                options: [
+                    { text: 'Yes, regularly improve based on data', score: 2 },
+                    { text: 'Occasionally adjust, not systematic', score: 1 },
+                    { text: 'Mostly reactive / no structured improvement', score: 0 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        const answers = {};
+        const totalQuestions = questions.length;
+
+        function startAssessment() {
+            document.getElementById('practice-info-section').classList.add('hidden');
+            document.getElementById('progress-section').classList.remove('hidden');
+            document.getElementById('questions-section').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const container = document.getElementById('questions-section');
+
+            container.innerHTML = `
+                <div class="question-card" id="currentQuestion">
+                    <span class="category-badge">${q.category}</span>
+                    <div class="question-number">Question ${currentQuestion + 1} of ${totalQuestions}</div>
+                    <div class="question-text">${q.q}</div>
+                    ${q.hint ? `<div class="question-hint">${q.hint}</div>` : ''}
+                    <div class="options-grid">
+                        ${q.options.map((opt, i) => `
+                            <button class="option-btn ${answers[q.id] === i ? 'selected' : ''}" data-value="${opt.score}" data-index="${i}" onclick="selectOption(this, '${q.id}', ${i}, ${opt.score})">
+                                <span class="radio"></span>
+                                <span>${opt.text}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div class="nav-buttons">
+                        <button id="prevBtn" class="btn btn-secondary ${currentQuestion === 0 ? 'hidden' : ''}" onclick="prevQuestion()">← Previous</button>
+                        <button id="nextBtn" class="btn btn-primary" onclick="nextQuestion()" ${answers[q.id] === undefined ? 'disabled' : ''}>${currentQuestion === totalQuestions - 1 ? 'See Results' : 'Next →'}</button>
+                    </div>
+                </div>
+            `;
+
+            updateProgress();
+        }
+
+        function selectOption(btn, qId, index, score) {
+            const card = btn.closest('.question-card');
+            card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            answers[qId] = index;
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                // Show email gate
+                document.getElementById('questions-section').classList.add('hidden');
+                document.getElementById('progress-section').classList.add('hidden');
+                document.getElementById('email-section').classList.remove('hidden');
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showResults(e) {
+            e.preventDefault();
+            const email = document.getElementById('userEmail').value;
+            const practiceName = document.getElementById('practiceName').value || 'Practice';
+            const contactPerson = document.getElementById('contactPerson').value || 'User';
+
+            // Calculate scores
+            let totalScore = 0;
+            const pillarScores = {
+                'Tech & Ownership': 0,
+                'Intake & Eligibility': 0,
+                'Claims & Posting': 0,
+                'A/R & Denials': 0,
+                'Reporting & Compliance': 0
+            };
+
+            questions.forEach((q, i) => {
+                const answerIndex = answers[q.id];
+                if (answerIndex !== undefined) {
+                    const score = q.options[answerIndex].score;
+                    totalScore += score;
+                    pillarScores[q.pillar] += score;
+                }
+            });
+
+            const maxScore = 40; // 20 questions * 2 max
+            const percentage = Math.round((totalScore / maxScore) * 100);
+
+            // Display scores
+            const scoreEl = document.getElementById('totalScore');
+            scoreEl.textContent = percentage + '%';
+            scoreEl.classList.remove('green', 'yellow', 'red');
+            if (percentage >= 75) {
+                scoreEl.classList.add('green');
+                document.getElementById('scoreLabel').textContent = 'Excellent! Your revenue cycle is healthy.';
+            } else if (percentage >= 50) {
+                scoreEl.classList.add('yellow');
+                document.getElementById('scoreLabel').textContent = 'Good with room for improvement.';
+            } else {
+                scoreEl.classList.add('red');
+                document.getElementById('scoreLabel').textContent = 'Significant revenue recovery opportunity identified.';
+            }
+
+            // Pillar scores (max 8 per pillar = 4 questions * 2)
+            const pillarMax = 8;
+            document.getElementById('pillar1Score').textContent = Math.round((pillarScores['Tech & Ownership'] / pillarMax) * 100) + '%';
+            document.getElementById('pillar2Score').textContent = Math.round((pillarScores['Intake & Eligibility'] / pillarMax) * 100) + '%';
+            document.getElementById('pillar3Score').textContent = Math.round((pillarScores['Claims & Posting'] / pillarMax) * 100) + '%';
+            document.getElementById('pillar4Score').textContent = Math.round((pillarScores['A/R & Denials'] / pillarMax) * 100) + '%';
+            document.getElementById('pillar5Score').textContent = Math.round((pillarScores['Reporting & Compliance'] / pillarMax) * 100) + '%';
+
+            // Recommendations
+            const recs = [];
+            if (pillarScores['Tech & Ownership'] < 5) recs.push('Strengthen your EMR/clearinghouse setup and billing ownership.');
+            if (pillarScores['Intake & Eligibility'] < 5) recs.push('Implement consistent eligibility verification to prevent denials.');
+            if (pillarScores['Claims & Posting'] < 5) recs.push('Move to daily claim submission and faster ERA posting.');
+            if (pillarScores['A/R & Denials'] < 5) recs.push('Establish weekly A/R review and denial tracking processes.');
+            if (pillarScores['Reporting & Compliance'] < 5) recs.push('Start tracking KPIs and implement monthly RCM reviews.');
+            if (percentage < 75) recs.push('A 20-claim pilot could recover $10,000-$50,000 in aged claims.');
+
+            document.getElementById('recList').innerHTML = recs.map(r => `<li>${r}</li>`).join('');
+
+            // Show results
+            document.getElementById('email-section').classList.add('hidden');
+            document.getElementById('results-section').classList.remove('hidden');
+
+            // Send to Formspree
+            try {
+                fetch('https://formspree.io/f/xqezjrag', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: 'Revenue Pulse Audit Completed',
+                        practice_name: practiceName,
+                        contact_person: contactPerson,
+                        email: email,
+                        score: percentage + '%',
+                        pillar_tech: pillarScores['Tech & Ownership'] + '/8',
+                        pillar_intake: pillarScores['Intake & Eligibility'] + '/8',
+                        pillar_claims: pillarScores['Claims & Posting'] + '/8',
+                        pillar_ar: pillarScores['A/R & Denials'] + '/8',
+                        pillar_reporting: pillarScores['Reporting & Compliance'] + '/8',
+                        recommendations: recs.join('; ')
+                    })
+                });
+            } catch (e) {
+                console.log('Form submission error:', e);
+            }
+        }
+    </script>
+
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>
