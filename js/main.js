@@ -1,11 +1,137 @@
 /* Main JavaScript for Velden Health */
 
-// ChatWidget Logic
+// Enhanced ChatWidget with Human-like Responses
 const ChatWidget = {
   isOpen: false,
   elements: {},
   FORMSPREE_URL: "https://formspree.io/f/xkgelwbw",
-  state: { step: 'idle', data: {} },
+  state: { step: 'idle', data: {}, history: [], context: null },
+
+  // Comprehensive Knowledge Base
+  knowledge: {
+    company: {
+      name: "Velden Health",
+      tagline: "Illinois Behavioral Health A/R Recovery Specialist",
+      location: "Chicago, Illinois",
+      phone: "+1 (312) 925-6457",
+      email: "info@veldenhealth.com",
+      founded: "2023",
+      specialty: "behavioral and mental health billing recovery",
+      differentiator: "We work as a 'sidecar' to your existing billing team—we don't replace them, we clear their backlog."
+    },
+    services: {
+      ar_recovery: {
+        name: "A/R Recovery",
+        description: "We specialize in recovering claims that are 60-180+ days old. These are the claims most billers give up on.",
+        howItWorks: "We analyze your aged A/R, identify recoverable claims, and work them through appeals… and payer calls until they're paid.",
+        timeframe: "Most clients see cash hitting their accounts within 30-45 days of starting.",
+        keywords: ["ar", "aged", "old claims", "recovery", "backlog", "unpaid"]
+      },
+      denial_management: {
+        name: "Denial Management",
+        description: "We don't just fix denials—we prevent them. We analyze root causes and implement fixes.",
+        commonCodes: {
+          "CO-197": "Precertification/authorization not obtained. We verify prior auth status before resubmitting.",
+          "CO-16": "Missing or invalid information. Usually a simple data entry fix.",
+          "CO-29": "Time limit for filing has expired. We negotiate with payers when there's valid cause.",
+          "CO-22": "Duplicate claim. We investigate and resubmit with corrections.",
+          "CO-50": "Non-covered service. We review patient benefits and appeal when appropriate."
+        },
+        keywords: ["denial", "denied", "reject", "appeal", "co-197", "co-16", "co-29"]
+      },
+      billing: {
+        name: "Medical Billing",
+        description: "Full-service medical billing for behavioral health practices. We handle everything from eligibility to posting.",
+        includes: ["Eligibility verification", "Coding review (90834, 90837, 90791)", "Claim submission", "Payment posting", "Patient statements"],
+        keywords: ["billing", "claims", "coding", "submit", "charge", "cpt"]
+      },
+      pilot: {
+        name: "20-Claim Pilot",
+        description: "Give us your 20 toughest denied claims. We work them for 60 days. You only pay if we recover cash.",
+        cost: "6% of what we recover. If we recover $0, you pay $0.",
+        noRisk: "No upfront cost. No monthly retainer. Pure performance.",
+        keywords: ["pilot", "trial", "try", "test", "20 claims", "start"]
+      },
+      audit: {
+        name: "Revenue Pulse Analysis",
+        description: "A free, comprehensive audit of your aged A/R. We identify hidden revenue and show you exactly what's recoverable.",
+        deliverable: "1-page Recovery Asset Report with denial root causes and a Cost of Inaction (COI) analysis.",
+        cost: "Completely free. No obligation.",
+        keywords: ["audit", "free", "analysis", "revenue pulse", "check", "review"]
+      }
+    },
+    pricing: {
+      pilot: "6% of recovered cash (performance-based)",
+      fullService: "3-6% of monthly collections for full RCM",
+      audit: "Free",
+      noUpfront: "We never charge upfront. You pay when you get paid.",
+      keywords: ["price", "pricing", "cost", "fee", "charge", "how much", "expensive", "cheap", "rate"]
+    },
+    faqs: [
+      {
+        q: ["do you replace my biller", "work with my team", "replace staff"],
+        a: "No! We work alongside your existing team as a 'sidecar.' Your biller handles current claims, we handle the backlog. No disruption to your workflow."
+      },
+      {
+        q: ["how long", "time", "timeline", "when will I see"],
+        a: "Most clients see the first recovered payments within 30-45 days. The full pilot takes 60 days. We send weekly progress reports every Friday."
+      },
+      {
+        q: ["hipaa", "secure", "security", "safe", "compliant"],
+        a: "Absolutely. We're HIPAA compliant, BAA ready, and use encrypted data transfer. Your patient data is protected with enterprise-grade security."
+      },
+      {
+        q: ["what ehr", "therapynotes", "simplepractice", "kareo", "software", "system"],
+        a: "We work with all major behavioral health EHRs including TherapyNotes, SimplePractice, Kareo, Valant, and many others. We just need an aged A/R export (CSV or Excel)."
+      },
+      {
+        q: ["illinois", "location", "where", "based"],
+        a: "We're based in Chicago and specialize in Illinois payers like BCBS of Illinois, United Healthcare IL, and Aetna IL. We know the local payer quirks inside and out."
+      },
+      {
+        q: ["minimum", "small practice", "solo", "how big"],
+        a: "We work with practices of all sizes—from solo therapists to multi-location clinics. Our pilot program is designed to be accessible for smaller practices too."
+      },
+      {
+        q: ["guarantee", "risk", "if you don't recover"],
+        a: "Zero risk. Our pilot is 100% performance-based. If we don't recover anything, you don't pay a cent. Simple as that."
+      },
+      {
+        q: ["bcbs", "blue cross", "united", "aetna", "cigna", "medicaid", "medicare"],
+        a: "Yes! We work with all major payers including BCBS, United, Aetna, Cigna, and we're experienced with Medicaid/Medicare for behavioral health."
+      }
+    ],
+    behavioral: {
+      specialty: "Behavioral and mental health billing has unique challenges—prior auth requirements, medical necessity documentation, and payer-specific rules. We specialize in this niche.",
+      providers: ["Therapists (LCSW, LMFT, LPC)", "Psychologists", "Psychiatrists", "Counselors", "Substance abuse clinics", "IOP/PHP programs"],
+      commonIssues: ["Prior authorization denials", "Medical necessity documentation gaps", "Timely filing issues", "Coding errors on 90837 vs 90834"]
+    }
+  },
+
+  // Human-like response variations
+  greetings: [
+    "Hey there! 👋 I'm the Velden Assistant. How can I help you today?",
+    "Hi! 👋 Welcome to Velden Health. What brings you here today?",
+    "Hello! I'm here to help with any questions about recovering your aged A/R. What's on your mind?",
+    "Hey! 👋 Great to see you. Are you looking to recover some stuck revenue, or do you have questions about our services?"
+  ],
+
+  thinking: [
+    "Good question! ",
+    "Great question. ",
+    "Let me explain. ",
+    "Absolutely! ",
+    "Happy to help with that. ",
+    "That's something we get asked a lot. "
+  ],
+
+  transitions: [
+    "Does that help? Let me know if you have more questions!",
+    "Want me to explain anything else?",
+    "Feel free to ask more—I'm here to help!",
+    "Is there anything specific you'd like to dive deeper into?",
+    "Does that answer your question?"
+  ],
 
   init: function () {
     this.elements = {
@@ -52,13 +178,18 @@ const ChatWidget = {
     const text = this.elements.input.value.trim();
     if (!text) return;
     this.addMessage(text, 'user');
+    this.state.history.push({ role: 'user', text: text });
     this.elements.input.value = '';
     this.showTyping();
+
+    // Simulate human-like typing delay based on response length
+    const delay = 500 + Math.random() * 700;
     setTimeout(() => {
       const response = this.processLogic(text);
       this.hideTyping();
       this.addMessage(response, 'bot');
-    }, 700);
+      this.state.history.push({ role: 'bot', text: response });
+    }, delay);
   },
 
   formatText: function (text) {
@@ -98,80 +229,248 @@ const ChatWidget = {
       .then(response => {
         if (response.ok) {
           setTimeout(() => {
-            this.addMessage("✅ <b>Success!</b> I've emailed your details to our senior analyst. We will be in touch shortly.", 'bot');
-          }, 1000);
+            this.addMessage("✅ **Perfect!** I've sent your info to our team. You'll hear from a recovery specialist within 24-48 hours. In the meantime, feel free to ask me anything else!", 'bot');
+          }, 800);
         } else {
-          this.addMessage("❌ I tried to send the email, but something went wrong. Please try again later.", 'bot');
+          this.addMessage("❌ Hmm, something went wrong on my end. Could you try again, or just email us directly at **info@veldenhealth.com**?", 'bot');
         }
       })
       .catch(() => {
-        this.addMessage("❌ Network error. Please check your connection.", 'bot');
+        this.addMessage("❌ Looks like there's a network issue. You can reach us directly at **info@veldenhealth.com** or **(312) 925-6457**.", 'bot');
       });
   },
 
-  processLogic: function (input) {
+  // Fuzzy matching helper
+  matchesIntent: function (input, keywords) {
     const lower = input.toLowerCase();
+    return keywords.some(kw => lower.includes(kw.toLowerCase()));
+  },
 
-    if (this.state.step === 'awaiting_choice') {
-      if (lower.includes('audit') || lower.includes('free') || lower.includes('pilot')) {
-        this.state.step = 'awaiting_name';
-        return "I can help you with that. To start your <b>20-Claim Pilot</b> or <b>Revenue Pulse Analysis</b>, what is the <b>Name of your Clinic</b>?";
-      }
-      if (lower.includes('pric') || lower.includes('cost')) {
-        this.state.step = 'idle';
-        return "Our 20-Claim Pilot is <b>Performance Based</b> (No upfront cost). For full ledger recovery, we operate on a percentage of the actual cash we recover for you.";
-      }
-      if (lower.includes('billing')) {
-        this.state.step = 'idle';
-        return "We handle correcting, resubmitting, and appealing aged and denied claims (60-180+ days). We don't replace your current biller; we clear their backlog.";
-      }
-    }
+  // Get random element from array for variety
+  randomFrom: function (arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  },
 
+  processLogic: function (input) {
+    const lower = input.toLowerCase().trim();
+    const k = this.knowledge;
+
+    // === STATE MACHINE FOR LEAD CAPTURE ===
     if (this.state.step === 'awaiting_name') {
       this.state.data.name = input;
       this.state.step = 'awaiting_email';
-      return `Understood. We'll set up the secure ingest for ${input}. What is your <b>work email address</b>?`;
+      return `Got it—**${input}**! And what's the best email to reach you at?`;
     }
 
     if (this.state.step === 'awaiting_email') {
       const email = input;
-      const name = this.state.data.name || 'Clinic';
+      const name = this.state.data.name || 'your practice';
       this.sendToEmail(name, email);
       this.state.step = 'idle';
-      return "Transmitting to our secure vault... You will receive the <b>Revenue Pulse</b> report and Pilot instructions within 48 hours.";
+      return "Sending your info securely... 🔒";
     }
 
-    if (lower.match(/^(hi|hello|hey|start)/)) {
-      return "Hello! 👋 I'm the Velden Assistant. I help Illinois clinics recover revenue stuck in aged A/R. Would you like to start a <b>20-Claim Pilot</b> or get a <b>Revenue Pulse Analysis</b>?";
+    // === GREETINGS ===
+    if (lower.match(/^(hi|hello|hey|good morning|good afternoon|howdy|yo|sup|what's up|hiya)/)) {
+      return this.randomFrom(this.greetings);
     }
 
-    if (lower.match(/^(yes|ok|sure|help|assist)/)) {
-      this.state.step = 'awaiting_choice';
-      return "Surgical recovery initialized. Would you like to start the <b>20-Claim Pilot</b> or view the <b>Recovery Lifecycle</b>?";
+    // === THANK YOU ===
+    if (lower.match(/thank|thanks|appreciate|helpful/)) {
+      return this.randomFrom([
+        "You're welcome! 😊 Is there anything else I can help with?",
+        "Happy to help! Let me know if you have any other questions.",
+        "Anytime! Feel free to ask anything else about our services."
+      ]);
     }
 
-    if (lower.includes('about') || lower.includes('company') || lower.includes('who are you') || lower.includes('what do you do')) {
-      return "Velden Health is a revenue cycle partner for U.S. clinics, specializing in <b>behavioral & mental health billing</b>, AR recovery, and denial management.";
+    // === BYE ===
+    if (lower.match(/^(bye|goodbye|see you|later|gotta go|leaving)/)) {
+      return this.randomFrom([
+        "Take care! Feel free to come back anytime. Good luck with your practice! 👋",
+        "Goodbye! Remember, we're here when you need help with aged A/R. 👋",
+        "See you! Don't hesitate to reach out when you're ready to recover some cash. 👋"
+      ]);
     }
 
-    if (lower.includes('billing') || lower.includes('claim') || lower.includes('code')) {
-      return "We handle end-to-end billing: eligibility, coding, claims, AR follow-up, and payment posting. We’re especially strong in behavioral health codes like 90834, 90837, and 90791. Would you like a <b>Free Audit</b> of your current billing?";
+    // === PRICING/COST ===
+    if (this.matchesIntent(input, k.pricing.keywords)) {
+      return this.randomFrom(this.thinking) +
+        `Our pricing is **100% performance-based**. Here's the breakdown:\n\n` +
+        `• **20-Claim Pilot**: 6% of what we recover (if we recover $0, you pay $0)\n` +
+        `• **Full-Service RCM**: 3-6% of monthly collections\n` +
+        `• **Revenue Pulse Audit**: Completely free\n\n` +
+        `The key thing? **No upfront costs, ever.** We succeed when you succeed. Want to start with the free audit?`;
     }
 
-    if (lower.includes('audit') || lower.includes('free')) {
+    // === PILOT PROGRAM ===
+    if (this.matchesIntent(input, k.services.pilot.keywords)) {
       this.state.step = 'awaiting_name';
-      return "Our Free Audit finds hidden revenue leaks. To get started, please type your <b>Clinic Name</b>.";
+      this.state.context = 'pilot';
+      return this.randomFrom(this.thinking) +
+        `The **20-Claim Pilot** is our most popular option! Here's how it works:\n\n` +
+        `1. You send us your **20 toughest denied claims** (60+ days old)\n` +
+        `2. We work them for **60 days** using our specialized recovery process\n` +
+        `3. You only pay **6% of what we actually recover**\n\n` +
+        `**Zero risk.** If we don't recover anything, you pay nothing.\n\n` +
+        `Ready to try it? Just tell me your **clinic name** to get started!`;
     }
 
-    if (lower.includes('pric') || lower.includes('cost')) {
-      return "We usually work on a performance model: <b>3% - 6% of monthly collections</b> for full-service RCM, or hybrid and analytics-only options.";
+    // === FREE AUDIT ===
+    if (this.matchesIntent(input, k.services.audit.keywords)) {
+      this.state.step = 'awaiting_name';
+      this.state.context = 'audit';
+      return this.randomFrom(this.thinking) +
+        `Our **Revenue Pulse Analysis** is a free, no-obligation audit of your aged A/R. You'll get:\n\n` +
+        `• A 1-page **Recovery Asset Report**\n` +
+        `• Denial **root cause identification**\n` +
+        `• A **Cost of Inaction** analysis showing what you're losing\n\n` +
+        `Want me to set one up for you? Just share your **clinic name**!`;
     }
 
-    if (lower.includes('human') || lower.includes('contact')) {
-      return "You can reach our team directly at <b>info@veldenhealth.com</b> or the phone number listed in the footer.";
+    // === DENIAL CODES ===
+    if (lower.includes('co-197') || lower.includes('prior auth')) {
+      return `**CO-197** is a prior authorization denial—one of the most common in behavioral health. ` +
+        `The fix? We verify the original auth, check if it was entered correctly, and either resubmit with the correct auth number or submit a retrospective auth request. ` +
+        `We've recovered thousands on CO-197 alone. Want us to look at yours?`;
+    }
+    if (lower.includes('co-16')) {
+      return `**CO-16** means "missing or invalid information." Usually it's a simple fix—wrong subscriber ID, missing modifier, or date issue. ` +
+        `We identify exactly what's missing and resubmit with the correction. Quick win!`;
+    }
+    if (lower.includes('co-29') || lower.includes('timely filing')) {
+      return `**CO-29** is the timely filing denial—payers love this one. 😤 But it's not always the end! ` +
+        `We can appeal if there was a valid reason for the delay (prior appeal, payer error, etc.). We've overturned plenty of these.`;
+    }
+    if (this.matchesIntent(input, k.services.denial_management.keywords)) {
+      return this.randomFrom(this.thinking) +
+        `Denial management is our bread and butter. The most common behavioral health denials we fix:\n\n` +
+        `• **CO-197**: Prior auth missing → We verify and resubmit\n` +
+        `• **CO-16**: Invalid info → Quick data correction\n` +
+        `• **CO-29**: Timely filing → We appeal with documentation\n` +
+        `• **CO-22**: Duplicate claim → Investigation and correction\n\n` +
+        `Which codes are giving you trouble? I can give you specific tips!`;
     }
 
-    return "I didn't quite catch that. I can help with <b>Audits</b>, <b>Pricing</b>, or <b>Billing</b>. Which would you like to discuss?";
+    // === A/R RECOVERY ===
+    if (this.matchesIntent(input, k.services.ar_recovery.keywords)) {
+      return this.randomFrom(this.thinking) +
+        `A/R recovery is what we do best. Here's the reality: **67% of claims over 90 days are never collected** (HFMA data). ` +
+        `Most billers don't have time to work old claims—they're focused on current ones.\n\n` +
+        `That's where we come in. We take your 60-180+ day claims and work them until they're paid. ` +
+        `No replacing your team, just clearing the backlog.\n\n` +
+        `How old is your oldest unpaid claim?`;
+    }
+
+    // === BILLING/CLAIMS ===
+    if (this.matchesIntent(input, k.services.billing.keywords)) {
+      return this.randomFrom(this.thinking) +
+        `We offer full-service behavioral health billing:\n\n` +
+        `• **Eligibility & benefits verification**\n` +
+        `• **Coding review** (especially 90834, 90837, 90791)\n` +
+        `• **Claim submission** with 95%+ clean claim rate\n` +
+        `• **Payment posting & reconciliation**\n` +
+        `• **Patient statement management**\n\n` +
+        `We're especially strong in behavioral health codes—the ones other billers often get wrong. What's your current billing situation?`;
+    }
+
+    // === HIPAA/SECURITY ===
+    if (this.matchesIntent(input, ['hipaa', 'secure', 'security', 'safe', 'baa', 'compliant', 'privacy'])) {
+      return this.randomFrom(this.thinking) +
+        `Security is non-negotiable for us. Here's what we have in place:\n\n` +
+        `🔒 **HIPAA Compliant** - Full compliance with all PHI requirements\n` +
+        `📋 **BAA Ready** - We sign Business Associate Agreements with all clients\n` +
+        `🛡️ **Encrypted Data** - All file transfers are encrypted\n\n` +
+        `Your patient data stays protected. No shortcuts. Questions about our security practices?`;
+    }
+
+    // === EHR/SOFTWARE ===
+    if (this.matchesIntent(input, ['therapynotes', 'simplepractice', 'kareo', 'ehr', 'software', 'system', 'valant', 'janeapp', 'drchrono'])) {
+      return this.randomFrom(this.thinking) +
+        `We work with all major behavioral health EHRs:\n\n` +
+        `• **TherapyNotes** ✓\n` +
+        `• **SimplePractice** ✓\n` +
+        `• **Kareo** ✓\n` +
+        `• **Valant** ✓\n` +
+        `• **And many others!**\n\n` +
+        `We just need an aged A/R export (CSV or Excel)—takes about 5 minutes to pull. Which system are you using?`;
+    }
+
+    // === ILLINOIS/PAYERS ===
+    if (this.matchesIntent(input, ['illinois', 'bcbs', 'blue cross', 'united', 'aetna', 'chicago'])) {
+      return this.randomFrom(this.thinking) +
+        `We're based in **Chicago** and specialize in Illinois payers. We know the local quirks:\n\n` +
+        `• **BCBS of Illinois** - Their behavioral health denials are notorious. We know their appeal process inside out.\n` +
+        `• **UnitedHealthcare IL** - Specific prior auth rules we've mastered.\n` +
+        `• **Aetna**, **Cigna**, Medicaid/Medicare too!\n\n` +
+        `Local expertise matters. Which payers are giving you the most trouble?`;
+    }
+
+    // === HOW IT WORKS ===
+    if (lower.includes('how') && (lower.includes('work') || lower.includes('process') || lower.includes('start'))) {
+      return this.randomFrom(this.thinking) +
+        `It's a simple 4-step process:\n\n` +
+        `**1. Send the File** - Export your aged A/R (5 min)\n` +
+        `**2. We Find the Claims** - We identify what's recoverable\n` +
+        `**3. We Get You Paid** - Appeals, resubmissions, payer calls\n` +
+        `**4. Weekly Reports** - Track progress every Friday\n\n` +
+        `Your current biller keeps doing their job—we just clear the backlog. Want to try the pilot?`;
+    }
+
+    // === ABOUT/COMPANY ===
+    if (this.matchesIntent(input, ['about', 'company', 'who are you', 'what do you do', 'tell me about', 'velden'])) {
+      return `**Velden Health** is a revenue cycle partner based in Chicago, specializing in behavioral and mental health billing recovery.\n\n` +
+        `We're the "**cleanup crew**" for Illinois clinics. Your internal team handles current claims; we recover the aged, denied, and stuck ones.\n\n` +
+        `Think of us as a sidecar—we work alongside your team, not instead of them. ` +
+        `Want to know more about a specific service?`;
+    }
+
+    // === CONTACT ===
+    if (this.matchesIntent(input, ['contact', 'email', 'phone', 'call', 'reach', 'talk to human', 'real person', 'speak to someone'])) {
+      return `Of course! Here's how to reach our team:\n\n` +
+        `📧 **Email**: info@veldenhealth.com\n` +
+        `📞 **Phone**: (312) 925-6457\n\n` +
+        `Or I can have someone reach out to you—just share your clinic name and email!`;
+    }
+
+    // === CHECK FAQ DATABASE ===
+    for (const faq of k.faqs) {
+      if (faq.q.some(q => lower.includes(q))) {
+        return this.randomFrom(this.thinking) + faq.a;
+      }
+    }
+
+    // === YES/AFFIRMATIVE ===
+    if (lower.match(/^(yes|yeah|yep|sure|ok|okay|definitely|absolutely|please|let's do it)/)) {
+      if (this.state.context === 'pilot' || this.state.context === 'audit') {
+        this.state.step = 'awaiting_name';
+        return "Awesome! What's your **clinic name**?";
+      }
+      this.state.step = 'awaiting_name';
+      return "Great! Let's get you started. What's your **clinic name**?";
+    }
+
+    // === NO/NEGATIVE ===
+    if (lower.match(/^(no|nope|not really|maybe later|not now)/)) {
+      return "No problem! I'm here whenever you're ready. Is there anything else I can help you with in the meantime?";
+    }
+
+    // === NUMBERS/STATS ===
+    if (this.matchesIntent(input, ['statistic', 'data', 'numbers', 'benchmark', 'average', 'industry'])) {
+      return `Here are some industry benchmarks (MGMA/HFMA data):\n\n` +
+        `• **67%** of claims over 90 days are never collected\n` +
+        `• **15-18%** average denial rate in Illinois behavioral health\n` +
+        `• **55-65%** recovery rate with specialized A/R teams vs **12%** with internal staff\n\n` +
+        `The difference? Bandwidth. Your biller is busy with current claims—they can't chase old ones. That's where we come in.`;
+    }
+
+    // === FALLBACK with suggestions ===
+    return `I want to make sure I help you properly! I can assist with:\n\n` +
+      `• **Pricing** - How much we charge (spoiler: it's performance-based)\n` +
+      `• **Denials** - CO-197, CO-16, CO-29, and how we fix them\n` +
+      `• **20-Claim Pilot** - Risk-free way to try our service\n` +
+      `• **Free Audit** - See what revenue you're leaving on the table\n\n` +
+      `Just type what you're curious about, or ask me anything!`;
   }
 };
 

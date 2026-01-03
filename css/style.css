@@ -520,11 +520,16 @@ h4 {
 /* Hero */
 .hero-section {
   padding: 1rem 0 6rem;
-  /* Reduced top padding from 4rem to 1rem */
-  background:
-    radial-gradient(circle at 85% 10%, rgba(0, 196, 180, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 15% 90%, rgba(0, 31, 63, 0.05) 0%, transparent 40%);
   overflow: visible;
+  position: relative;
+}
+
+.section-bg-hero {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+    url('../Images/hero-office-bg.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-grid {
