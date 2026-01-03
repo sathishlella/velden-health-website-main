@@ -1712,49 +1712,7 @@
 
   <script>
     (function () {
-      // LOGIN LOGIC
-      const loginOverlay = document.getElementById("login-overlay");
-      const mainApp = document.getElementById("mainApp");
-      const loginBtn = document.getElementById("loginBtn");
-      const loginUser = document.getElementById("loginUser");
-      const loginPass = document.getElementById("loginPass");
-      const loginError = document.getElementById("loginError");
-
-      function attemptLogin() {
-        const u = loginUser.value;
-        const p = loginPass.value;
-
-        if (u === "Admin" && p === "Admin123") {
-          loginOverlay.style.opacity = "0";
-          loginOverlay.style.transition = "opacity 0.3s";
-          setTimeout(() => {
-            loginOverlay.style.display = "none";
-            mainApp.style.display = "block";
-          }, 300);
-        } else {
-          loginError.style.display = "block";
-          loginError.textContent = "Invalid username or password";
-          // Shake animation effect
-          const card = document.querySelector(".login-card");
-          card.animate([
-            { transform: 'translateX(0)' },
-            { transform: 'translateX(-5px)' },
-            { transform: 'translateX(5px)' },
-            { transform: 'translateX(0)' }
-          ], {
-            duration: 300,
-            iterations: 1
-          });
-        }
-      }
-
-      loginBtn.addEventListener("click", attemptLogin);
-      loginPass.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") attemptLogin();
-      });
-
-
-      // --- APP LOGIC BELOW ---
+      // --- APP LOGIC ---
 
       const MAX_SCORE = 20 * 2; // 20 questions * max 2 pts
 
